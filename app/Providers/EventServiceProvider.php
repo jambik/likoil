@@ -16,6 +16,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
         ],
+        'SocialiteProviders\Manager\SocialiteWasCalled' => [
+            'SocialiteProviders\VKontakte\VKontakteExtendSocialite@handle',
+            'SocialiteProviders\Yandex\YandexExtendSocialite@handle',
+            'JhaoDa\SocialiteProviders\Odnoklassniki\OdnoklassnikiExtendSocialite@handle',
+            'JhaoDa\SocialiteProviders\MailRu\MailRuExtendSocialite@handle',
+        ],
     ];
 
     /**

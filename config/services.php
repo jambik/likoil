@@ -35,4 +35,52 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'github' => [
+        'client_id' => env('GITHUB_KEY'),
+        'client_secret' => env('GITHUB_SECRET'),
+        'redirect' => env('GITHUB_REDIRECT'),
+    ],
+
+    'twitter' => [
+        'client_id' => env('TWITTER_KEY'),
+        'client_secret' => env('TWITTER_SECRET'),
+        'redirect' => env('TWITTER_REDIRECT'),
+    ],
+
+    'facebook' => [
+        'client_id' => env('FACEBOOK_KEY'),
+        'client_secret' => env('FACEBOOK_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT'),
+    ],
+
+    'vkontakte' => [
+        'client_id' => env('VKONTAKTE_KEY'),
+        'client_secret' => env('VKONTAKTE_SECRET'),
+        'redirect' => env('VKONTAKTE_REDIRECT'),
+    ],
+
+    'yandex' => [
+        'client_id' => env('YANDEX_KEY'),
+        'client_secret' => env('YANDEX_SECRET'),
+        'redirect' => env('YANDEX_REDIRECT'),
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_KEY'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT'),
+    ],
+
+    'odnoklassniki' => [
+        'client_id' => env('ODNOKLASSNIKI_KEY'),
+        'client_secret' => env('ODNOKLASSNIKI_SECRET'),
+        'redirect' => env('ODNOKLASSNIKI_REDIRECT'),
+    ],
+
+    'mailru' => [
+        'client_id' => env('MAILRU_KEY'),
+        'client_secret' => env('MAILRU_SECRET'),
+        'redirect' => env('MAILRU_REDIRECT'),
+    ],
+
 ];

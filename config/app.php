@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://likoil.dev'),
 
     /*
     |--------------------------------------------------------------------------
@@ -169,8 +169,12 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
@@ -235,8 +239,11 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Flash' => Laracasts\Flash\Flash::class,
+        'Image' => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

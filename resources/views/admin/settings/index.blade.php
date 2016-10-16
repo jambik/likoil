@@ -8,18 +8,33 @@
         <div class="col l6 offset-l3 m8 offset-m2">
             {!! Form::model($settings, ['url' => route('admin.settings.save'), 'method' => 'POST', 'files' => true]) !!}
                 <div class="input-field col s12">
-                    {!! Form::label('email', 'Email') !!}
-                    {!! Form::email('email', null, ['class' => 'validate']) !!}
+                    {!! Form::label('ai92', 'АИ 92 %') !!}
+                    {!! Form::text('ai92', null, ['class' => 'validate']) !!}
                 </div>
 
                 <div class="input-field col s12">
-                    {!! Form::label('phone', 'Телефон') !!}
-                    {!! Form::text('phone', null, ['class' => 'validate']) !!}
+                    {!! Form::label('ai95', 'АИ 95 %') !!}
+                    {!! Form::text('ai95', null, ['class' => 'validate']) !!}
                 </div>
 
-                <div class="input-field col s12 input-html">
-                    {!! Form::label('description', 'Описание сайта') !!}
-                    {!! Form::textarea('description', null, ['class' => 'materialize-textarea validate']) !!}
+                <div class="input-field col s12">
+                    {!! Form::label('ai98', 'АИ 98 %') !!}
+                    {!! Form::text('ai98', null, ['class' => 'validate']) !!}
+                </div>
+
+                <div class="input-field col s12">
+                    {!! Form::label('dt', 'ДТ %') !!}
+                    {!! Form::text('dt', null, ['class' => 'validate']) !!}
+                </div>
+
+                <div class="input-field col s12">
+                    {!! Form::label('dtevro', 'ДТ Евро %') !!}
+                    {!! Form::text('dtevro', null, ['class' => 'validate']) !!}
+                </div>
+
+                <div class="input-field col s12">
+                    {!! Form::label('gas', 'Газ %') !!}
+                    {!! Form::text('gas', null, ['class' => 'validate']) !!}
                 </div>
 
                 <div class="col s12 center">

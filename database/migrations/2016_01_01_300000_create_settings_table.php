@@ -14,9 +14,12 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email')->default('');
-            $table->string('phone')->default('');
-            $table->text('description')->default('');
+            $table->integer('ai92')->default(0);
+            $table->integer('ai95')->default(0);
+            $table->integer('ai98')->default(0);
+            $table->integer('dt')->default(0);
+            $table->integer('dtevro')->default(0);
+            $table->integer('gas')->default(0);
             $table->timestamps();
         });
     }

@@ -29,8 +29,30 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('settings', ['as' => 'admin.settings', 'uses' =>'Admin\SettingsController@index']);
         Route::post('settings', ['as' => 'admin.settings.save', 'uses' =>'Admin\SettingsController@save']);
 
+        ## Web Settings
+        Route::get('web_settings', ['as' => 'admin.web_settings', 'uses' =>'Admin\WebSettingsController@index']);
+        Route::post('web_settings', ['as' => 'admin.web_settings.save', 'uses' =>'Admin\WebSettingsController@save']);
+
         Route::group(['as' => 'admin.'], function ()
         {
+            ## Cards
+            Route::resource('cards', 'Admin\CardsController');
+
+            ## Discounts
+            Route::resource('discounts', 'Admin\DiscountsController');
+
+            ## Points
+            Route::resource('points', 'Admin\PointsController');
+
+            ## Campaigns
+            Route::resource('campaigns', 'Admin\CampaignsController');
+
+            ## Users import
+            Route::resource('users_export', 'Admin\UsersExportController');
+
+            ## Users AZS
+            Route::resource('users_azs', 'Admin\UsersAzsController');
+
             ## Pages
             Route::resource('pages', 'Admin\PagesController');
 

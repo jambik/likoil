@@ -40,3 +40,37 @@ $factory->define(App\News::class, function (Faker\Generator $faker) {
         'image' => $faker->image(storage_path('images').DIRECTORY_SEPARATOR.'news', 640, 480, null, false, false),
     ];
 });
+
+$factory->define(App\Card::class, function (Faker\Generator $faker) {
+    return [
+        'DiscountCardID' => $faker->randomNumber(),
+        'Code' => implode('', $faker->randomElements([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9], 13)),
+        'TransactionID' => $faker->randomNumber(),
+        'name' => $faker->name,
+        'gender' => $faker->randomElement([0, 1, 2]),
+        'phone' => $faker->phoneNumber,
+        'birthday_at' => $faker->dateTimeBetween('-70 years', '-18 years'),
+        'verified' => $faker->boolean(),
+    ];
+});
+
+$factory->define(App\Discount::class, function (Faker\Generator $faker) {
+
+    $categories = App\Card::all();
+
+    $DiscountCardIDs = $categories->pluck('DiscountCardID')->all();
+
+    $volume = $faker->randomFloat(2, 10, 100);
+    $price = $faker->randomFloat(2, 18, 35);
+
+    return [
+        'DiscountID' => $faker->randomNumber(),
+        'DiscountCardID' => $faker->randomElement($DiscountCardIDs),
+        'Date' => $faker->dateTimeThisMonth(),
+        'Volume' => $volume,
+        'Price' => $price,
+        'Amount' => number_format($volume * $price, 2, '.', ''),
+        'FuelName' => $faker->randomElement(['Аи92', 'Аи95', 'Аи98', 'ДТ', 'ДТев', 'СУГ']),
+        'AZSCode' => $faker->numberBetween(1, 30),
+    ];
+});

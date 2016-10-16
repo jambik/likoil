@@ -53,19 +53,26 @@
     <main class="container-fluid">
         <div class="row">
             <div class="col l3 m4 s4">
-                <ul class="collection">
+                <ul class="collection with-header">
+                    <li class="collection-header red darken-4 white-text"><i class="material-icons left">credit_card</i> <strong>Настройки системы</strong></li>
+                    <a class="collection-item red-text" href="{{ route('admin.cards.index') }}"><i class="material-icons left">credit_card</i>Карты</a>
+                    <a class="collection-item red-text" href="{{ route('admin.discounts.index') }}"><i class="material-icons left">local_gas_station</i>Заливы</a>
+                    <a class="collection-item red-text" href="#"><i class="material-icons left">card_giftcard</i>Баллы</a>
+                    <a class="collection-item red-text" href="#"><i class="material-icons left">event_note</i>Акции</a>
+                    <li class="divider"></li>
+                    <a class="collection-item red-text" href="{{ route('admin.users_export.index') }}"><i class="material-icons left">account_box</i>Пользователи выгрузки</a>
+                    <a class="collection-item red-text" href="{{ route('admin.users_azs.index') }}"><i class="material-icons left">account_box</i>Пользователи АЗС</a>
+                    <a class="collection-item red-text" href="{{ route('admin.settings') }}"><i class="material-icons left">settings</i>Настройки</a>
+                </ul>
+
+                <ul class="collection with-header">
+                    <li class="collection-header red darken-4 white-text"><i class="material-icons left">web</i> <strong>Настройки сайта</strong></li>
                     <a class="collection-item red-text" href="{{ route('admin.pages.index') }}"><i class="material-icons left">content_copy</i> Страницы</a>
                     <a class="collection-item red-text" href="{{ route('admin.blocks.index') }}"><i class="material-icons left">text_format</i> Текстовые блоки</a>
                     <a class="collection-item red-text" href="{{ route('admin.news.index') }}"><i class="material-icons left">featured_play_list</i> Новости</a>
-                </ul>
-
-                <ul class="collection">
-                    <a class="collection-item red-text" href="{{ route('admin.users.index') }}"><i class="material-icons left">account_box</i>Карты</a>
-                </ul>
-
-                <ul class="collection">
-                    <a class="collection-item red-text" href="{{ route('admin.settings') }}"><i class="material-icons left">settings</i>Настройки</a>
-                    <a class="collection-item red-text" href="{{ route('admin.administrators.index') }}"><i class="material-icons left">verified_user</i>Администраторы</a>
+                    <li class="divider"></li>
+                    <a class="collection-item red-text" href="{{ route('admin.web_settings') }}"><i class="material-icons left">settings</i>Настройки</a>
+                    <a class="collection-item red-text" href="{{ route('admin.administrators.index') }}"><i class="material-icons left">verified_user</i>Администраторы сайта</a>
                 </ul>
             </div>
             <div class="col l9 m8 s8">

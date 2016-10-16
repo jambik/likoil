@@ -13,9 +13,12 @@ class SettingsTableSeeder extends Seeder
     public function run()
     {
         $settings = new Settings();
-        $settings->email       = 'jambik@gmail.com';
-        $settings->phone       = '+79123456789';
-        $settings->description = '<p>Описание сайта</p>';
+        $settings->ai92 = 10;
+        $settings->ai95 = 10;
+        $settings->ai98 = 10;
+        $settings->dt = 10;
+        $settings->dtevro = 10;
+        $settings->gas = 5;
         $settings->save();
     }
 }

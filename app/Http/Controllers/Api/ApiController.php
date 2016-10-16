@@ -57,7 +57,7 @@ class ApiController extends Controller
         ]);
     }
 
-    public function cardsDiscounts(Request $request)
+    public function discountsSave(Request $request)
     {
         $this->validate($request, [
             'data' => 'required'

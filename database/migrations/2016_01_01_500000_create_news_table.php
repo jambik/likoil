@@ -15,7 +15,7 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->mediumText('text')->default('');
+            $table->mediumText('text');
             $table->string('image')->default('');
             $table->dateTime('published_at');
             $table->timestamps();

@@ -16,7 +16,7 @@ class CreateWebSettingsTable extends Migration
             $table->increments('id');
             $table->string('email')->default('');
             $table->string('phone')->default('');
-            $table->text('description')->default('');
+            $table->text('description');
             $table->timestamps();
         });
     }

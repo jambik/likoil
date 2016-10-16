@@ -12,6 +12,7 @@ class Discount extends Model
     protected $table = 'discounts';
 
     protected $fillable = ['DiscountID', 'DiscountCardID', 'Date', 'Amount', 'Volume', 'Price', 'FuelName', 'AZSCode'];
+    protected $hidden = ['id', 'created_at', 'updated_at'];
 
     /**
      * Get product category.

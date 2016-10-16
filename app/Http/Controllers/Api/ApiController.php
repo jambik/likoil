@@ -33,8 +33,6 @@ class ApiController extends Controller
 
         $data = $request->get('data');
 
-        $data = get_magic_quotes_gpc() ? stripcslashes($data) : $data;
-
         $jsonObj = json_decode($data);
 
         if(count($jsonObj->DocumentElement->dcDiscountCard) == 1)
@@ -42,6 +40,7 @@ class ApiController extends Controller
             Card::create([
                 'DiscountCardID' => $jsonObj->DocumentElement->dcDiscountCard->DiscountCardID,
                 'Code' => $jsonObj->DocumentElement->dcDiscountCard->Code,
+                'TransactionID' => $jsonObj->DocumentElement->dcDiscountCard->TransactionID,
             ])->save();
         }
         else
@@ -51,6 +50,7 @@ class ApiController extends Controller
                 Card::create([
                     'DiscountCardID' => $value->DiscountCardID,
                     'Code' => $value->Code,
+                    'TransactionID' => $value->TransactionID,
                 ])->save();
             }
         }
@@ -71,7 +71,7 @@ class ApiController extends Controller
 
         $jsonObj = json_decode($data);
 
-        if(count($jsonObj->DocumentElement->dcDiscountCard) == 1)
+        if(count($jsonObj->DocumentElement->rgDiscount) == 1)
         {
             Card::create([
                 'DiscountID' => $jsonObj->DocumentElement->rgDiscount->DiscountCardID,
@@ -86,7 +86,7 @@ class ApiController extends Controller
         }
         else
         {
-            foreach($jsonObj->DocumentElement->dcDiscountCard as $value)
+            foreach($jsonObj->DocumentElement->rgDiscount as $value)
             {
                 Card::create([
                     'DiscountID' => $value->DiscountCardID,

@@ -27,6 +27,11 @@ class DiscountsController extends BackendController
     {
         $items = $this->model->all();
 
+        $arr['rgDiscount'] = $items->toArray();
+        $arr2['DocumentElement'] = $arr;
+
+        return $arr2;
+
         return view('admin.'.$this->resourceName.'.index', compact('items'));
     }
 

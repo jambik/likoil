@@ -25,12 +25,7 @@ class DiscountsController extends BackendController
      */
     public function index()
     {
-        $items = $this->model->all();
-
-        $arr['rgDiscount'] = $items->toArray();
-        $arr2['DocumentElement'] = $arr;
-
-        return $arr2;
+        $items = $this->model->with('card')->get();
 
         return view('admin.'.$this->resourceName.'.index', compact('items'));
     }

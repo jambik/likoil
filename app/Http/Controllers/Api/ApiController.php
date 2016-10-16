@@ -17,9 +17,11 @@ class ApiController extends Controller
         $maxTransactionId = DB::table('cards')->max('TransactionID');
 
         return response()->json([
-            'MaxDiscountId' => $maxDiscountId,
-            'MaxDiscountCardId' => $maxDiscountCardId,
-            'MaxTransactionId' => $maxTransactionId,
+            'response' => [
+                'MaxDiscountId' => $maxDiscountId,
+                'MaxDiscountCardId' => $maxDiscountCardId,
+                'MaxTransactionId' => $maxTransactionId,
+            ]
         ]);
     }
 
@@ -100,8 +102,10 @@ class ApiController extends Controller
         }
 
         return response()->json([
-            'status' => 'ok',
-            'message' => 'Заливы успешно сохранены',
+            'response' => [
+                'status' => 'ok',
+                'message' => 'Заливы успешно сохранены',
+            ],
         ]);
     }
 }

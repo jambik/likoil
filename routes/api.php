@@ -19,6 +19,6 @@ use Illuminate\Http\Request;
 
 Route::get('maxid', 'Api\ApiController@maxId')->middleware('auth.basic');
 
-Route::get('cards/save', 'Api\ApiController@cardsSave')->middleware('auth.basic');
+Route::post('cards/save', 'Api\ApiController@cardsSave')->middleware('auth.basic');
 
-Route::get('discounts/save', 'Api\ApiController@discountsSave')->middleware('auth.basic');
+Route::post('discounts/save', 'Api\ApiController@discountsSave')->middleware('auth.basic');

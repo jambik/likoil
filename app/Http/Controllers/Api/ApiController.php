@@ -14,10 +14,12 @@ class ApiController extends Controller
     {
         $maxDiscountId = DB::table('discounts')->max('DiscountID');
         $maxDiscountCardId = DB::table('cards')->max('DiscountCardID');
+        $maxTransactionId = DB::table('cards')->max('TransactionID');
 
         return response()->json([
             'MaxDiscountId' => $maxDiscountId,
             'MaxDiscountCardId' => $maxDiscountCardId,
+            'MaxTransactionId' => $maxTransactionId,
         ]);
     }
 

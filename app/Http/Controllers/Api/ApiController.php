@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Card;
+use App\Discount;
 use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Http\Request;
@@ -56,8 +57,10 @@ class ApiController extends Controller
         }
 
         return response()->json([
-            'status' => 'ok',
-            'message' => 'Карты успешно сохранены',
+            'response' => [
+                'status' => 'ok',
+                'message' => 'Карты успешно сохранены',
+            ],
         ]);
     }
 
@@ -73,7 +76,7 @@ class ApiController extends Controller
 
         if(count($jsonObj->DocumentElement->rgDiscount) == 1)
         {
-            Card::create([
+            Discount::create([
                 'DiscountID' => $jsonObj->DocumentElement->rgDiscount->DiscountCardID,
                 'Date' => $jsonObj->DocumentElement->rgDiscount->Date,
                 'DiscountCardID' => $jsonObj->DocumentElement->rgDiscount->DiscountCardID,
@@ -88,7 +91,7 @@ class ApiController extends Controller
         {
             foreach($jsonObj->DocumentElement->rgDiscount as $value)
             {
-                Card::create([
+                Discount::create([
                     'DiscountID' => $value->DiscountCardID,
                     'Date' => $value->Date,
                     'DiscountCardID' => $value->DiscountCardID,

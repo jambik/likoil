@@ -20,7 +20,7 @@ class CreateCardsTable extends Migration
             $table->string('name')->default('');
             $table->tinyInteger('gender')->default(0);
             $table->string('phone')->default('');
-            $table->dateTime('birthday_at')->default('');
+            $table->dateTime('birthday_at')->default(0);
             $table->boolean('verified')->default(false);
             $table->timestamps();
 

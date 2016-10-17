@@ -17,7 +17,7 @@ class CardsController extends BackendController
         $this->resourceName = 'cards';
         $this->model = new Card();
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +25,7 @@ class CardsController extends BackendController
      */
     public function index()
     {
-        $items = $this->model->all();
+        $items = $this->model->all()->take(500);
 
         return view('admin.'.$this->resourceName.'.index', compact('items'));
     }

@@ -25,7 +25,7 @@ class DiscountsController extends BackendController
      */
     public function index()
     {
-        $items = $this->model->with('card')->get();
+        $items = $this->model->with('card')->get()->take(500);
 
         return view('admin.'.$this->resourceName.'.index', compact('items'));
     }

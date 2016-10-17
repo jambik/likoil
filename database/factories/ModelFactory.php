@@ -74,3 +74,9 @@ $factory->define(App\Discount::class, function (Faker\Generator $faker) {
         'AZSCode' => $faker->numberBetween(1, 30),
     ];
 });
+
+/*factory(App\Product::class, 10)->create()->each(function($u) {
+    $u->properties()->save(factory(App\ProductProperties::class)->make());
+});*/
+
+//factory(App\Card::class, 10)->create();

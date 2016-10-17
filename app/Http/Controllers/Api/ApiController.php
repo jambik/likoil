@@ -77,7 +77,7 @@ class ApiController extends Controller
         if(count($jsonObj->DocumentElement->rgDiscount) == 1)
         {
             Discount::create([
-                'DiscountID' => $jsonObj->DocumentElement->rgDiscount->DiscountCardID,
+                'DiscountID' => $jsonObj->DocumentElement->rgDiscount->DiscountID,
                 'Date' => $jsonObj->DocumentElement->rgDiscount->Date,
                 'DiscountCardID' => $jsonObj->DocumentElement->rgDiscount->DiscountCardID,
                 'Amount' => $jsonObj->DocumentElement->rgDiscount->Amount,
@@ -92,7 +92,7 @@ class ApiController extends Controller
             foreach($jsonObj->DocumentElement->rgDiscount as $value)
             {
                 Discount::create([
-                    'DiscountID' => $value->DiscountCardID,
+                    'DiscountID' => $value->DiscountID,
                     'Date' => $value->Date,
                     'DiscountCardID' => $value->DiscountCardID,
                     'Amount' => $value->Amount,

@@ -25,7 +25,7 @@ class CardsController extends BackendController
      */
     public function index()
     {
-        $items = $this->model->all()->take(500);
+        $items = $this->model->limit(500)->get();
 
         return view('admin.'.$this->resourceName.'.index', compact('items'));
     }

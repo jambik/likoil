@@ -13,8 +13,6 @@ class SettingsController extends BackendController
     {
         $settings = Settings::findOrNew(1);
 
-//        dd($settings->toArray());
-
         return view('admin.settings.index', compact('settings'));
     }
 

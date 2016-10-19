@@ -171,6 +171,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
@@ -241,9 +242,10 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Flash' => Laracasts\Flash\Flash::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSettingsTable extends Migration
+class CreateWithdrawalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,13 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('withdrawals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('step')->default(0);
+            $table->integer('card_id')->index();
+            $table->integer('amount');
+            $table->string('type');
+            $table->string('azs');
+            $table->dateTime('use_at');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('settings');
+        Schema::drop('withdrawals');
     }
 }

@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(NewsTableSeeder::class);
         $this->call(WebSettingsTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
+        $this->call(RatesTableSeeder::class);
     }
 }

@@ -75,8 +75,5 @@ $factory->define(App\Discount::class, function (Faker\Generator $faker) {
     ];
 });
 
-/*factory(App\Product::class, 10)->create()->each(function($u) {
-    $u->properties()->save(factory(App\ProductProperties::class)->make());
-});*/
-
-//factory(App\Card::class, 10)->create();
+//factory(App\Card::class, 100)->create();
+//factory(App\Discount::class, 1000)->create();

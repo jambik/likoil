@@ -15,10 +15,8 @@ class CreatePointsTable extends Migration
         Schema::create('points', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('points');
-            $table->integer('DiscountCardID');
+            $table->integer('card_id')->index();
             $table->timestamps();
-
-            $table->index('DiscountCardID');
         });
     }
 

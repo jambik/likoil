@@ -13,6 +13,7 @@ class UsersTableSeeder extends Seeder
         [3, 'Руслан', 'intex05@bk.ru', ''],
         [4, 'Топаз Малик', 'topaz@export.likoil', ''],
         [5, 'АЗС 1', '1@azs.likoil', ''],
+        [6, 'Стас', 'stas-group@yandex.ru', ''],
     ];
 
     /**
@@ -59,5 +60,9 @@ class UsersTableSeeder extends Seeder
         $row5 = array_combine(['id', 'name', 'email', 'image'], $this->items[4]) + ['password' => bcrypt('azs1azs1')];
         $user5 = User::create($row5);
         $user5->attachRole($roleAzs);
+
+        $row6 = array_combine(['id', 'name', 'email', 'image'], $this->items[0]) + ['password' => bcrypt('stustasstu')];
+        $user6 = User::create($row6);
+        $user6->attachRole($admin);
     }
 }

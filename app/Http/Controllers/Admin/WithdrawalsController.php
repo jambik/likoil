@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Card;
 use App\Http\Controllers\BackendController;
+use App\Withdrawal;
 use Illuminate\Http\Request;
 
-class CardsController extends BackendController
+class WithdrawalsController extends BackendController
 {
     protected $resourceName = null;
 
@@ -14,10 +14,10 @@ class CardsController extends BackendController
 
     public function __construct()
     {
-        $this->resourceName = 'cards';
-        $this->model = new Card();
+        $this->resourceName = 'withdrawals';
+        $this->model = new Withdrawal();
     }
-
+    
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +25,7 @@ class CardsController extends BackendController
      */
     public function index()
     {
-        $items = $this->model->with('discounts', 'withdrawals')->limit(100)->get();
+        $items = $this->model->all();
 
         return view('admin.'.$this->resourceName.'.index', compact('items'));
     }
@@ -48,15 +48,7 @@ class CardsController extends BackendController
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'Code' => 'required|unique',
-        ]);
-
-        $input = $request->all();
-
-        foreach (['verified'] as $value) $input[$value] = $request->has($value) ? true : false;
-
-        $this->model->create($input);
+        $this->model->create($request->all());
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
     }
@@ -94,17 +86,9 @@ class CardsController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'Code' => 'required|unique:' . $this->model->getTable() . ',Code,'.$id,
-        ]);
-
         $item = $this->model->findOrFail($id);
 
-        $input = $request->all();
-
-        foreach (['verified'] as $value) $input[$value] = $request->has($value) ? true : false;
-
-        $item->update($input);
+        $item->update($request->all());
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
     }

@@ -1,31 +1,31 @@
 <div class="input-field col s12 input-datetime">
-    {!! Form::label('Date', 'Дата') !!}
-    {!! Form::text('Date', null, ['class' => 'validate'.($errors->has('Date') ? ' invalid' : '')]) !!}
+    {!! Form::label('date', 'Дата') !!}
+    {!! Form::text('date', null, ['class' => 'validate'.($errors->has('date') ? ' invalid' : '')]) !!}
 </div>
 
 <div class="input-field col s12">
-    {!! Form::label('Volume', 'Объем') !!}
-    {!! Form::text('Volume', null, ['class' => 'validate'.($errors->has('Volume') ? ' invalid' : '')]) !!}
+    {!! Form::label('volume', 'Объем') !!}
+    {!! Form::text('volume', null, ['class' => 'validate'.($errors->has('volume') ? ' invalid' : '')]) !!}
 </div>
 
 <div class="input-field col s12">
-    {!! Form::label('Price', 'Цена') !!}
-    {!! Form::text('Price', null, ['class' => 'validate'.($errors->has('Price') ? ' invalid' : '')]) !!}
+    {!! Form::label('price', 'Цена') !!}
+    {!! Form::text('price', null, ['class' => 'validate'.($errors->has('price') ? ' invalid' : '')]) !!}
 </div>
 
 <div class="input-field col s12">
-    {!! Form::label('Amount', 'Сумма') !!}
-    {!! Form::text('Amount', null, ['class' => 'validate'.($errors->has('Amount') ? ' invalid' : '')]) !!}
+    {!! Form::label('amount', 'Сумма') !!}
+    {!! Form::text('amount', null, ['class' => 'validate'.($errors->has('amount') ? ' invalid' : '')]) !!}
 </div>
 
 <div class="input-field col s12">
-    {!! Form::label('FuelName', 'Топливо') !!}
-    {!! Form::text('FuelName', null, ['class' => 'validate'.($errors->has('FuelName') ? ' invalid' : '')]) !!}
+    {!! Form::label('fuel_name', 'Топливо') !!}
+    {!! Form::text('fuel_name', null, ['class' => 'validate'.($errors->has('fuel_name') ? ' invalid' : '')]) !!}
 </div>
 
 <div class="input-field col s12">
-    {!! Form::label('AZSCode', 'Код АЗС') !!}
-    {!! Form::text('AZSCode', null, ['class' => 'validate'.($errors->has('AZSCode') ? ' invalid' : '')]) !!}
+    {!! Form::label('azs', 'Код АЗС') !!}
+    {!! Form::text('azs', null, ['class' => 'validate'.($errors->has('azs') ? ' invalid' : '')]) !!}
 </div>
 
 <div class="input-field col s12 center">

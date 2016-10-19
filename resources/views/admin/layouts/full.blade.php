@@ -57,11 +57,13 @@
                     <li class="collection-header red darken-4 white-text"><i class="material-icons left">credit_card</i> <strong>Настройки системы</strong></li>
                     <a class="collection-item red-text" href="{{ route('admin.cards.index') }}"><i class="material-icons left">credit_card</i>Карты</a>
                     <a class="collection-item red-text" href="{{ route('admin.discounts.index') }}"><i class="material-icons left">local_gas_station</i>Заливы</a>
-                    <a class="collection-item red-text" href="#"><i class="material-icons left">card_giftcard</i>Баллы</a>
+                    <a class="collection-item red-text" href="{{ route('admin.withdrawals.index') }}"><i class="material-icons left">card_giftcard</i>Использованные баллы</a>
+                    {{--<a class="collection-item red-text" href="{{ route('admin.points.index') }}"><i class="material-icons left">card_giftcard</i>Баллы</a>--}}
                     <a class="collection-item red-text" href="#"><i class="material-icons left">event_note</i>Акции</a>
                     <li class="divider"></li>
                     <a class="collection-item red-text" href="{{ route('admin.users_export.index') }}"><i class="material-icons left">account_box</i>Пользователи выгрузки</a>
                     <a class="collection-item red-text" href="{{ route('admin.users_azs.index') }}"><i class="material-icons left">account_box</i>Пользователи АЗС</a>
+                    <a class="collection-item red-text" href="{{ route('admin.rates.index') }}"><i class="material-icons left">attach_money</i>Курсы</a>
                     <a class="collection-item red-text" href="{{ route('admin.settings') }}"><i class="material-icons left">settings</i>Настройки</a>
                 </ul>
 
@@ -73,6 +75,10 @@
                     <li class="divider"></li>
                     <a class="collection-item red-text" href="{{ route('admin.web_settings') }}"><i class="material-icons left">settings</i>Настройки</a>
                     <a class="collection-item red-text" href="{{ route('admin.administrators.index') }}"><i class="material-icons left">verified_user</i>Администраторы сайта</a>
+                </ul>
+
+                <ul class="collection with-header">
+                    <li class="collection-header red darken-4 white-text"><a class="white-text" href="{{ route('admin.initialization') }}"><i class="material-icons left">error_outline</i> <strong>ИНИЦИАЛИЗАЦИЯ</strong></a></li>
                 </ul>
             </div>
             <div class="col l9 m8 s8">

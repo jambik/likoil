@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,8 +11,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('maxid', 'Api\ApiController@maxId')->middleware('auth.basic');
+Route::get('maxid', 'Api\ImportController@maxId')->middleware('auth.basic');
+Route::post('cards/save', 'Api\ImportController@cardsSave')->middleware('auth.basic');
+Route::post('discounts/save', 'Api\ImportController@discountsSave')->middleware('auth.basic');
 
-Route::post('cards/save', 'Api\ApiController@cardsSave')->middleware('auth.basic');
+Route::get('settings', 'Api\AzsController@settings')->middleware('auth.basic');
+Route::match(['get', 'post'], 'card/info', 'Api\AzsController@cardInfo')->middleware('auth.basic');
+Route::match(['get', 'post'], 'card/withdraw', 'Api\AzsController@cardWithdraw')->middleware('auth.basic');
 
-Route::post('discounts/save', 'Api\ApiController@discountsSave')->middleware('auth.basic');
+## Documentation
+Route::get('docs', 'Api\DocumentationController@show')->middleware('auth.basic');

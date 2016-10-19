@@ -19,13 +19,14 @@
                         <th>Сумма</th>
                         <th>Топливо</th>
                         <th>Код АЗС</th>
+                        <th>Бонус</th>
                         <th class="filter-false btn-collumn" data-sorter="false"></th>
                         <th class="filter-false btn-collumn" data-sorter="false"></th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th colspan="10" class="pager form-inline">
+                        <th colspan="11" class="pager form-inline">
                             <button type="button" class="btn btn-small red waves-effect waves-light first"><i class="material-icons">first_page</i></button>
                             <button type="button" class="btn btn-small red waves-effect waves-light prev"><i class="material-icons">navigate_before</i></button>
                             <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
@@ -45,13 +46,14 @@
                     @foreach($items as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
-                            <td>{{ $item->card->Code }}</td>
-                            <td>{{ $item->Date }}</td>
-                            <td>{{ $item->Volume }}</td>
-                            <td>{{ $item->Price }}</td>
-                            <td>{{ $item->Amount }}</td>
-                            <td>{{ $item->FuelName }}</td>
-                            <td>{{ $item->AZSCode }}</td>
+                            <td>{{ $item->card->code }}</td>
+                            <td>{{ $item->date }}</td>
+                            <td>{{ $item->volume }}</td>
+                            <td>{{ $item->price }}</td>
+                            <td>{{ $item->amount }}</td>
+                            <td>{{ $item->fuel_name }}</td>
+                            <td>{{ $item->azs }}</td>
+                            <td><strong class="red-text text-darken-2">{{ $item->point }}</strong></td>
                             <td><a href="{{ route('admin.discounts.edit', $item->id) }}" class="btn btn-small waves-effect waves-light"><i class="material-icons">edit</i></a></td>
                             <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-small waves-effect waves-light red darken-2"><i class="material-icons">delete</i></button></td>
                         </tr>

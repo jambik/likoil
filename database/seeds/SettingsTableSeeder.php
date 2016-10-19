@@ -13,12 +13,7 @@ class SettingsTableSeeder extends Seeder
     public function run()
     {
         $settings = new Settings();
-        $settings->ai92 = 10;
-        $settings->ai95 = 10;
-        $settings->ai98 = 10;
-        $settings->dt = 10;
-        $settings->dtevro = 10;
-        $settings->gas = 5;
+        $settings->step = 50;
         $settings->save();
     }
 }

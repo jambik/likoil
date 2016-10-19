@@ -13,18 +13,15 @@ class CreateCardsTable extends Migration
     public function up()
     {
         Schema::create('cards', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('DiscountCardID');
-            $table->string('Code')->unique();
-            $table->integer('TransactionID');
+            $table->integer('id')->unique();
+            $table->string('code')->index();
+            $table->integer('transaction_id');
             $table->string('name')->default('');
             $table->tinyInteger('gender')->default(0);
             $table->string('phone')->default('');
             $table->dateTime('birthday_at')->nullable();
             $table->boolean('verified')->default(false);
             $table->timestamps();
-
-            $table->index('DiscountCardID');
         });
     }
 

@@ -1,6 +1,6 @@
 <div class="input-field col s12">
-    {!! Form::label('code', 'Номер карты') !!}
-    {!! Form::text('code', null, ['class' => 'validate'.($errors->has('code') ? ' invalid' : '')]) !!}
+    {!! Form::label('Code', 'Номер карты') !!}
+    {!! Form::text('Code', null, ['class' => 'validate'.($errors->has('Code') ? ' invalid' : '')]) !!}
 </div>
 
 <div class="input-field col s12">
@@ -36,5 +36,5 @@
 </div>
 
 <div class="input-field col s12 center">
-    <a href="{{ route('admin.cards.index') }}" class="btn grey waves-effect waves-light">Отмена</a>
+    <a href="{{ route('admin.withdrawals.index') }}" class="btn grey waves-effect waves-light">Отмена</a>
 </div>

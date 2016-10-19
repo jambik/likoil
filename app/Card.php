@@ -11,5 +11,45 @@ class Card extends Model
 
     protected $table = 'cards';
 
-    protected $fillable = ['DiscountCardID', 'Code', 'TransactionID', 'name', 'gender', 'phone', 'birthday_at', 'verified'];
+    protected $fillable = ['id', 'code', 'transaction_id', 'name', 'gender', 'phone', 'birthday_at', 'verified'];
+
+    /**
+     * Сумма всех снятых баллов
+     */
+    public function getTotalWithdrawalsAttribute()
+    {
+        return $this->withdrawals->sum('amount');
+    }
+
+    /**
+     * Сумма всех начисленных баллов
+     */
+    public function getTotalPointsAttribute()
+    {
+        return $this->discounts->sum('point');
+    }
+
+    /**
+     * Сумма всех начисленных баллов
+     */
+    public function getBonusAttribute()
+    {
+        return $this->totalPoints - $this->totalWithdrawals;
+    }
+
+    /**
+     * Снятые баллов
+     */
+    public function withdrawals()
+    {
+        return $this->hasMany('App\Withdrawal');
+    }
+
+    /**
+     * Заливы
+     */
+    public function discounts()
+    {
+        return $this->hasMany('App\Discount');
+    }
 }

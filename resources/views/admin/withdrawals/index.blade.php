@@ -1,10 +1,10 @@
 @extends('admin.layouts.full')
 
-@section('title', 'Администрирование - Карты')
+@section('title', 'Администрирование - Использованные баллы')
 
 @section('content')
-    <h4 class="center">Карты</h4>
-    <p><a href="{{ route('admin.cards.create') }}" class="btn red waves-effect waves-light"><i class="material-icons left">add_circle</i> Добавить</a></p>
+    <h4 class="center">Использованные баллы</h4>
+    <p><a href="{{ route('admin.withdrawals.create') }}" class="btn red waves-effect waves-light"><i class="material-icons left">add_circle</i> Добавить</a></p>
 
     @if ($items->count())
         <div class="table-responsive">
@@ -12,20 +12,18 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>Номер карты</th>
-                        <th>Бонусы</th>
-                        <th>Имя</th>
-                        <th>Пол</th>
-                        <th>Телефон</th>
-                        <th>Дата рождения</th>
-                        <th>Подтвержден</th>
+                        <th>Карта</th>
+                        <th>Баллы</th>
+                        <th>Тип</th>
+                        <th>АЗС</th>
+                        <th>Дата использования</th>
                         <th class="filter-false btn-collumn" data-sorter="false"></th>
                         <th class="filter-false btn-collumn" data-sorter="false"></th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th colspan="10" class="pager form-inline">
+                        <th colspan="8" class="pager form-inline">
                             <button type="button" class="btn btn-small red waves-effect waves-light first"><i class="material-icons">first_page</i></button>
                             <button type="button" class="btn btn-small red waves-effect waves-light prev"><i class="material-icons">navigate_before</i></button>
                             <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
@@ -45,14 +43,12 @@
                     @foreach($items as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
-                            <td>{{ $item->code }}</td>
-                            <td>{{ $item->bonus }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->gender }}</td>
-                            <td>{{ $item->phone }}</td>
-                            <td>{{ $item->birthday_at }}</td>
-                            <td>{{ $item->verified }}</td>
-                            <td><a href="{{ route('admin.cards.edit', $item->id) }}" class="btn btn-small waves-effect waves-light"><i class="material-icons">edit</i></a></td>
+                            <td>{{ $item->card->code }}</td>
+                            <td>{{ $item->amount }}</td>
+                            <td>{{ $item->type }}</td>
+                            <td>{{ $item->azs }}</td>
+                            <td>{{ $item->use_at }}</td>
+                            <td><a href="{{ route('admin.withdrawals.edit', $item->id) }}" class="btn btn-small waves-effect waves-light"><i class="material-icons">edit</i></a></td>
                             <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-small waves-effect waves-light red darken-2"><i class="material-icons">delete</i></button></td>
                         </tr>
                     @endforeach

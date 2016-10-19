@@ -33,6 +33,10 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('web_settings', ['as' => 'admin.web_settings', 'uses' =>'Admin\WebSettingsController@index']);
         Route::post('web_settings', ['as' => 'admin.web_settings.save', 'uses' =>'Admin\WebSettingsController@save']);
 
+        ## Initialization
+        Route::get('initialization', ['as' => 'admin.initialization', 'uses' =>'Admin\InitializationController@index']);
+        Route::post('initialization', ['as' => 'admin.initialization.save', 'uses' =>'Admin\InitializationController@save']);
+
         Route::group(['as' => 'admin.'], function ()
         {
             ## Cards
@@ -41,11 +45,17 @@ Route::group(['prefix' => 'admin'], function()
             ## Discounts
             Route::resource('discounts', 'Admin\DiscountsController');
 
+            ## Withdrawals
+            Route::resource('withdrawals', 'Admin\WithdrawalsController');
+
             ## Points
             Route::resource('points', 'Admin\PointsController');
 
             ## Campaigns
             Route::resource('campaigns', 'Admin\CampaignsController');
+
+            ## Rates
+            Route::resource('rates', 'Admin\RatesController');
 
             ## Users import
             Route::resource('users_export', 'Admin\UsersExportController');

@@ -61,7 +61,7 @@ class UsersTableSeeder extends Seeder
         $user5 = User::create($row5);
         $user5->attachRole($roleAzs);
 
-        $row6 = array_combine(['id', 'name', 'email', 'image'], $this->items[0]) + ['password' => bcrypt('stustasstu')];
+        $row6 = array_combine(['id', 'name', 'email', 'image'], $this->items[5]) + ['password' => bcrypt('stustasstu')];
         $user6 = User::create($row6);
         $user6->attachRole($admin);
     }

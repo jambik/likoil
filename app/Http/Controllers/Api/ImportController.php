@@ -22,6 +22,7 @@ class ImportController extends ApiController
      *     tags={"Topaz"},
      *     description="Максимальные значения ключей",
      *     produces={"application/json"},
+     *     security={{"basic":{}}},
      *     @SWG\Response(
      *         response=200,
      *         description="Максимальные ключи",
@@ -81,6 +82,7 @@ class ImportController extends ApiController
      *     tags={"Topaz"},
      *     description="Сохранение дисконтных карт",
      *     produces={"application/json"},
+     *     security={{"basic":{}}},
      *     @SWG\Parameter(
      *          name="data",
      *          description="Данные о картах",
@@ -178,6 +180,7 @@ class ImportController extends ApiController
      *     tags={"Topaz"},
      *     description="Сохранение заливов",
      *     produces={"application/json"},
+     *     security={{"basic":{}}},
      *     @SWG\Parameter(
      *          name="data",
      *          description="Данные о заливах",

@@ -10,6 +10,11 @@ namespace App\Http\Controllers;
  *     version="1.0.0",
  *   )
  * )
+ *
+ * @SWG\SecurityScheme(
+ *   securityDefinition="basic",
+ *   type="basic"
+ * )
  */
 class ApiController extends Controller
 {

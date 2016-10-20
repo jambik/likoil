@@ -26,6 +26,7 @@ class AzsController extends ApiController
      *     tags={"AZS"},
      *     description="Настройки для программы",
      *     produces={"application/json"},
+     *     security={{"basic":{}}},
      *     @SWG\Response(
      *         response=200,
      *         description="Настройки",
@@ -73,6 +74,7 @@ class AzsController extends ApiController
      *     tags={"AZS"},
      *     description="Информация о бонусной карте",
      *     produces={"application/json"},
+     *     security={{"basic":{}}},
      *     @SWG\Parameter(
      *          name="card",
      *          description="Номер карты",
@@ -152,6 +154,7 @@ class AzsController extends ApiController
      *     tags={"AZS"},
      *     description="Использование бонусов с бонусной карты",
      *     produces={"application/json"},
+     *     security={{"basic":{}}},
      *     @SWG\Parameter(
      *         name="card",
      *         description="Номер карты",

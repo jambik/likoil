@@ -46,7 +46,7 @@ class Discount extends Model
             if ($discountDate > $rateObj->start_at) {
                 $startAt = $rateObj->start_at;
                 $rate = $rateObj->rate;
-                $point = ($startAt > $rateObj->start_at) ? $discountObject->Volume * $rateObj->rate : 0;
+                $point = $discountObject->Volume * $rateObj->rate;
             }
         }
 

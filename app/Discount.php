@@ -44,7 +44,7 @@ class Discount extends Model
             $discountDate = Carbon::parse($discountObject->Date);
 
             if ($discountDate > $rateObj->start_at) {
-                $startAt = $discountDate;
+                $startAt = $rateObj->start_at;
                 $rate = $rateObj->rate;
                 $point = ($startAt > $rateObj->start_at) ? $discountObject->Volume * $rateObj->rate : 0;
             }

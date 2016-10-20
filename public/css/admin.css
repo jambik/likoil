@@ -24,18 +24,6 @@ nav .brand-logo { background-color: #fff; padding: 0 20px; }
     padding-right: 1rem;
 }
 
-.tablesorter-material .select-wrapper {
-    display: inline-block;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.tablesorter-material .select-wrapper input.select-dropdown {
-    margin-bottom: 0;
-    width: 100px;
-
-}
-
 .filter-input {
     background: #eee;
 }
@@ -109,6 +97,38 @@ nav .brand-logo { background-color: #fff; padding: 0 20px; }
 .no-items::after {
     content: "нет записей";
 }
+
+/* tablsesorter fixes */
+.tablesorter-material .select-wrapper {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.tablesorter-material .select-wrapper input.select-dropdown {
+    margin-bottom: 0;
+    width: 100px;
+}
+
+/* DataTable fixes */
+.table-ajax select {
+    display: none !important;
+}
+
+.table-ajax .select-wrapper {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.table-ajax .dataTables_filter {
+    margin-top: -66px;
+}
+
+.table-ajax .dataTables_paginate {
+    margin-top: -30px !important;
+}
+
 
 /* headerable */
 .headerable {

@@ -16,6 +16,14 @@
     <link href="{{ asset('/css/admin.bundle.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('/css/admin.css') }}" type="text/css" rel="stylesheet">
 
+    <style type="text/css">
+        @font-face {
+            font-family: 'Glyphicons Halflings';
+            src: url('{{ asset('fonts/glyphicons-halflings-regular.eot') }}');
+            src: url('{{ asset('fonts/glyphicons-halflings-regular.eot?#iefix') }}') format('embedded-opentype'), url('{{ asset('fonts/glyphicons-halflings-regular.woff2') }}') format('woff2'), url('{{ asset('fonts/glyphicons-halflings-regular.woff') }}') format('woff'), url('{{ asset('fonts/glyphicons-halflings-regular.ttf') }}') format('truetype'), url('{{ asset('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') }}') format('svg');
+        }
+    </style>
+
     <!-- Scripts -->
     <script src="{{ asset('/js/admin.bundle.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/admin.js') }}" type="text/javascript"></script>

@@ -44,7 +44,8 @@ elixir(mix => {
         '../../../bower_components/Materialize/dist/css/materialize.min.css',
         '../../../bower_components/animate.css/animate.min.css',
         '../../../bower_components/sweetalert/dist/sweetalert.css',
-        '../../../bower_components/datetimepicker/jquery.datetimepicker.css'
+        '../../../bower_components/datetimepicker/jquery.datetimepicker.css',
+        '../../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css',
     ], 'public/css/admin.bundle.css');
     mix.scripts([
         '../../../bower_components/jquery/dist/jquery.min.js',
@@ -55,6 +56,8 @@ elixir(mix => {
         '../../../bower_components/sweetalert/dist/sweetalert.min.js',
         '../../../node_modules/tablesorter/dist/js/jquery.tablesorter.combined.min.js',
         '../../../node_modules/tablesorter/dist/js/extras/jquery.tablesorter.pager.min.js',
+        '../../../bower_components/datatables.net/js/jquery.dataTables.min.js',
+        '../../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js',
         '../../../bower_components/datetimepicker/build/jquery.datetimepicker.full.min.js'
     ], 'public/js/admin.bundle.js');
 

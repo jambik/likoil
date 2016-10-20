@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Discount;
 use App\Http\Controllers\BackendController;
+use DB;
 use Illuminate\Http\Request;
 
 class DiscountsController extends BackendController
@@ -17,14 +18,59 @@ class DiscountsController extends BackendController
         $this->resourceName = 'discounts';
         $this->model = new Discount();
     }
-    
+
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
+//        $items = $this->model->with('card')->skip(0)->limit(5)->get();
+//        dump($items);
+
+        if ($request->wantsJson()) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+            $recordsTotal = $this->model->count();
+            $recordsFiltered = $recordsTotal;
+
+            $columns = $request->get('columns');
+            $order = $request->get('order');
+            $search = $request->get('search');
+
+            $query = DB::table('discounts')
+                        ->leftJoin('cards', 'discounts.card_id', '=', 'cards.id')
+                        ->select('discounts.*', 'cards.code');
+
+            // Поиск
+            if ($search['value']) {
+                $query->where('code', 'LIKE', '%'.$search['value'].'%');
+//                $query->orWhere('fuel_name', 'LIKE', '%'.$search['value'].'%');
+                $recordsFiltered = $query->count();
+            }
+
+            // Добавление пагинации
+            $query->skip($start)->limit($length);
+
+            // Добавление сортировки по колонкам
+            foreach ($order as $orderColumn) {
+                $query->orderBy($columns[$orderColumn['column']]['data'], $orderColumn['dir']);
+            }
+
+            $items = $query->get();
+
+            return response()->json([
+                'draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $items,
+            ]);
+        }
+
         $items = $this->model->with('card')->limit(500)->get();
 
         return view('admin.'.$this->resourceName.'.index', compact('items'));

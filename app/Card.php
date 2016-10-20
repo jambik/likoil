@@ -14,6 +14,13 @@ class Card extends Model
     protected $fillable = ['id', 'code', 'transaction_id', 'name', 'gender', 'phone', 'birthday_at', 'verified'];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var integer
+     */
+    protected $appends = ['bonus'];
+
+    /**
      * Сумма всех снятых баллов
      */
     public function getTotalWithdrawalsAttribute()

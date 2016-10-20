@@ -6,7 +6,7 @@
     <h4 class="center">Заливы</h4>
     <p><a href="{{ route('admin.discounts.create') }}" class="btn red waves-effect waves-light"><i class="material-icons left">add_circle</i> Добавить</a></p>
 
-    @if ($items->count())
+    {{--@if ($items->count())--}}
         <div class="table-responsive table-ajax">
             <table id="table_items_ajax" class="striped bordered highlight responsive-table">
                 <thead>
@@ -39,9 +39,9 @@
                 </tbody>
             </table>
         </div>
-    @else
+    {{--@else
         <div class="no-items"></div>
-    @endif
+    @endif--}}
 @endsection
 
 @section('footer_scripts')

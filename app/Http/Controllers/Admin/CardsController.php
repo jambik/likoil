@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Card;
 use App\Http\Controllers\BackendController;
+use DB;
 use Illuminate\Http\Request;
 
 class CardsController extends BackendController
@@ -21,13 +22,62 @@ class CardsController extends BackendController
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = $this->model->with('discounts', 'withdrawals')->limit(100)->get();
+        if ($request->wantsJson()) {
 
-        return view('admin.'.$this->resourceName.'.index', compact('items'));
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+            $recordsTotal = $this->model->count();
+            $recordsFiltered = $recordsTotal;
+
+            $columns = $request->get('columns');
+            $order = $request->get('order');
+            $search = $request->get('search');
+
+            $query = $this->model->select('*');
+
+            // Поиск
+            if ($search['value']) {
+                $query->where('code', 'LIKE', '%'.$search['value'].'%');
+//                $query->orWhere('name', 'LIKE', '%'.$search['value'].'%');
+                $recordsFiltered = $query->count();
+            }
+
+            // Добавление пагинации
+            $query->skip($start)->limit($length);
+
+            // Добавление сортировки по колонкам
+            foreach ($order as $orderColumn) {
+                $query->orderBy($columns[$orderColumn['column']]['data'], $orderColumn['dir']);
+            }
+
+            $items = $query->get();
+
+            if ($columns[$order[0]['column']]['data'] == 'bonus') {
+                if ($order[0]['dir'] == 'desc') {
+                    $items = $items->sortByDesc('bonus')->values();
+                } else {
+                    $items = $items->sortBy('bonus')->values();
+                }
+            }
+
+            return response()->json([
+                'draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $items,
+            ]);
+        }
+
+//        $items = $this->model->with('discounts', 'withdrawals')->limit(100)->get();
+
+        return view('admin.'.$this->resourceName.'.index'/*, compact('items')*/);
     }
 
     /**

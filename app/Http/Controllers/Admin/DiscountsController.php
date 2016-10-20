@@ -27,9 +27,6 @@ class DiscountsController extends BackendController
      */
     public function index(Request $request)
     {
-//        $items = $this->model->with('card')->skip(0)->limit(5)->get();
-//        dump($items);
-
         if ($request->wantsJson()) {
             $draw = $request->get('draw');
             $start = $request->get('start');
@@ -71,9 +68,9 @@ class DiscountsController extends BackendController
             ]);
         }
 
-        $items = $this->model->with('card')->limit(500)->get();
+//        $items = $this->model->with('card')->limit(500)->get();
 
-        return view('admin.'.$this->resourceName.'.index', compact('items'));
+        return view('admin.'.$this->resourceName.'.index'/*, compact('items')*/);
     }
 
     /**

@@ -91,14 +91,13 @@ class AzsController extends ApiController
      *                 type="object",
      *                 description="корневой объект",
      *                 @SWG\Property(
-     *                     property="card",
-     *                     type="string",
-     *                     description="Номер карты"
-     *                 ),
-     *                 @SWG\Property(
      *                     property="points",
      *                     type="integer",
      *                     description="Количество бонусов"
+     *                 ),
+     *                 @SWG\Property(
+     *                     property="card_info",
+     *                     ref="#/definitions/CardInfo"
      *                 ),
      *             )
      *         )
@@ -135,8 +134,9 @@ class AzsController extends ApiController
 
         return response()->json([
             'response' => [
-                'card' => $card->code,
                 'points' => $card->bonus,
+                'code' => $card->code,
+                'card_info' => $card->info,
             ],
         ]);
     }
@@ -189,19 +189,13 @@ class AzsController extends ApiController
      *                 ),
      *                 @SWG\Property(
      *                     property="receipt_id",
-     *                     type="string",
+     *                     type="integer",
      *                     description="Id квитанции"
      *                 ),
      *                 @SWG\Property(
-     *                     property="card_id",
-     *                     type="integer",
-     *                     description="Id карты"
-     *                 ),
-     *                 @SWG\Property(
-     *                     property="name",
-     *                     type="string",
-     *                     description="Имя владельца карты"
-     *                 ),
+     *                     property="card_info",
+     *                     ref="#/definitions/CardInfo"
+     *                 )
      *             )
      *         )
      *     ),
@@ -249,8 +243,7 @@ class AzsController extends ApiController
                 'status' => 'ok',
                 'message' => 'Бонус успешно списан с карты',
                 'receipt_id' => $instance->id,
-                'card_id' => $card->id,
-                'name' => $card->info->last_name . ' ' . $card->info->name . ' ' . $card->info->patronymic
+                'card_info' => $card->info,
             ],
         ]);
     }

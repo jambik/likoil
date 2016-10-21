@@ -12,6 +12,16 @@
                     {!! Form::text('step', null, ['class' => 'validate']) !!}
                 </div>
 
+                <div class="input-field col s12">
+                    {!! Form::label('min', 'Минимальный порог') !!}
+                    {!! Form::text('min', null, ['class' => 'validate']) !!}
+                </div>
+
+                <div class="input-field col s12">
+                    {!! Form::label('max', 'Максимальный порог') !!}
+                    {!! Form::text('max', null, ['class' => 'validate']) !!}
+                </div>
+
                 <div class="col s12 center">
                     <button type="submit" class="btn-large red waves-effect waves-light"><i class="material-icons left">check_circle</i>Сохранить настройки</button>
                 </div>

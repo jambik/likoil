@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Card;
-use App\Discount;
 use App\Http\Controllers\ApiController;
 use App\Settings;
 use App\Withdrawal;
 use Auth;
 use Carbon\Carbon;
-use DB;
 use Illuminate\Http\Request;
 
 class AzsController extends ApiController
@@ -41,6 +39,16 @@ class AzsController extends ApiController
      *                     type="integer",
      *                     description="Шаг для увеличения/уменьшения баллов"
      *                 ),
+     *                 @SWG\Property(
+     *                     property="min",
+     *                     type="integer",
+     *                     description="Минимальный порог"
+     *                 ),
+     *                 @SWG\Property(
+     *                     property="max",
+     *                     type="integer",
+     *                     description="Максимальный порог"
+     *                 ),
      *             )
      *         )
      *     ),
@@ -57,6 +65,8 @@ class AzsController extends ApiController
         return response()->json([
             'response' => [
                 'step' => $settings->step,
+                'min' => $settings->min,
+                'max' => $settings->max,
             ]
         ]);
     }

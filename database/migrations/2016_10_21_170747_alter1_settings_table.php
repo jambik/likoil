@@ -14,8 +14,8 @@ class Alter1SettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->integer('min')->default(50)->after('step');
-            $table->integer('max')->default(1000)->after('min');
+            $table->integer('min')->default(0)->after('step');
+            $table->integer('max')->default(0)->after('min');
         });
     }
 

@@ -26,7 +26,6 @@ class AzsController extends ApiController
      *     tags={"AZS"},
      *     description="Настройки для программы",
      *     produces={"application/json"},
-     *     security={{"basic":{}}},
      *     @SWG\Response(
      *         response=200,
      *         description="Настройки",
@@ -188,6 +187,21 @@ class AzsController extends ApiController
      *                     type="string",
      *                     description="Сообщение"
      *                 ),
+     *                 @SWG\Property(
+     *                     property="receipt_id",
+     *                     type="string",
+     *                     description="Id квитанции"
+     *                 ),
+     *                 @SWG\Property(
+     *                     property="card_id",
+     *                     type="integer",
+     *                     description="Id карты"
+     *                 ),
+     *                 @SWG\Property(
+     *                     property="name",
+     *                     type="string",
+     *                     description="Имя владельца карты"
+     *                 ),
      *             )
      *         )
      *     ),
@@ -234,6 +248,9 @@ class AzsController extends ApiController
             'response' => [
                 'status' => 'ok',
                 'message' => 'Бонус успешно списан с карты',
+                'receipt_id' => $instance->id,
+                'card_id' => $card->id,
+                'name' => $card->info->last_name . ' ' . $card->info->name . ' ' . $card->info->patronymic
             ],
         ]);
     }

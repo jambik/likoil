@@ -11,13 +11,8 @@ class Card extends Model
 
     protected $table = 'cards';
 
-    protected $fillable = ['id', 'code', 'transaction_id', 'name', 'gender', 'phone', 'birthday_at', 'verified'];
+    protected $fillable = ['id', 'code', 'transaction_id', 'verified'];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var integer
-     */
     protected $appends = ['bonus'];
 
     /**
@@ -45,7 +40,7 @@ class Card extends Model
     }
 
     /**
-     * Снятые баллов
+     * Снятые баллы
      */
     public function withdrawals()
     {
@@ -58,5 +53,13 @@ class Card extends Model
     public function discounts()
     {
         return $this->hasMany('App\Discount');
+    }
+
+    /**
+     * Информация о карте
+     */
+    public function info()
+    {
+        return $this->hasOne('App\CardInfo');
     }
 }

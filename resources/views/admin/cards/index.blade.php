@@ -14,10 +14,10 @@
                         <th>id</th>
                         <th>Номер карты</th>
                         <th>Бонусы</th>
-                        <th>Имя</th>
+                        {{--<th>Имя</th>
                         <th>Пол</th>
                         <th>Телефон</th>
-                        <th>Дата рождения</th>
+                        <th>Дата рождения</th>--}}
                         <th>Подтвержден</th>
                     </tr>
                 </thead>
@@ -63,10 +63,10 @@
                     { "data": "id" },
                     { "data": "code" },
                     { "data": "bonus" },
-                    { "data": "name" },
+                    /*{ "data": "name" },
                     { "data": "gender" },
                     { "data": "phone" },
-                    { "data": "birthday_at" },
+                    { "data": "birthday_at" },*/
                     { "data": "verified" }
                 ]
             });

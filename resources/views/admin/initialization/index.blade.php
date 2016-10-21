@@ -19,6 +19,17 @@
                     </div>
                 </div>
 
+                <div class="input-field file-field col s12">
+                    <h5 class="center">Данные о картах</h5>
+                    <div class="btn">
+                        <span>Файл</span>
+                        {!! Form::file('file_cards') !!}
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate{{ $errors->has('file_cards') ? ' invalid' : '' }}" type="text" placeholder="Выберите файл (CSV) с данными о картах">
+                    </div>
+                </div>
+
                 <div class="input-field col s12 center">
                     <button type="submit" class="btn-large red waves-effect waves-light"><i class="material-icons left">check_circle</i>Инициализировать</button>
                 </div>

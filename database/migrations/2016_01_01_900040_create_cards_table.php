@@ -16,10 +16,6 @@ class CreateCardsTable extends Migration
             $table->integer('id')->unique();
             $table->string('code')->index();
             $table->integer('transaction_id');
-            $table->string('name')->default('');
-            $table->tinyInteger('gender')->default(0);
-            $table->string('phone')->default('');
-            $table->dateTime('birthday_at')->nullable();
             $table->boolean('verified')->default(false);
             $table->timestamps();
         });

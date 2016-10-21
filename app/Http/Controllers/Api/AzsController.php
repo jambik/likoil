@@ -255,7 +255,7 @@ class AzsController extends ApiController
             'card_id' => $card->id,
             'amount' => $request->get('amount'),
             'type' => 'Использование бонусов',
-            'azs' => Auth::user()->name(),
+            'azs' => Auth::user()->name,
             'use_at' => Carbon::now(),
         ]);
 

@@ -96,6 +96,16 @@ class AzsController extends ApiController
      *                     description="Количество бонусов"
      *                 ),
      *                 @SWG\Property(
+     *                     property="card_id",
+     *                     type="integer",
+     *                     description="Id карты"
+     *                 ),
+     *                 @SWG\Property(
+     *                     property="code",
+     *                     type="string",
+     *                     description="Номер карты"
+     *                 ),
+     *                 @SWG\Property(
      *                     property="card_info",
      *                     ref="#/definitions/CardInfo"
      *                 ),
@@ -135,6 +145,7 @@ class AzsController extends ApiController
         return response()->json([
             'response' => [
                 'points' => $card->bonus,
+                'card_id' => $card->id,
                 'code' => $card->code,
                 'card_info' => $card->info,
             ],
@@ -193,6 +204,16 @@ class AzsController extends ApiController
      *                     description="Id квитанции"
      *                 ),
      *                 @SWG\Property(
+     *                     property="card_id",
+     *                     type="integer",
+     *                     description="Id карты"
+     *                 ),
+     *                 @SWG\Property(
+     *                     property="code",
+     *                     type="string",
+     *                     description="Номер карты"
+     *                 ),
+     *                 @SWG\Property(
      *                     property="card_info",
      *                     ref="#/definitions/CardInfo"
      *                 )
@@ -243,6 +264,8 @@ class AzsController extends ApiController
                 'status' => 'ok',
                 'message' => 'Бонус успешно списан с карты',
                 'receipt_id' => $instance->id,
+                'card_id' => $card->id,
+                'code' => $card->code,
                 'card_info' => $card->info,
             ],
         ]);

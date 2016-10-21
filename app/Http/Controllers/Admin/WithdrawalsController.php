@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BackendController;
 use App\Withdrawal;
+use DB;
 use Illuminate\Http\Request;
 
 class WithdrawalsController extends BackendController
@@ -17,15 +18,57 @@ class WithdrawalsController extends BackendController
         $this->resourceName = 'withdrawals';
         $this->model = new Withdrawal();
     }
-    
+
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = $this->model->all();
+        if ($request->wantsJson()) {
+            $draw = $request->get('draw');
+            $start = $request->get('start');
+            $length = $request->get('length');
+
+            $recordsTotal = $this->model->count();
+            $recordsFiltered = $recordsTotal;
+
+            $columns = $request->get('columns');
+            $order = $request->get('order');
+            $search = $request->get('search');
+
+            $query = DB::table('withdrawals')
+                ->leftJoin('cards', 'withdrawals.card_id', '=', 'cards.id')
+                ->select('withdrawals.*', 'cards.code');
+
+            // Поиск
+            if ($search['value']) {
+                $query->where('code', 'LIKE', '%'.$search['value'].'%');
+//                $query->orWhere('fuel_name', 'LIKE', '%'.$search['value'].'%');
+                $recordsFiltered = $query->count();
+            }
+
+            // Добавление пагинации
+            $query->skip($start)->limit($length);
+
+            // Добавление сортировки по колонкам
+            foreach ($order as $orderColumn) {
+                $query->orderBy($columns[$orderColumn['column']]['data'], $orderColumn['dir']);
+            }
+
+            $items = $query->get();
+
+            return response()->json([
+                'draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $items,
+            ]);
+        }
+
+//        $items = $this->model->all();
 
         return view('admin.'.$this->resourceName.'.index', compact('items'));
     }

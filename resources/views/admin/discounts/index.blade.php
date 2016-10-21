@@ -71,7 +71,6 @@
                     { "data": "point" }
                 ]
             });
-
         }
     </script>
 @endsection

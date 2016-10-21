@@ -114,7 +114,7 @@ class InitializationController extends BackendController
 
                 $card = Card::find($id);
 
-//                if ($card) {
+                if ($card) {
                     $instance = CardInfo::updateOrCreate(['card_id' => $id], [
                         'name' => $name,
                         'last_name' => $last_name,
@@ -134,7 +134,7 @@ class InitializationController extends BackendController
                         'car_number' => $car_number,
                         'indate_at' => $indate_at,
                     ]);
-//                }
+                }
             }
         });
 

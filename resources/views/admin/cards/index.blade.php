@@ -14,11 +14,10 @@
                         <th>id</th>
                         <th>Номер карты</th>
                         <th>Бонусы</th>
-                        {{--<th>Имя</th>
+                        <th>Имя</th>
                         <th>Пол</th>
                         <th>Телефон</th>
-                        <th>Дата рождения</th>--}}
-                        <th>Подтвержден</th>
+                        <th>Дата рождения</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +30,6 @@
                             <td>{{ $item->gender }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>{{ $item->birthday_at }}</td>
-                            <td>{{ $item->verified }}</td>
                             <td><a href="{{ route('admin.cards.edit', $item->id) }}" class="btn btn-small waves-effect waves-light"><i class="material-icons">edit</i></a></td>
                             <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-small waves-effect waves-light red darken-2"><i class="material-icons">delete</i></button></td>
                         </tr>
@@ -63,14 +61,41 @@
                     { "data": "id" },
                     { "data": "code" },
                     { "data": "bonus" },
-                    /*{ "data": "name" },
-                    { "data": "gender" },
-                    { "data": "phone" },
-                    { "data": "birthday_at" },*/
-                    { "data": "verified" }
+                    { "data": "info.full_name" },
+                    { "data": "info.gender" },
+                    { "data": "info.phone" },
+                    { "data": "info.birthday_at" }
                 ]
             });
+        }
 
+        $.fn.dataTableExt.sErrMode = "console";
+
+        $.fn.dataTableExt.oApi._fnLog = function (oSettings, iLevel, sMesg, tn) {
+            var sAlert = (oSettings === null)
+                            ? "DataTables warning: "+sMesg
+                            : "DataTables warning (table id = '"+oSettings.sTableId+"'): "+sMesg
+                    ;
+
+            if (tn) {
+                sAlert += ". For more information about this error, please see "+
+                        "http://datatables.net/tn/"+tn
+                ;
+            }
+
+            if (iLevel === 0) {
+                if ($.fn.dataTableExt.sErrMode == "alert") {
+                    alert(sAlert);
+                } else if ($.fn.dataTableExt.sErrMode == "thow") {
+                    throw sAlert;
+                } else  if ($.fn.dataTableExt.sErrMode == "console") {
+                    console.log(sAlert);
+                } else  if ($.fn.dataTableExt.sErrMode == "mute") {}
+
+                return;
+            } else if (console !== undefined && console.log) {
+                console.log(sAlert);
+            }
         }
     </script>
 @endsection

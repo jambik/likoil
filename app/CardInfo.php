@@ -13,6 +13,8 @@ class CardInfo extends Model
 
     protected $primaryKey = 'card_id';
 
+    protected $appends = ['full_name'];
+
     protected $fillable = [
         'card_id',
         'name',
@@ -33,6 +35,16 @@ class CardInfo extends Model
         'car_number',
         'indate_at',
     ];
+
+    public function getGenderAttribute($value)
+    {
+        return $value == 1 ? 'М' : ($value == 2 ? 'Ж' : '');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->attributes['last_name'] . ' ' . $this->attributes['name'] . ' ' . $this->attributes['patronymic'];
+    }
 
     /**
      * Карта

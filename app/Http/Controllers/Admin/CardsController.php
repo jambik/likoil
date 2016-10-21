@@ -54,16 +54,21 @@ class CardsController extends BackendController
 
             // Добавление сортировки по колонкам
             foreach ($order as $orderColumn) {
-                $query->orderBy($columns[$orderColumn['column']]['data'], $orderColumn['dir']);
+                if ( ! in_array($columns[$orderColumn['column']]['data'], ['bonus'])) { // Если поле бонус то пропускаем
+                    $query->orderBy($columns[$orderColumn['column']]['data'], $orderColumn['dir']);
+                }
             }
 
             $items = $query->get();
 
-            if ($columns[$order[0]['column']]['data'] == 'bonus') {
-                if ($order[0]['dir'] == 'desc') {
-                    $items = $items->sortByDesc('bonus')->values();
-                } else {
-                    $items = $items->sortBy('bonus')->values();
+            // Добавление сортировки по колонкам
+            foreach ($order as $orderColumn) {
+                if (in_array($columns[$orderColumn['column']]['data'], ['bonus'])) { // Если поле бонус то пропускаем
+                    if ($orderColumn['dir'] == 'desc') {
+                        $items = $items->sortByDesc('bonus')->values();
+                    } else {
+                        $items = $items->sortBy('bonus')->values();
+                    }
                 }
             }
 

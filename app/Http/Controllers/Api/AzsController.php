@@ -243,7 +243,7 @@ class AzsController extends ApiController
 
         $card = Card::where('code', $request->get('card'))->first();
 
-        if (! $card) {
+        if ( ! $card) {
             return response()->json([
                 'response' => [
                     'message' => 'Карта с номером ' . $request->get('card') . ' не найдена',

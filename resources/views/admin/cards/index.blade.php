@@ -18,7 +18,7 @@
                         <th>Пол</th>
                         <th>Телефон</th>
                         <th>Дата рождения</th>
-                        <th></th>
+                        <th>Инфо</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,7 +61,7 @@
                 "columns": [
                     { "data": "id" },
                     { "data": "code" },
-                    { "data": "bonus" },
+                    { "data": "bonus", "orderable": false },
                     { "data": "info.full_name", "orderable": false },
                     { "data": "info.gender_letter", "orderable": false },
                     { "data": "info.phone", "orderable": false },

@@ -36,7 +36,7 @@
 						{!! Form::text('info[phone]', null, ['class' => 'validate'.($errors->has('info[phone]') ? ' invalid' : '')]) !!}
 					</div>
 
-					<div class="input-field col s12 input-datetime">
+					<div class="input-field col s12 input-date">
 						{!! Form::label('info[birthday_at]', 'Дата рождения') !!}
 						{!! Form::text('info[birthday_at]', null, ['class' => 'validate'.($errors->has('info[birthday_at]') ? ' invalid' : '')]) !!}
 					</div>
@@ -51,7 +51,7 @@
 						{!! Form::text('info[type]', null, ['class' => 'validate'.($errors->has('info[type]') ? ' invalid' : '')]) !!}
 					</div>
 
-					<div class="input-field col s12 input-datetime">
+					<div class="input-field col s12 input-date">
 						{!! Form::label('info[issued_at]', 'Дата выдачи карты') !!}
 						{!! Form::text('info[issued_at]', null, ['class' => 'validate'.($errors->has('info[issued_at]') ? ' invalid' : '')]) !!}
 					</div>
@@ -66,7 +66,7 @@
 						{!! Form::text('info[document_number]', null, ['class' => 'validate'.($errors->has('info[document_number]') ? ' invalid' : '')]) !!}
 					</div>
 
-					<div class="input-field col s12 input-datetime">
+					<div class="input-field col s12 input-date">
 						{!! Form::label('info[document_at]', 'Дата выдачи документа') !!}
 						{!! Form::text('info[document_at]', null, ['class' => 'validate'.($errors->has('info[document_at]') ? ' invalid' : '')]) !!}
 					</div>

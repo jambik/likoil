@@ -23,7 +23,7 @@ class CreateCardsInfoTable extends Migration
             $table->string('card_number')->default('');
             $table->string('issue_place')->default('');
             $table->string('type')->default('');
-            $table->dateTime('issued_at')->nullable('');
+            $table->dateTime('issued_at')->nullable();
             $table->string('document_type')->default('');
             $table->string('document_number')->default('');
             $table->dateTime('document_at')->nullable();

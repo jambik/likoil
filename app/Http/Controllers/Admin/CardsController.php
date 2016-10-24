@@ -191,16 +191,22 @@ class CardsController extends BackendController
 
     public function saveInfo(Request $request, $id)
     {
-        $this->validate($request, [
+        /*$this->validate($request, [
             'info.name' => 'required',
-        ]);
+        ]);*/
 
         $item = $this->model->findOrFail($id);
 
+        $data = $request->get('info');
+
+        foreach (['birthday_at', 'issued_at', 'document_at'] as $value) $data[$value] = $data[$value] ?: null;
+
+//        dd($data);
+
         if ($item->info()->count()) {
-            $item->info()->update($request->get('info'));
+            $item->info()->update($data);
         } else {
-            $item->info()->create($request->get('info'));
+            $item->info()->create($data);
         }
 
         return redirect(route('admin.'.$this->resourceName.'.index'));

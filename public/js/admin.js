@@ -80,6 +80,18 @@ $(document).ready(function () {
     }
 
     // Применять плагин datetime к полям типа дата
+    if ($('.input-date').length) {
+
+        $.datetimepicker.setLocale('ru');
+        $('.input-date input').datetimepicker({
+            format: 'Y-m-d',
+            timepicker: false,
+            dayOfWeekStart: 1
+        });
+
+    }
+
+    // Применять плагин datetime к полям типа дата
     if ($('.input-datetime').length) {
 
         $.datetimepicker.setLocale('ru');

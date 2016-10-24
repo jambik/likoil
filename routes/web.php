@@ -41,6 +41,8 @@ Route::group(['prefix' => 'admin'], function()
         {
             ## Cards
             Route::resource('cards', 'Admin\CardsController');
+            Route::get('cards/{id}/info', ['as' => 'cards.info', 'uses' =>'Admin\CardsController@showInfo'])->where('id', '[0-9]+');
+            Route::post('cards/{id}/info', ['as' => 'cards.info.save', 'uses' =>'Admin\CardsController@saveInfo'])->where('id', '[0-9]+');
 
             ## Discounts
             Route::resource('discounts', 'Admin\DiscountsController');

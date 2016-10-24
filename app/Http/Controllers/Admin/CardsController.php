@@ -72,6 +72,11 @@ class CardsController extends BackendController
                 }
             }
 
+            $items = $items->map(function ($item, $key) {
+                $item['DT_RowId'] = 'row_' . $item->id;
+                return $item;
+            });
+
             return response()->json([
                 'draw' => $draw,
                 'recordsTotal' => $recordsTotal,
@@ -124,7 +129,7 @@ class CardsController extends BackendController
      */
     public function show($id)
     {
-        //
+        return $this->model->findOrFail($id);
     }
 
     /**
@@ -173,6 +178,30 @@ class CardsController extends BackendController
     public function destroy($id)
     {
         $this->model->destroy($id);
+
+        return redirect(route('admin.'.$this->resourceName.'.index'));
+    }
+
+    public function showInfo($id)
+    {
+        $card = $this->model->findOrFail($id);
+
+        return view('admin.'.$this->resourceName.'.info', compact('card'));
+    }
+
+    public function saveInfo(Request $request, $id)
+    {
+        $this->validate($request, [
+            'info.name' => 'required',
+        ]);
+
+        $item = $this->model->findOrFail($id);
+
+        if ($item->info()->count()) {
+            $item->info()->update($request->get('info'));
+        } else {
+            $item->info()->create($request->get('info'));
+        }
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
     }

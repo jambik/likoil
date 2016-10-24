@@ -109,7 +109,7 @@ class CardInfo extends Model
 
     protected $primaryKey = 'card_id';
 
-    protected $appends = ['full_name'];
+    protected $appends = ['full_name', 'gender_letter', 'gender_letters'];
 
     protected $fillable = [
         'card_id',
@@ -132,9 +132,14 @@ class CardInfo extends Model
         'indate_at',
     ];
 
-    public function getGenderAttribute($value)
+    public function getGenderLetterAttribute()
     {
-        return $value == 1 ? 'М' : ($value == 2 ? 'Ж' : '');
+        return $this->attributes['gender'] == 1 ? 'М' : ($this->attributes['gender'] == 2 ? 'Ж' : '');
+    }
+
+    public function getGenderLettersAttribute()
+    {
+        return $this->attributes['gender'] == 1 ? 'Мужской' : ($this->attributes['gender'] == 2 ? 'Женский' : '');
     }
 
     public function getFullNameAttribute()

@@ -18,6 +18,7 @@
                         <th>Пол</th>
                         <th>Телефон</th>
                         <th>Дата рождения</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +48,7 @@
         // Применяем плагин DataTable к таблице элементов
         if ($('#table_items_ajax').length) {
 
-            $('#table_items_ajax').DataTable({
+            var table = $('#table_items_ajax').DataTable({
                 "language": {
                     "url": "{{ asset('js/DataTable.Russian.json') }}"
                 },
@@ -61,11 +62,27 @@
                     { "data": "id" },
                     { "data": "code" },
                     { "data": "bonus" },
-                    { "data": "info.full_name" },
-                    { "data": "info.gender" },
-                    { "data": "info.phone" },
-                    { "data": "info.birthday_at" }
+                    { "data": "info.full_name", "orderable": false },
+                    { "data": "info.gender_letter", "orderable": false },
+                    { "data": "info.phone", "orderable": false },
+                    { "data": "info.birthday_at", "orderable": false },
+                    {
+                        "className":      'card-info',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent" : '<button style="width: 20px; padding: 0 10px;" class="btn red waves-effect waves-light"><i class="material-icons left">contact_mail</i></button>'
+                    },
                 ]
+            });
+
+            // Add event listener for opening and closing details
+            $('#table_items_ajax tbody').on('click', 'td.card-info', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                var location = '/admin/cards/' +  row.data().id + '/info';
+
+                document.location = location;
             });
         }
 

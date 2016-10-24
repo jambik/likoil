@@ -173,6 +173,7 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
+        PrettyRoutes\ServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,

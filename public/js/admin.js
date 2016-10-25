@@ -10,33 +10,10 @@ $(document).ready(function () {
     // Применяем плагин tablesorter к таблице элементов
     if ($('#table_items').length) {
 
-        // Установка стилей к плагину tablesorter
-        $.tablesorter.themes.material = {
-            iconSortAsc: 'material-icons arrow_drop_up', // class name added to icon when column has ascending sort
-            iconSortDesc: 'material-icons arrow_drop_down' // class name added to icon when column has descending sort
-        };
-
-        $('#table_items').tablesorter({
-            theme: "material",
-            sortReset: true,
-            sortRestart: true,
-            widthFixed: true,
-            headerTemplate: '{content} {icon}',
-            widgets: ["uitheme", "filter", "pager", "zebra", "stickyHeaders"],
-            widgetOptions: {
-                // filter
-                filter_cssFilter: 'filter-input',
-                filter_searchDelay: 0,
-                filter_hideFilters: true,
-
-                // zebra
-                zebra: ["even", "odd"]
+        $('#table_items').DataTable({
+            "language": {
+                "url": "/js/DataTable.Russian.json"
             }
-        }).tablesorterPager({ // Настройка вывода pager
-            container: $(".pager"),
-            output: '{startRow} - {endRow} / {filteredRows} ({totalRows})'
-        }).bind('pagerComplete', function (e, c) { // Обновляем все элементы select после того как меняется pager
-            $('#table_items select').material_select();
         });
 
     }
@@ -108,13 +85,6 @@ $(document).ready(function () {
         $('.input-html textarea').each(function(){
             CKEDITOR.replace( this );
         });
-
-    }
-
-    // Применяем стили material ко всем элементам select
-    if ($('#app select').length) {
-
-        $('#app select').material_select();
 
     }
 

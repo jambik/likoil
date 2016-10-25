@@ -4,7 +4,7 @@
 
 @section('content')
     <h4 class="center">Пользователи</h4>
-    <p><a href="{{ route('admin.users.create') }}" class="btn red waves-effect waves-light"><i class="material-icons left">add_circle</i> Добавить</a></p>
+    <p><a href="{{ route('admin.users.create') }}" class="btn btn-success"><i class="material-icons">add_circle</i> Добавить</a></p>
 
     @if ($items->count())
         <table id="table_items">
@@ -14,8 +14,8 @@
                     <th>Аватар</th>
                     <th>Имя</th>
                     <th>Email</th>
-                    <th class="filter-false btn-collumn" data-sorter="false"></th>
-                    <th class="filter-false btn-collumn" data-sorter="false"></th>
+                    <th data-orderable="false" class="btn-collumn"></th>
+                    <th data-orderable="false" class="btn-collumn"></th>
                 </tr>
             </thead>
             <tfoot>
@@ -43,8 +43,8 @@
                         <td>@if ($item->avatar)<img src='{{ $item->avatar }}' alt='' />@endif</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->email }}</td>
-                        <td><a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-small waves-effect waves-light"><i class="material-icons">edit</i></a></td>
-                        <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-small waves-effect waves-light red darken-2"><i class="material-icons">delete</i></button></td>
+                        <td><a href="{{ route('admin.users.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>
+                        <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-danger btn-small"><i class="material-icons">delete</i></button></td>
                     </tr>
                 @endforeach
             </tbody>

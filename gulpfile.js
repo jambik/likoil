@@ -41,7 +41,7 @@ elixir(mix => {
 
     /* Admin files */
     mix.styles([
-        '../../../bower_components/Materialize/dist/css/materialize.min.css',
+        '../../../bower_components/bootstrap/dist/css/bootstrap.min.css',
         '../../../bower_components/animate.css/animate.min.css',
         '../../../bower_components/sweetalert/dist/sweetalert.css',
         '../../../bower_components/datetimepicker/jquery.datetimepicker.css',
@@ -49,8 +49,9 @@ elixir(mix => {
     ], 'public/css/admin.bundle.css');
     mix.scripts([
         '../../../bower_components/jquery/dist/jquery.min.js',
+        '../../../bower_components/bootstrap/dist/js/bootstrap.min.js',
+        '../../../bower_components/bootstrap-filestyle/src/bootstrap-filestyle.min.js',
         '../../../node_modules/vue/dist/vue.min.js',
-        '../../../bower_components/Materialize/dist/js/materialize.min.js',
         '../../../bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js',
         '../../../bower_components/jquery.scrollTo/jquery.scrollTo.min.js',
         '../../../bower_components/sweetalert/dist/sweetalert.min.js',
@@ -60,9 +61,6 @@ elixir(mix => {
         '../../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js',
         '../../../bower_components/datetimepicker/build/jquery.datetimepicker.full.min.js'
     ], 'public/js/admin.bundle.js');
-
-    /* Materialize-css Files */
-    mix.copy('bower_components/Materialize/dist/fonts', 'public/fonts');
 
     /* CKEDITOR Files */
     mix.copy([

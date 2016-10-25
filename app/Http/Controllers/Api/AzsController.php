@@ -24,6 +24,7 @@ class AzsController extends ApiController
      *     tags={"AZS"},
      *     description="Настройки для программы",
      *     produces={"application/json"},
+     *     security={{"basic":{}}},
      *     @SWG\Response(
      *         response=200,
      *         description="Настройки",

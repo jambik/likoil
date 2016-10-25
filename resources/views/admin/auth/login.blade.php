@@ -6,12 +6,12 @@
     <form class="col s12" method="POST" action="{{ route('admin.login') }}">
         {!! csrf_field() !!}
 
-        <div class="input-field col s12">
+        <div class="form-group">
             <input id="email" name="email" type="email" value="{{ old('email') }}" class="validate">
             <label for="email">Email</label>
         </div>
 
-        <div class="input-field col s12">
+        <div class="form-group">
             <input id="password" name="password" type="password" class="validate">
             <label for="password">Пароль</label>
         </div>
@@ -22,7 +22,7 @@
         </p>
 
         <p class="col s12 center">
-            <button type="submit" class="btn-large red waves-effect waves-light">Вход</button>
+            <button type="submit" class="btn btn-lg btn-primary">Вход</button>
         </p>
     </form>
 @endsection

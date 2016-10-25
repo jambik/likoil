@@ -3,12 +3,12 @@
 @section('title', 'Администрирование - Заливы')
 
 @section('content')
-    <h4 class="center">Заливы</h4>
-    <p><a href="{{ route('admin.discounts.create') }}" class="btn red waves-effect waves-light"><i class="material-icons left">add_circle</i> Добавить</a></p>
+    <h2 class="text-center">Заливы</h2>
+    {{--<p><a href="{{ route('admin.discounts.create') }}" class="btn btn-default btn-success"><i class="material-icons">add_circle</i> Добавить</a></p>--}}
 
     {{--@if ($items->count())--}}
-        <div class="table-responsive table-ajax">
-            <table id="table_items_ajax" class="striped bordered highlight responsive-table">
+        <div class="table-responsive">
+            <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Id</th>

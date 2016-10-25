@@ -1,5 +1,6 @@
 @if (count($errors) > 0)
-    <div class="card-panel red darken-4 white-text">
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
         <strong>Ошибка</strong>
         <ul>
             @foreach ($errors->all() as $error)

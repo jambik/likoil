@@ -3,12 +3,12 @@
 @section('title', 'Администрирование - Использованные баллы')
 
 @section('content')
-    <h4 class="center">Использованные баллы</h4>
-    <p><a href="{{ route('admin.withdrawals.create') }}" class="btn red waves-effect waves-light"><i class="material-icons left">add_circle</i> Добавить</a></p>
+    <h2 class="text-center">Использованные баллы</h2>
+{{--    <p><a href="{{ route('admin.withdrawals.create') }}" class="btn btn-success"><i class="material-icons">add_circle</i> Добавить</a></p>--}}
 
     {{--@if ($items->count())--}}
-        <div class="table-responsive table-ajax">
-            <table id="table_items_ajax" class="striped bordered highlight responsive-table">
+    <div class="table-responsive">
+        <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -28,8 +28,8 @@
                             <td>{{ $item->type }}</td>
                             <td>{{ $item->azs }}</td>
                             <td>{{ $item->use_at }}</td>
-                            <td><a href="{{ route('admin.withdrawals.edit', $item->id) }}" class="btn btn-small waves-effect waves-light"><i class="material-icons">edit</i></a></td>
-                            <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-small waves-effect waves-light red darken-2"><i class="material-icons">delete</i></button></td>
+                            <td><a href="{{ route('admin.withdrawals.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>
+                            <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-danger btn-small"><i class="material-icons">delete</i></button></td>
                         </tr>
                     @endforeach--}}
                 </tbody>

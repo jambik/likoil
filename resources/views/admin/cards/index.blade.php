@@ -3,12 +3,12 @@
 @section('title', 'Администрирование - Карты')
 
 @section('content')
-    <h4 class="center">Карты</h4>
-    <p><a href="{{ route('admin.cards.create') }}" class="btn red waves-effect waves-light"><i class="material-icons left">add_circle</i> Добавить</a></p>
+    <h2 class="text-center">Карты</h2>
+{{--    <p><a href="{{ route('admin.cards.create') }}" class="btn btn-default btn-success"><i class="material-icons">add_circle</i> Добавить</a></p>--}}
 
     {{--@if ($items->count())--}}
-        <div class="table-responsive table-ajax">
-            <table id="table_items_ajax" class="striped bordered highlight responsive-table">
+        <div class="table-responsive">
+            <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -31,8 +31,8 @@
                             <td>{{ $item->gender }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>{{ $item->birthday_at }}</td>
-                            <td><a href="{{ route('admin.cards.edit', $item->id) }}" class="btn btn-small waves-effect waves-light"><i class="material-icons">edit</i></a></td>
-                            <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-small waves-effect waves-light red darken-2"><i class="material-icons">delete</i></button></td>
+                            <td><a href="{{ route('admin.cards.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>
+                            <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-danger btn-small"><i class="material-icons">delete</i></button></td>
                         </tr>
                     @endforeach--}}
                 </tbody>
@@ -70,7 +70,7 @@
                         "className":      'card-info',
                         "orderable":      false,
                         "data":           null,
-                        "defaultContent" : '<button style="width: 20px; padding: 0 10px;" class="btn red waves-effect waves-light"><i class="material-icons left">contact_mail</i></button>'
+                        "defaultContent" : '<button style="padding: 0 10px;" class="btn btn-primary"><i class="material-icons">contact_mail</i></button>'
                     },
                 ]
             });

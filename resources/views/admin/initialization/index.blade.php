@@ -3,35 +3,26 @@
 @section('title', 'Администрирование - Инициализация')
 
 @section('content')
-    <h4 class="center">Инициализация</h4>
+    <h2 class="text-center">Инициализация</h2>
     <div class="row">
-        <div class="col l6 offset-l3 m8 offset-m2">
+        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
             <form action="{{ route('admin.initialization.save') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
-                <div class="input-field file-field col s12">
-                    <h5 class="center">Расход</h5>
-                    <div class="btn">
-                        <span>Файл</span>
-                        {!! Form::file('file_withdrawal') !!}
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate{{ $errors->has('file_withdrawal') ? ' invalid' : '' }}" type="text" placeholder="Выберите файл (CSV) с расходами">
-                    </div>
+
+                <div class="form-group">
+                    <label for="file_withdrawal">Расход</label>
+                    <input type="file" name="file_withdrawal" id="file_withdrawal" class="filestyle" data-buttonBefore="true" data-buttonText="Выберите файл">
+                    <small>Выберите файл (CSV) с расходами</small>
                 </div>
 
-                <div class="input-field file-field col s12">
-                    <h5 class="center">Данные о картах</h5>
-                    <div class="btn">
-                        <span>Файл</span>
-                        {!! Form::file('file_cards') !!}
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate{{ $errors->has('file_cards') ? ' invalid' : '' }}" type="text" placeholder="Выберите файл (CSV) с данными о картах">
-                    </div>
+                <div class="form-group">
+                    <label for="file_cards">Данные о картах</label>
+                    <input type="file" name="file_cards" id="file_cards" class="filestyle" data-buttonBefore="true" data-buttonText="Выберите файл">
+                    <small>Выберите файл (CSV) с данными о картах</small>
                 </div>
 
-                <div class="input-field col s12 center">
-                    <button type="submit" class="btn-large red waves-effect waves-light"><i class="material-icons left">check_circle</i>Инициализировать</button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-lg btn-primary"><i class="material-icons">check_circle</i>Инициализировать</button>
                 </div>
             </form>
         </div>

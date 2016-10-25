@@ -1,14 +1,13 @@
 #app {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+
 }
 
-main {
-    flex: 1 0 auto;
-}
+nav .navbar-brand { padding: 8px; }
+nav .navbar-brand img { display: inline-block; }
 
-nav .brand-logo { background-color: #fff; padding: 0 20px; }
+.material-icons {
+    vertical-align: middle;
+}
 
 .preloader-wrapper.x-small {
     width: 22px;
@@ -16,7 +15,7 @@ nav .brand-logo { background-color: #fff; padding: 0 20px; }
 }
 
 .btn-collumn {
-    width: 62px;
+    width: 46px;
 }
 
 .btn-small {
@@ -45,12 +44,6 @@ nav .brand-logo { background-color: #fff; padding: 0 20px; }
 .input-html {
     margin-top: 25px;
     margin-bottom: 20px;
-}
-
-.input-html label, .input-html label.active {
-    font-size: 1rem;
-    transform: none;
-    margin-top: -35px;
 }
 
 .input-tags {
@@ -110,26 +103,6 @@ nav .brand-logo { background-color: #fff; padding: 0 20px; }
     width: 100px;
 }
 
-/* DataTable fixes */
-.table-ajax select {
-    display: none !important;
-}
-
-.table-ajax .select-wrapper {
-    display: inline-block;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.table-ajax .dataTables_filter {
-    margin-top: -66px;
-}
-
-.table-ajax .dataTables_paginate {
-    margin-top: -30px !important;
-}
-
-
 /* headerable */
 .headerable {
     display: inline-block;
@@ -145,22 +118,6 @@ nav .brand-logo { background-color: #fff; padding: 0 20px; }
     font-size: 16pt;
     text-align: center;
 }
-
-
-/* -------------------------------------------------------------------------- */
-/* CKEditor                                                                   */
-/* -------------------------------------------------------------------------- */
-input.cke_dialog_ui_input_text, input.cke_dialog_ui_input_password, textarea.cke_dialog_ui_input_textarea {
-    height: inherit;
-    font-size: inherit;
-    margin: auto;
-}
-
-select.cke_dialog_ui_input_select {
-    display: inherit;
-}
-
-
 
 /* -------------------------------------------------------------------------- */
 /* tablesorter                                                                */

@@ -30,16 +30,20 @@
     <p>&nbsp;</p>
     <main class="container">
         <div class="row">
-            <div class="col s12 m8 l6 offset-m2 offset-l3">
-                <div class="row card-panel">
-                    <div class="center">
-                        <img src="/img/logo.png">
-                    </div>
-                    <h4 class="center">Администрирование</h4>
-                    @include('admin.partials._status')
-                    @include('admin.partials._errors')
+            <div class="col-lg-6 col-md-8 col-sm-12 col-lg-offset-3 col-md-offset-2">
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <img src="{{ asset('img/logo.png') }}" class="img-responsive center-block" style="height: 100px;" />
 
-                    @yield('content')
+                            <h2 class="text-center">Администрирование</h2>
+
+                            @include('admin.partials._status')
+                            @include('admin.partials._errors')
+
+                            @yield('content')
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,12 +51,10 @@
 
     @include('admin.partials._flash')
 
-    <footer class="page-footer teal">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col s12 center white-text">
-                    <i class="material-icons">verified_user</i>
-                </div>
+    <footer class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+
             </div>
         </div>
     </footer>

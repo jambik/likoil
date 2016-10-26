@@ -48,8 +48,11 @@
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('admin.logout') }}" class="red-text"><i class="material-icons">exit_to_app</i> Выход</a></li>
+                            <li><a href="{{ route('admin.logout') }}" class="red-text" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">exit_to_app</i> Выход</a></li>
                         </ul>
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Настройки <span class="caret"></span></a>
@@ -106,7 +109,7 @@
 
     <footer class="container-fluid">
         <div class="row">
-            <div class="col s12 text-center">
+            <div class="col-lg-12 text-center">
 
             </div>
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Card;
 use App\Http\Controllers\BackendController;
 use DB;
+use Flash;
 use Illuminate\Http\Request;
 
 class CardsController extends BackendController
@@ -208,6 +209,8 @@ class CardsController extends BackendController
         } else {
             $item->info()->create($data);
         }
+
+        Flash::success("Запись #{$item->id} обновлена");
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
     }

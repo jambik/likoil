@@ -41,6 +41,10 @@ nav .navbar-brand img { display: inline-block; }
     left: 0;
 }
 
+.input-datetime, .input-date {
+    margin-bottom: 15px;
+}
+
 .input-html {
     margin-top: 25px;
     margin-bottom: 20px;

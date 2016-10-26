@@ -11,5 +11,7 @@ class Campaign extends Model
 
     protected $table = 'campaigns';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'start_at', 'end_at', 'rate', 'azs', 'fuel', 'days'];
+
+
 }

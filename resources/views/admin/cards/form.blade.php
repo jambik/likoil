@@ -3,7 +3,7 @@
     {!! Form::text('code', null, ['class' => 'form-control'.($errors->has('code') ? ' invalid' : '')]) !!}
 </div>
 
-<div class="input-field col s12 input-checkbox">
+<div class="input-field input-checkbox">
     {!! Form::checkbox('verified', 0, null, ['id' => 'verified', 'class' => $errors->has('verified') ? ' invalid' : '']) !!}
     {!! Form::label('verified', 'Подтвержден') !!}
 </div>

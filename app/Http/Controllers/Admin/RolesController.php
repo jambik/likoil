@@ -3,20 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BackendController;
+use App\Permission;
 use App\Role;
-use App\User;
 use Illuminate\Http\Request;
 
-class AdministratorsController extends BackendController
+class RolesController extends BackendController
 {
     protected $resourceName = null;
-
     protected $model = null;
 
     public function __construct()
     {
-        $this->resourceName = 'administrators';
-        $this->model = new User();
+        $this->resourceName = 'roles';
+        $this->model = new Role();
     }
 
     /**
@@ -26,9 +25,7 @@ class AdministratorsController extends BackendController
      */
     public function index()
     {
-        $items = User::whereHas('roles', function ($query) {
-            $query->whereNotIn('role_id', [2, 3]);
-        })->where('id', '<>', 1)->get();
+        $items = $this->model->whereNotIn('id', [1, 2, 3])->get();
 
         return view('admin.'.$this->resourceName.'.index', compact('items'));
     }
@@ -40,9 +37,9 @@ class AdministratorsController extends BackendController
      */
     public function create()
     {
-        $roles = $this->getRolesList();
+        $permissions = $this->getPermissionsList();
 
-        return view('admin.'.$this->resourceName.'.create', compact('roles'));
+        return view('admin.'.$this->resourceName.'.create', compact('permissions'));
     }
 
     /**
@@ -55,16 +52,13 @@ class AdministratorsController extends BackendController
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|min:6',
+            'name' => 'required|unique:roles,name',
+            'display_name' => 'required',
         ]);
 
         $item = $this->model->create($request->all());
-        $item->password = bcrypt($request->input('password'));
-        $item->save();
 
-        $item->roles()->sync($request->get('role') ?: []);
+        $item->perms()->sync($request->get('permissions_ids') ?: []);
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
     }
@@ -89,11 +83,10 @@ class AdministratorsController extends BackendController
     public function edit($id)
     {
         $item = $this->model->findOrFail($id);
-        $item->password = '';
 
-        $roles = $this->getRolesList();
+        $permissions = $this->getPermissionsList();
 
-        return view('admin.'.$this->resourceName.'.edit', compact('item', 'roles'));
+        return view('admin.'.$this->resourceName.'.edit', compact('item', 'permissions'));
     }
 
     /**
@@ -106,20 +99,16 @@ class AdministratorsController extends BackendController
      */
     public function update($id, Request $request)
     {
-        $passwordRule = $request->input('password') ? 'required|min:6' : '';
-
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|unique:users,email,' . $id,
-            'password' => $passwordRule
+            'name' => 'required|unique:roles,name,' . $id,
+            'display_name' => 'required',
         ]);
 
         $item = $this->model->findOrFail($id);
 
-        $item->roles()->sync($request->get('role'));
+        $item->update($request->all());
 
-        $item->update($request->except('password') +
-            ($passwordRule ? ['password' => bcrypt($request->input('password'))] : []));
+        $item->perms()->sync($request->get('permissions_ids') ?: []);
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
     }
@@ -137,14 +126,18 @@ class AdministratorsController extends BackendController
         return redirect(route('admin.'.$this->resourceName.'.index'));
     }
 
-    /**
-     * Get Roles list
-     *
-     * @return mixed
-     */
-    private function getRolesList()
+    private function getPermissionsList()
     {
-        return Role::whereNotIn('id', [2, 3])->get()->pluck('display_name', 'id');
+        $permissions = Permission::all();
+
+        $permissions = $permissions->map(function ($item, $key) {
+            $item['full_name'] = $item['name'] . ' (' . $item['display_name'] . ')';
+            return $item;
+        });
+
+        $permissions = $permissions->pluck('full_name', 'id');
+
+        return $permissions;
     }
 
 }

@@ -1,17 +1,22 @@
 <div class="form-group">
     {!! Form::label('name', 'Имя') !!}
-    {!! Form::text('name', null, ['class' => 'form-control'.($errors->has('name') ? ' invalid' : '')]) !!}
+    {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
     {!! Form::label('email', 'Email') !!}
-    {!! Form::text('email', null, ['class' => 'form-control'.($errors->has('email') ? ' invalid' : '')]) !!}
+    {!! Form::text('email', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
     {!! Form::label('password', 'Пароль') !!}
-    {!! Form::text('password', null, ['class' => 'form-control'.($errors->has('password') ? ' invalid' : '')]) !!}
+    {!! Form::text('password', null, ['class' => 'form-control']) !!}
     @if (isset($item)) <small>Если оставить пароль пустым, то он не изменится</small> @endif
+</div>
+
+<div class="form-group">
+    {!! Form::label('role[]', 'Роль') !!}
+    {!! Form::select('role[]', $roles, null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group text-center">

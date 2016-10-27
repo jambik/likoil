@@ -12,7 +12,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Имя</th>
-                    <th>Код АЗС</th>
+                    <th>Логин (Код АЗС)</th>
                     <th data-orderable="false" class="btn-collumn"></th>
                     <th data-orderable="false" class="btn-collumn"></th>
                 </tr>

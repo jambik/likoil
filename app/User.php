@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [ 'name', 'email', 'phone', 'password', 'provider_id', 'provider', 'avatar', 'image' ];
+    protected $fillable = [ 'name', 'email', 'role_id', 'phone', 'password', 'provider_id', 'provider', 'avatar', 'image' ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -29,6 +29,11 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $appends = ['img_url'];
+
+    public function getRolesNamesAttribute()
+    {
+        return implode(', ', $this->roles->pluck('display_name')->all());
+    }
 
     public function getAvatarAttribute($value)
     {

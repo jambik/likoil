@@ -79,6 +79,12 @@ Route::group(['prefix' => 'admin'], function()
 
             ## Administrators
             Route::resource('administrators', 'Admin\AdministratorsController');
+
+            ## Roles
+            Route::resource('roles', 'Admin\RolesController');
+
+            ## Permissions
+            Route::resource('permissions', 'Admin\PermissionsController');
         });
 
         ## Imageable routes

@@ -41,6 +41,18 @@ class UsersTableSeeder extends Seeder
         $roleAzs->description  = 'Имеет доступ к Api как пользователь АЗС';
         $roleAzs->save();
 
+        $roleViewer = new Role();
+        $roleViewer->name         = 'viewer';
+        $roleViewer->display_name = 'Обозреватель';
+        $roleViewer->description  = 'Может просматривать информацию о картах, заливах, баллах';
+        $roleViewer->save();
+
+        $roleModerator = new Role();
+        $roleModerator->name         = 'moderator';
+        $roleModerator->display_name = 'Модератор';
+        $roleModerator->description  = 'Может изменять информацию о картах';
+        $roleModerator->save();
+
         $row1 = array_combine(['id', 'name', 'email', 'image'], $this->items[0]) + ['password' => bcrypt('111111')];
         $user1 = User::create($row1);
         $user1->attachRole($admin);

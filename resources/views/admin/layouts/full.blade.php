@@ -88,8 +88,8 @@
                     <a class="list-group-item list-group-item-warning" href="{{ route('admin.news.index') }}"><i class="material-icons">featured_play_list</i> Новости</a>
                     <a class="list-group-item list-group-item-warning" href="{{ route('admin.web_settings') }}"><i class="material-icons">settings</i> Настройки</a>
                     <a class="list-group-item list-group-item-warning" href="{{ route('admin.administrators.index') }}"><i class="material-icons">verified_user</i> Администраторы сайта</a>
-                    <a class="list-group-item list-group-item-warning" href="{{ route('admin.roles.index') }}"><i class="material-icons">perm_identity</i> Роли</a>
-                    <a class="list-group-item list-group-item-warning" href="{{ route('admin.permissions.index') }}"><i class="material-icons">security</i> Разрешения</a>
+                    {{--<a class="list-group-item list-group-item-warning" href="{{ route('admin.roles.index') }}"><i class="material-icons">perm_identity</i> Роли</a>--}}
+                    {{--<a class="list-group-item list-group-item-warning" href="{{ route('admin.permissions.index') }}"><i class="material-icons">security</i> Разрешения</a>--}}
                 </div>
 
                 <div class="list-group">

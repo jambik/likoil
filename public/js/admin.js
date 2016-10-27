@@ -69,12 +69,32 @@ $(document).ready(function () {
     }
 
     // Применять плагин datetime к полям типа дата
+    if ($('.input-time').length) {
+
+        $.datetimepicker.setLocale('ru');
+        $('.input-time input').datetimepicker({
+            format: 'H:i',
+            datepicker: false
+        });
+
+    }
+
+    // Применять плагин datetime к полям типа дата
     if ($('.input-datetime').length) {
 
         $.datetimepicker.setLocale('ru');
         $('.input-datetime input').datetimepicker({
             format: 'Y-m-d H:i:s',
             dayOfWeekStart: 1
+        });
+
+    }
+
+    // Применять плагин datetime к полям типа дата
+    if ($('.input-select2').length) {
+
+        $('.input-select2 select').select2({
+            language: 'ru'
         });
 
     }

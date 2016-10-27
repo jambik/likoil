@@ -16,9 +16,9 @@ class Alter1CampaignsTable extends Migration
         Schema::table('campaigns', function (Blueprint $table) {
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
+            $table->integer('time_start')->default(0);
+            $table->integer('time_end')->default(0);
             $table->decimal('rate', 6, 2)->default(0);
-            $table->string('azs')->default('');
-            $table->string('fuel')->default('');
             $table->string('days')->default('');
             $table->softDeletes();
         });
@@ -34,9 +34,9 @@ class Alter1CampaignsTable extends Migration
         Schema::table('campaigns', function (Blueprint $table) {
             $table->dropColumn('start_at');
             $table->dropColumn('end_at');
+            $table->dropColumn('time_start');
+            $table->dropColumn('time_end');
             $table->dropColumn('rate');
-            $table->dropColumn('azs');
-            $table->dropColumn('fuel');
             $table->dropColumn('days');
             $table->dropSoftDeletes();
         });

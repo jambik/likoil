@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Campaign;
 use App\Http\Controllers\BackendController;
+use App\Rate;
+use App\User;
 use Illuminate\Http\Request;
 
 class CampaignsController extends BackendController
 {
     protected $resourceName = null;
-
     protected $model = null;
 
     public function __construct()
@@ -37,7 +38,10 @@ class CampaignsController extends BackendController
      */
     public function create()
     {
-        return view('admin.'.$this->resourceName.'.create');
+        $azs = $this->getAzsList();
+        $fuels = $this->getFuelsList();
+
+        return view('admin.'.$this->resourceName.'.create', compact('azs', 'fuels'));
     }
 
     /**
@@ -48,7 +52,23 @@ class CampaignsController extends BackendController
      */
     public function store(Request $request)
     {
-        $this->model->create($request->all());
+        $this->validate($request, [
+            'name' => 'required',
+            'start_at' => 'required|date',
+            'end_at' => 'required|date',
+            'rate' => 'required|numeric',
+            'time_start' => 'required_with:time_end',
+            'time_end' => 'required_with:time_start',
+        ]);
+
+        $input = $request->all();
+
+        foreach (['time_start', 'time_end'] as $value) $input[$value] = $input[$value] ?: 0;
+
+        $item = $this->model->create($input);
+
+        $item->azs()->sync($request->get('azs_ids') ?: []);
+        $item->fuels()->sync($request->get('fuels_ids') ?: []);
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
     }
@@ -74,7 +94,10 @@ class CampaignsController extends BackendController
     {
         $item = $this->model->findOrFail($id);
 
-        return view('admin.'.$this->resourceName.'.edit', compact('item'));
+        $azs = $this->getAzsList();
+        $fuels = $this->getFuelsList();
+
+        return view('admin.'.$this->resourceName.'.edit', compact('item', 'azs', 'fuels'));
     }
 
     /**
@@ -86,9 +109,25 @@ class CampaignsController extends BackendController
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'start_at' => 'required|date',
+            'end_at' => 'required|date',
+            'rate' => 'required|numeric',
+            'time_start' => 'required_with:time_end',
+            'time_end' => 'required_with:time_start',
+        ]);
+
         $item = $this->model->findOrFail($id);
 
-        $item->update($request->all());
+        $input = $request->all();
+
+        foreach (['days'] as $value) $input[$value] = $request->has($value) ? $request->get($value) : '';
+
+        $item->update($input);
+
+        $item->azs()->sync($request->get('azs_ids') ?: []);
+        $item->fuels()->sync($request->get('fuels_ids') ?: []);
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
     }
@@ -104,5 +143,21 @@ class CampaignsController extends BackendController
         $this->model->destroy($id);
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
+    }
+
+    private function getAzsList()
+    {
+        $azs = User::whereHas('roles', function ($query) {
+            $query->where('role_id', 3);
+        })->get();
+
+        return $azs->pluck('name', 'id');
+    }
+
+    private function getFuelsList()
+    {
+        $fuels = Rate::all();
+
+        return $fuels->pluck('name', 'id');
     }
 }

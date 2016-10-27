@@ -44,6 +44,7 @@ elixir(mix => {
         '../../../bower_components/bootstrap/dist/css/bootstrap.min.css',
         '../../../bower_components/animate.css/animate.min.css',
         '../../../bower_components/sweetalert/dist/sweetalert.css',
+        '../../../bower_components/select2/dist/css/select2.min.css',
         '../../../bower_components/datetimepicker/jquery.datetimepicker.css',
         '../../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css',
     ], 'public/css/admin.bundle.css');
@@ -55,6 +56,8 @@ elixir(mix => {
         '../../../bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js',
         '../../../bower_components/jquery.scrollTo/jquery.scrollTo.min.js',
         '../../../bower_components/sweetalert/dist/sweetalert.min.js',
+        '../../../bower_components/select2/dist/js/select2.min.js',
+        '../../../bower_components/select2/dist/js/i18n/ru.js',
         '../../../node_modules/tablesorter/dist/js/jquery.tablesorter.combined.min.js',
         '../../../node_modules/tablesorter/dist/js/extras/jquery.tablesorter.pager.min.js',
         '../../../bower_components/datatables.net/js/jquery.dataTables.min.js',

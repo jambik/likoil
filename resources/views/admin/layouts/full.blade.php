@@ -74,7 +74,7 @@
                     <a class="list-group-item" href="{{ route('admin.cards.index') }}"><i class="material-icons">credit_card</i> Карты</a>
                     <a class="list-group-item" href="{{ route('admin.discounts.index') }}"><i class="material-icons">local_gas_station</i> Заливы</a>
                     <a class="list-group-item" href="{{ route('admin.withdrawals.index') }}"><i class="material-icons">card_giftcard</i> Использованные баллы</a>
-                    <a class="list-group-item" href="#"><i class="material-icons">event_note</i> Акции</a>
+                    <a class="list-group-item" href="{{ route('admin.campaigns.index') }}"><i class="material-icons">event_note</i> Акции</a>
                     <a class="list-group-item" href="{{ route('admin.users_export.index') }}"><i class="material-icons">account_box</i> Пользователи выгрузки</a>
                     <a class="list-group-item" href="{{ route('admin.users_azs.index') }}"><i class="material-icons">account_box</i> Пользователи АЗС</a>
                     <a class="list-group-item" href="{{ route('admin.rates.index') }}"><i class="material-icons">attach_money</i> Курсы</a>

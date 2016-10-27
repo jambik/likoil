@@ -29,13 +29,12 @@ CKEDITOR.editorConfig = function( config ) {
 	config.allowedContent = true;
 
 	config.toolbarCanCollapse = true;
-	config.toolbarStartupExpanded = false;
+	// config.toolbarStartupExpanded = false;
 
 	config.format_tags = 'h1;h2;h3;h4;h5;h6;p;pre';
 
 	config.bodyClass = 'container-fluid';
 	config.contentsCss = ['/css/app.bundle.css', '/css/app.css'];
 
-	config.filebrowserBrowseUrl      = '/elfinder/ckeditor';
-	config.filebrowserImageBrowseUrl = '/elfinder/ckeditor';
+	config.filebrowserBrowseUrl = '/library/elfinder/elfinder.php';
 };

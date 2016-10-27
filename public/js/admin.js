@@ -7,7 +7,7 @@ $.ajaxSetup({
 
 $(document).ready(function () {
 
-    // Применяем плагин tablesorter к таблице элементов
+    // Применяем плагин DataTable к таблице элементов
     if ($('#table_items').length) {
 
         $('#table_items').DataTable({

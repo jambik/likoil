@@ -37,6 +37,7 @@ elixir(mix => {
         'bower_components/font-awesome/fonts/*.*',
     ], 'public/fonts');
     // mix.copy('node_modules/swagger-ui/dist', 'public/apidocs');
+    // mix.copy('bower_components/elfinder', 'public/library/elfinder');
 
 
     /* Admin files */

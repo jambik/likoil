@@ -40,13 +40,13 @@
 
 <div class="form-group">
     <label>Дни</label>
-    <div class="checkbox"><label><input type="checkbox" value="1" name="days[]">Понедельник</label></div>
-    <div class="checkbox"><label><input type="checkbox" value="2" name="days[]">Вторник</label></div>
-    <div class="checkbox"><label><input type="checkbox" value="3" name="days[]">Среда</label></div>
-    <div class="checkbox"><label><input type="checkbox" value="4" name="days[]">Четверг</label></div>
-    <div class="checkbox"><label><input type="checkbox" value="5" name="days[]">Пятница</label></div>
-    <div class="checkbox"><label><input type="checkbox" value="6" name="days[]">Суббота</label></div>
-    <div class="checkbox"><label><input type="checkbox" value="0" name="days[]">Воскресенье</label></div>
+    <div class="checkbox"><label><input type="checkbox" value="1" name="days[]"{{ in_array(1, $item->days) ? ' checked' : '' }}>Понедельник</label></div>
+    <div class="checkbox"><label><input type="checkbox" value="2" name="days[]"{{ in_array(2, $item->days) ? ' checked' : '' }}>Вторник</label></div>
+    <div class="checkbox"><label><input type="checkbox" value="3" name="days[]"{{ in_array(3, $item->days) ? ' checked' : '' }}>Среда</label></div>
+    <div class="checkbox"><label><input type="checkbox" value="4" name="days[]"{{ in_array(4, $item->days) ? ' checked' : '' }}>Четверг</label></div>
+    <div class="checkbox"><label><input type="checkbox" value="5" name="days[]"{{ in_array(5, $item->days) ? ' checked' : '' }}>Пятница</label></div>
+    <div class="checkbox"><label><input type="checkbox" value="6" name="days[]"{{ in_array(6, $item->days) ? ' checked' : '' }}>Суббота</label></div>
+    <div class="checkbox"><label><input type="checkbox" value="0" name="days[]"{{ in_array(0, $item->days) ? ' checked' : '' }}>Воскресенье</label></div>
 </div>
 
 <div class="form-group text-center">

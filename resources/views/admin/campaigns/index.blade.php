@@ -34,7 +34,7 @@
                         <td>{{ $item->time_start }} - {{ $item->time_end }}</td>
                         <td>{{ $item->azs_names ?: '-' }}</td>
                         <td>{{ $item->fuels_names ?: '-' }}</td>
-                        <td>{{ $item->days ?: '-' }}</td>
+                        <td>{{ $item->days_names ?: '-' }}</td>
                         <td><a href="{{ route('admin.campaigns.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>
                         <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-danger btn-small"><i class="material-icons">delete</i></button></td>
                     </tr>

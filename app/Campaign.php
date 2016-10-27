@@ -92,6 +92,11 @@ class Campaign extends Model
 
     public function getDaysAttribute($value)
     {
+        return $value !== '' ? explode(',', $value) : [];
+    }
+
+    public function getDaysNamesAttribute()
+    {
         $days = collect([
             0 => 'Воскресенье',
             1 => 'Понедельник',
@@ -103,9 +108,9 @@ class Campaign extends Model
         ]);
 
         $daysNames = '';
-        $daysIds = explode(',', $value);
 
-        if ($daysIds) {
+        if ($this->attributes['days'] !== '') {
+            $daysIds = explode(',', $this->attributes['days']);
             $daysNames = $days->only($daysIds);
             $daysNames = $daysNames->implode(', ');
         }

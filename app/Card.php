@@ -36,7 +36,7 @@ class Card extends Model
      */
     public function getBonusAttribute()
     {
-        return number_format($this->totalPoints - $this->totalWithdrawals, 2, '.', '');
+        return number_format($this->total_points - $this->total_withdrawals, 2, '.', '');
     }
 
     /**

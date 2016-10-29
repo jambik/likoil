@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
         [2, 'Малик', 'nmm888@gmail.com', ''],
         [3, 'Руслан', 'intex05@bk.ru', ''],
         [4, 'Топаз Малик', 'topaz@export.likoil', ''],
-        [5, 'АЗС 1', '1@azs.likoil', ''],
+        [5, 'АЗС 1', '1', ''],
         [6, 'Стас', 'stas-group@yandex.ru', ''],
     ];
 

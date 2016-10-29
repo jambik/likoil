@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class Admin {
+class Azs {
 
 	/**
 	 * The Guard implementation.
@@ -34,7 +34,7 @@ class Admin {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if ($this->auth->guest() || ! $this->auth->user()->hasRole('admin'))
+		if ($this->auth->guest() || ! $this->auth->user()->hasRole('azs'))
 		{
 			if ($request->wantsJson())
 			{
@@ -42,7 +42,7 @@ class Admin {
 			}
 			else
 			{
-				return redirect()->guest('admin/login');
+				return redirect()->guest('login');
 			}
 		}
 

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @SWG\Definition(
  *      definition="CardInfo",
- *      required={"email"},
  *      @SWG\Property(
  *          property="card_id",
  *          description="Id карты",
@@ -19,84 +18,99 @@ use Illuminate\Database\Eloquent\Model;
  *          description="Имя",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="last_name",
  *          description="Фамилия",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="patronymic",
  *          description="Отчество",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="gender",
  *          description="Пол",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="phone",
  *          description="Телефон",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="birthday_at",
  *          description="Дата рождения",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="card_number",
  *          description="Внутренний номер карты",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="issue_place",
  *          description="Место выдачи",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="type",
  *          description="Тип",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="issued_at",
  *          description="Дата выдачи",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="document_type",
  *          description="Вид документа",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="document_number",
  *          description="Номер документа",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="document_at",
  *          description="Дата выдачи документа",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="document_issued",
  *          description="Кем выдан документ",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="car_brand",
  *          description="Марка автомобиля",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="car_number",
  *          description="Номер автомобиля",
  *          type="string"
  *      ),
- *     @SWG\Property(
+ *      @SWG\Property(
  *          property="indate_at",
  *          description="Внутренняя дата",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="full_name",
+ *          description="Полное имя (ФИО)",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="gender_letter",
+ *          description="Буква пола (М, Ж)",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="gender_letters",
+ *          description="Название пола (Мужской, Женский)",
  *          type="string"
  *      ),
  * )
@@ -130,7 +144,11 @@ class CardInfo extends Model
         'car_brand',
         'car_number',
         'indate_at',
+        'password',
+        'user_id',
     ];
+
+    protected $hidden = [ 'password' ];
 
     public function getGenderLetterAttribute()
     {
@@ -153,5 +171,13 @@ class CardInfo extends Model
     public function card()
     {
         return $this->belongsTo('App\Card');
+    }
+
+    /**
+     * Пользователь
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

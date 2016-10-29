@@ -17,18 +17,28 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [ 'name', 'email', 'role_id', 'phone', 'password', 'provider_id', 'provider', 'avatar', 'image' ];
+    protected $fillable = [ 'name', 'email', 'role_id', 'phone', 'password', 'provider_id', 'provider', 'avatar', 'image', 'api_token' ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [ 'password', 'remember_token' ];
+    protected $hidden = [ 'password', 'remember_token', 'api_token' ];
 
     protected $table = 'users';
 
     protected $appends = ['img_url'];
+
+    /**
+     * Дисконтная карта пользователя
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function cardInfo()
+    {
+        return $this->hasOne('App\CardInfo');
+    }
 
     public function getRolesNamesAttribute()
     {

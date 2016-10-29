@@ -6,6 +6,65 @@ use App\Traits\ResourceableTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @SWG\Definition(
+ *      definition="Discount",
+ *      @SWG\Property(
+ *          property="id",
+ *          description="Id залива",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="card_id",
+ *          description="Id карты",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="date",
+ *          description="Дата залива",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="amount",
+ *          description="Сумма залива",
+ *          type="number",
+ *          format="float",
+ *      ),
+ *      @SWG\Property(
+ *          property="volume",
+ *          description="Объем залитого топлива",
+ *          type="number",
+ *          format="float",
+ *      ),
+ *      @SWG\Property(
+ *          property="price",
+ *          description="Цена за литр",
+ *          type="number",
+ *          format="float",
+ *      ),
+ *      @SWG\Property(
+ *          property="fuel_name",
+ *          description="Код топлива",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="azs",
+ *          description="Код АЗС",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="point",
+ *          description="Начисленный бонус",
+ *          type="number",
+ *          format="float",
+ *      ),
+ *      @SWG\Property(
+ *          property="start_at",
+ *          description="Дата начала курса бонуса",
+ *          type="string"
+ *      )
+ * )
+ */
 class Discount extends Model
 {
     use ResourceableTrait;

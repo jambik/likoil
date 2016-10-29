@@ -19,6 +19,7 @@
                         <th>Телефон</th>
                         <th>Дата рождения</th>
                         <th>Инфо</th>
+                        <th>Логин</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,20 +68,44 @@
                     { "data": "info.phone", "orderable": false },
                     { "data": "info.birthday_at", "orderable": false },
                     {
-                        "className":      'card-info',
+                        "className":      'btn-collumn card-info',
                         "orderable":      false,
                         "data":           null,
-                        "defaultContent" : '<button style="padding: 0 10px;" class="btn btn-primary"><i class="material-icons">contact_mail</i></button>'
+                        "defaultContent" : '<button style="padding: 0 5px;" class="btn btn-success"><i class="material-icons">info_outline</i></button>'
                     },
-                ]
+                    {
+                        "className":      'btn-collumn card-login',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent" : '<button style="padding: 0 5px;" class="btn btn-success"><i class="material-icons">vpn_key</i></button>'
+                    },
+                ],
+                "createdRow": function ( row, data, index ) {
+                    if ( ! data.info) {
+                        $(row).find('.card-info button').removeClass('btn-success').addClass('btn-primary');
+                        $(row).find('.card-login button').hide();
+                    } else if ( ! data.info.user_id) {
+                        $(row).find('.card-login button').removeClass('btn-success').addClass('btn-primary');
+                    }
+                }
             });
 
-            // Add event listener for opening and closing details
+            // Добавление события на нажатие кнопки Инфо
             $('#table_items_ajax tbody').on('click', 'td.card-info', function () {
                 var tr = $(this).closest('tr');
                 var row = table.row( tr );
 
                 var location = '/admin/cards/' +  row.data().id + '/info';
+
+                document.location = location;
+            });
+
+            // Добавление события на нажатие кнопки Логин
+            $('#table_items_ajax tbody').on('click', 'td.card-login', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                var location = '/admin/cards/' +  row.data().id + '/login';
 
                 document.location = location;
             });

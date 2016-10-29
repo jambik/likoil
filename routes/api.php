@@ -27,4 +27,4 @@ Route::get('user/info', 'Api\UserController@info')->middleware(['auth:api']);
 Route::get('user/discounts', 'Api\UserController@discounts')->middleware(['auth:api']);
 
 ## Documentation
-Route::get('docs', 'Api\DocumentationController@show')->middleware(['admin']);
+Route::get('docs', 'Api\DocumentationController@show')->middleware('admin');

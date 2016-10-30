@@ -16,26 +16,20 @@ require('laravel-elixir-vue-2');
 elixir(mix => {
     /* App files */
     mix.styles([
-        '../../../bower_components/bootswatch/paper/bootstrap.min.css',
-        '../../../bower_components/sweetalert/dist/sweetalert.css',
-        '../../../bower_components/magnific-popup/dist/magnific-popup.css',
-        '../../../bower_components/cropper/dist/cropper.min.css',
-        '../../../bower_components/font-awesome/css/font-awesome.min.css',
-        '../../../bower_components/animate.css/animate.min.css',
+        '../../../bower_components/bootstrap/dist/css/bootstrap.min.css',
+        '../../../bower_components/font-awesome/css/font-awesome.min.css'
     ], 'public/css/app.bundle.css');
     mix.scripts([
         '../../../bower_components/jquery/dist/jquery.min.js',
         '../../../bower_components/bootstrap/dist/js/bootstrap.min.js',
-        '../../../bower_components/sweetalert/dist/sweetalert.min.js',
-        '../../../bower_components/jquery.scrollTo/jquery.scrollTo.min.js',
-        '../../../bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js',
-        '../../../bower_components/magnific-popup/dist/jquery.magnific-popup.min.js',
-        '../../../bower_components/cropper/dist/cropper.min.js',
+        '../../../bower_components/jquery.easing/js/jquery.easing.min.js'
     ], 'public/js/app.bundle.js');
     mix.copy([
         'bower_components/bootstrap/fonts',
         'bower_components/font-awesome/fonts/*.*',
     ], 'public/fonts');
+
+
     // mix.copy('node_modules/swagger-ui/dist', 'public/apidocs');
     // mix.copy('bower_components/elfinder', 'public/library/elfinder');
 
@@ -59,8 +53,6 @@ elixir(mix => {
         '../../../bower_components/sweetalert/dist/sweetalert.min.js',
         '../../../bower_components/select2/dist/js/select2.min.js',
         '../../../bower_components/select2/dist/js/i18n/ru.js',
-        '../../../node_modules/tablesorter/dist/js/jquery.tablesorter.combined.min.js',
-        '../../../node_modules/tablesorter/dist/js/extras/jquery.tablesorter.pager.min.js',
         '../../../bower_components/datatables.net/js/jquery.dataTables.min.js',
         '../../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js',
         '../../../bower_components/datetimepicker/build/jquery.datetimepicker.full.min.js'

@@ -1,36 +1,31 @@
 $(document).ready(function() {
 
-    if ($('#form_callback').length) {
-        $('#form_callback').on('submit', function(e){
-            ajaxFormSubmit(e, callbackSuccess);
-        })
-    }
+    // jQuery for page scrolling feature - requires jQuery Easing plugin
+    $('a.page-scroll').bind('click', function(event) {
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: ($($anchor.attr('href')).offset().top - 50)
+        }, 1250, 'easeInOutExpo');
+        event.preventDefault();
+    });
 
-    if ($('.popup-gallery').length) {
-        $('.popup-gallery').magnificPopup({
-            type: 'image',
-            zoom: {
-                enabled: true
-            },
-            gallery: {
-                enabled: true,
-                preload: [1, 2],
-                tPrev: 'Пердыдущая (клавиша влево)',
-                tNext: 'Следующая (клавиша вправо)'
-            },
-            tLoading: 'Загрузка...'
-        });
-    }
+    // Highlight the top nav as scrolling occurs
+    $('body').scrollspy({
+        target: '.navbar-fixed-top',
+        offset: 51
+    });
 
-    if ($('.popup-product').length) {
-        $('.popup-product').magnificPopup({
-            type: 'image',
-            zoom: {
-                enabled: true
-            },
-            tLoading: 'Загрузка...'
-        });
-    }
+    // Closes the Responsive Menu on Menu Item Click
+    $('.navbar-collapse ul li a').click(function(){
+        $('.navbar-toggle:visible').click();
+    });
+
+    // Offset for Main Navigation
+    $('#mainNav').affix({
+        offset: {
+            top: 100
+        }
+    });
 
 });
 
@@ -89,66 +84,4 @@ function ajaxFormSubmit(e, successFunction)
             }
         }
     });
-}
-
-function callbackSuccess(data)
-{
-    $('#callbackModal').modal('hide');
-    showNoty(data.message, 'success');
-}
-
-function showNoty(message, type)
-{
-    noty({
-        text: message,
-        type: type,
-        layout: 'topCenter',
-        theme: 'relax',
-        timeout: 5000,
-        animation: {
-            open: 'animated flipInX', // jQuery animate function property object
-            close: 'animated flipOutX', // jQuery animate function property object
-            easing: 'swing', // easing
-            speed: 500 // opening & closing animation speed
-        }
-    });
-}
-
-function avatarSelected()
-{
-    startCropper($('#avatar_file')[0].files[0]);
-
-    $('#avatar_cropper').show();
-    $('#avatar_current').hide();
-}
-
-function startCropper(file)
-{
-    var $img = $('<img src="' + URL.createObjectURL(file) + '">');
-    $('#avatar_wrapper').empty().html($img);
-
-    $img.cropper({
-        aspectRatio: 1,
-        preview: $('.avatar-preview').selector,
-        strict: true,
-        guides: false,
-        crop: function (e) {
-            var json = [
-                '{"x":' + e.x,
-                '"y":' + e.y,
-                '"height":' + e.height,
-                '"width":' + e.width,
-                '"rotate":' + e.rotate + '}'
-            ].join();
-            $('#avatar_data').val(json);
-        }
-    });
-}
-
-function cancelAvatarUpload()
-{
-    URL.revokeObjectURL($('#avatar_file')[0].files[0].url); // Revoke the old one
-
-    $('#avatar_cropper').hide();
-    $('#avatar_current').show();
 }

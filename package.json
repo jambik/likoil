@@ -13,7 +13,6 @@
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3",
     "ckeditor": "^4.5.7",
-    "swagger-ui": "^2.1.4",
-    "tablesorter": "^2.23.5"
+    "swagger-ui": "^2.1.4"
   }
 }

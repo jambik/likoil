@@ -79,7 +79,7 @@
         <div class="intro-text">
             <div class="intro-lead-in">Выбирайте самое лучшее!</div>
             <div class="intro-heading">ДИСКОНТНЫЕ КАРТЫ ЛИКОЙЛ</div>
-            <a href="#services" class="page-scroll btn btn-xl">подробнее</a>
+            <a href="#about" class="page-scroll btn btn-xl">подробнее</a>
         </div>
     </div>
 </header>

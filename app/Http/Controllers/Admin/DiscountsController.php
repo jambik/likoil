@@ -68,9 +68,7 @@ class DiscountsController extends BackendController
             ]);
         }
 
-//        $items = $this->model->with('card')->limit(500)->get();
-
-        return view('admin.'.$this->resourceName.'.index'/*, compact('items')*/);
+        return view('admin.'.$this->resourceName.'.index');
     }
 
     /**

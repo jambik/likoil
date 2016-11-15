@@ -46,7 +46,16 @@ class CardsController extends BackendController
             // Поиск
             if ($search['value']) {
                 $query->where('code', 'LIKE', '%'.$search['value'].'%');
-//                $query->orWhere('name', 'LIKE', '%'.$search['value'].'%');
+                $query->orWhereHas('info', function($q) use ($search) {
+                    $q->where('name', 'LIKE', '%'.$search['value'].'%');
+                });
+                $query->orWhereHas('info', function($q) use ($search) {
+                    $q->where('last_name', 'LIKE', '%'.$search['value'].'%');
+                });
+                $query->orWhereHas('info', function($q) use ($search) {
+                    $q->where('phone', 'LIKE', '%'.$search['value'].'%');
+                });
+
                 $recordsFiltered = $query->count();
             }
 
@@ -55,24 +64,14 @@ class CardsController extends BackendController
 
             // Добавление сортировки по колонкам
             foreach ($order as $orderColumn) {
-                if ( ! in_array($columns[$orderColumn['column']]['data'], ['bonus'])) { // Если поле бонус то пропускаем
-                    $query->orderBy($columns[$orderColumn['column']]['data'], $orderColumn['dir']);
-                }
+                $query->orderBy($columns[$orderColumn['column']]['data'], $orderColumn['dir']);
             }
 
+            // Выбираем записи
             $items = $query->get();
+//            dd($items->toArray());
 
-            // Добавление сортировки по колонкам
-            foreach ($order as $orderColumn) {
-                if (in_array($columns[$orderColumn['column']]['data'], ['bonus'])) { // Если поле бонус то пропускаем
-                    if ($orderColumn['dir'] == 'desc') {
-                        $items = $items->sortByDesc('bonus')->values();
-                    } else {
-                        $items = $items->sortBy('bonus')->values();
-                    }
-                }
-            }
-
+            // Добавляем к каждой записи дополнительное поле row_<ID> для плагина DataTables
             $items = $items->map(function ($item, $key) {
                 $item['DT_RowId'] = 'row_' . $item->id;
                 return $item;

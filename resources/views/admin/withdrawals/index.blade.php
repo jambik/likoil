@@ -62,7 +62,8 @@
                     { "data": "type" },
                     { "data": "azs" },
                     { "data": "use_at" }
-                ]
+                ],
+                "order": [[ 5, "desc" ]]
             });
         }
     </script>

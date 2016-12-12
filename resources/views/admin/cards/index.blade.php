@@ -66,7 +66,7 @@
                     { "data": "info.full_name", "orderable": false },
                     { "data": "info.gender_letter", "orderable": false },
                     { "data": "info.phone", "orderable": false },
-                    { "data": "info.birthday_at", "orderable": false },
+                    { "data": "info.birthday_at_formatted", "orderable": false },
                     {
                         "className":      'btn-collumn card-info',
                         "orderable":      false,

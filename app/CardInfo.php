@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\ResourceableTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -123,7 +124,7 @@ class CardInfo extends Model
 
     protected $primaryKey = 'card_id';
 
-    protected $appends = ['full_name', 'gender_letter', 'gender_letters'];
+    protected $appends = ['full_name', 'gender_letter', 'gender_letters', 'birthday_at_formatted'];
 
     protected $fillable = [
         'card_id',
@@ -163,6 +164,11 @@ class CardInfo extends Model
     public function getFullNameAttribute()
     {
         return $this->attributes['last_name'] . ' ' . $this->attributes['name'] . ' ' . $this->attributes['patronymic'];
+    }
+
+    public function getBirthdayAtFormattedAttribute()
+    {
+        return Carbon::parse($this->attributes['birthday_at'])->format('d.m.Y');
     }
 
     /**

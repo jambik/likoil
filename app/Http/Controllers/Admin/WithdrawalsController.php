@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BackendController;
 use App\Withdrawal;
 use DB;
+use Debugbar;
 use Illuminate\Http\Request;
 
 class WithdrawalsController extends BackendController
@@ -46,7 +47,6 @@ class WithdrawalsController extends BackendController
             // Поиск
             if ($search['value']) {
                 $query->where('code', 'LIKE', '%'.$search['value'].'%');
-//                $query->orWhere('fuel_name', 'LIKE', '%'.$search['value'].'%');
                 $recordsFiltered = $query->count();
             }
 

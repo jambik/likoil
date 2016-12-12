@@ -17,6 +17,7 @@
                         <th>Тип</th>
                         <th>АЗС</th>
                         <th>Дата использования</th>
+                        <th>Печать</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,6 +39,9 @@
     {{--@else
         <div class="no-items"></div>
     @endif--}}
+    <input type="text" value="1" name="date_start" id="date_start">
+    <input type="text" value="99" name="date_end" id="date_end">
+    <button class="check-btn">check</button>
 @endsection
 
 @section('footer_scripts')
@@ -45,7 +49,7 @@
         // Применяем плагин DataTable к таблице элементов
         if ($('#table_items_ajax').length) {
 
-            $('#table_items_ajax').DataTable({
+            var table = $('#table_items_ajax').DataTable({
                 "language": {
                     "url": "{{ asset('js/DataTable.Russian.json') }}"
                 },
@@ -53,17 +57,43 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
-                    "url": "{{ route('admin.withdrawals.index') }}"
+                    "url": "{{ route('admin.withdrawals.index') }}",
+                    "data": function ( d ) {
+                        d.date_start = $('#date_start').val();
+                        d.date_end = $('#date_end').val();
+                    }
                 },
+                searchDelay: 500,
                 "columns": [
                     { "data": "id" },
                     { "data": "code" },
                     { "data": "amount" },
                     { "data": "type" },
                     { "data": "azs" },
-                    { "data": "use_at" }
+                    { "data": "use_at" },
+                    {
+                        "className":      'btn-collumn td-print',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent" : '<button style="padding: 0 5px;" class="btn btn-default"><i class="material-icons">print</i></button>'
+                    },
                 ],
                 "order": [[ 5, "desc" ]]
+            });
+
+            $('.check-btn').on('click', function(){
+                table.search($('#table_items_ajax_filter input').val()).draw();
+            });
+
+            // Добавление события на нажатие кнопки Печать
+            $('#table_items_ajax tbody').on('click', 'td.td-print', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                var location = '/admin/withdrawals/' +  row.data().id;
+
+                var win = window.open(location, '_blank');
+                win.focus();
             });
         }
     </script>

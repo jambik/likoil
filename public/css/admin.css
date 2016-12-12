@@ -95,6 +95,10 @@ nav .navbar-brand img { display: inline-block; }
     content: "нет записей";
 }
 
+.table-nonfluid {
+    width: auto !important;
+}
+
 /* tablsesorter fixes */
 .tablesorter-material .select-wrapper {
     display: inline-block;

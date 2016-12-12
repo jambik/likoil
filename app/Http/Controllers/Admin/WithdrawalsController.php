@@ -47,6 +47,7 @@ class WithdrawalsController extends BackendController
             // Поиск
             if ($search['value']) {
                 $query->where('code', 'LIKE', '%'.$search['value'].'%');
+                $query->orWhere('azs', 'LIKE', '%'.$search['value'].'%');
                 $recordsFiltered = $query->count();
             }
 
@@ -104,7 +105,9 @@ class WithdrawalsController extends BackendController
      */
     public function show($id)
     {
-        //
+        $item = $this->model->findOrFail($id);
+
+        return view('admin.'.$this->resourceName.'.show', compact('item'));
     }
 
     /**

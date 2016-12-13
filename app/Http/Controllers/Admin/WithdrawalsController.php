@@ -44,10 +44,25 @@ class WithdrawalsController extends BackendController
                 ->leftJoin('cards', 'withdrawals.card_id', '=', 'cards.id')
                 ->select('withdrawals.*', 'cards.code');
 
+            // Фильтр по дате
+            if ($request->has('daterange')) {
+                $daterange = $request->get('daterange');
+                $dateStart = str_replace('.', '-', substr($daterange, 0, strpos($daterange, '-') - 1) . ' 00:00:00');
+                $dateEnd = str_replace('.', '-', substr($daterange, strpos($daterange, '-') + 2) . ' 23:59:59');
+
+                $query->where('use_at', '>=', $dateStart);
+                $query->where('use_at', '<=', $dateEnd);
+            }
+
             // Поиск
             if ($search['value']) {
-                $query->where('code', 'LIKE', '%'.$search['value'].'%');
-                $query->orWhere('azs', 'LIKE', '%'.$search['value'].'%');
+                $query->where(function ($query) use ($search) {
+                    $query->where('code', 'LIKE', '%'.$search['value'].'%')->orWhere('azs', 'LIKE', '%'.$search['value'].'%');
+                });
+            }
+
+            // Получить количество фильтрованных записей
+            if ($search['value'] || $request->has('daterange')) {
                 $recordsFiltered = $query->count();
             }
 

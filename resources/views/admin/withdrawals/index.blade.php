@@ -7,41 +7,44 @@
 {{--    <p><a href="{{ route('admin.withdrawals.create') }}" class="btn btn-success"><i class="material-icons">add_circle</i> Добавить</a></p>--}}
 
     {{--@if ($items->count())--}}
+    <div class="daterange-picker-wrapper">
+        <label for="daterange">Дата:</label>
+        <input type="text" name="daterange" id="daterange" class="daterange-picker form-control input-sm pull-right">
+    </div>
+    <div class="clearfix"></div>
+
     <div class="table-responsive">
         <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
-                <thead>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Карта</th>
+                    <th>Баллы</th>
+                    <th>Тип</th>
+                    <th>АЗС</th>
+                    <th>Дата использования</th>
+                    <th>Печать</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{--@foreach($items as $item)
                     <tr>
-                        <th>id</th>
-                        <th>Карта</th>
-                        <th>Баллы</th>
-                        <th>Тип</th>
-                        <th>АЗС</th>
-                        <th>Дата использования</th>
-                        <th>Печать</th>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->card->code }}</td>
+                        <td>{{ $item->amount }}</td>
+                        <td>{{ $item->type }}</td>
+                        <td>{{ $item->azs }}</td>
+                        <td>{{ $item->use_at }}</td>
+                        <td><a href="{{ route('admin.withdrawals.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>
+                        <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-danger btn-small"><i class="material-icons">delete</i></button></td>
                     </tr>
-                </thead>
-                <tbody>
-                    {{--@foreach($items as $item)
-                        <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->card->code }}</td>
-                            <td>{{ $item->amount }}</td>
-                            <td>{{ $item->type }}</td>
-                            <td>{{ $item->azs }}</td>
-                            <td>{{ $item->use_at }}</td>
-                            <td><a href="{{ route('admin.withdrawals.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>
-                            <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-danger btn-small"><i class="material-icons">delete</i></button></td>
-                        </tr>
-                    @endforeach--}}
-                </tbody>
-            </table>
-        </div>
+                @endforeach--}}
+            </tbody>
+        </table>
+    </div>
     {{--@else
         <div class="no-items"></div>
     @endif--}}
-    <input type="text" value="1" name="date_start" id="date_start">
-    <input type="text" value="99" name="date_end" id="date_end">
-    <button class="check-btn">check</button>
 @endsection
 
 @section('footer_scripts')
@@ -59,8 +62,7 @@
                 "ajax": {
                     "url": "{{ route('admin.withdrawals.index') }}",
                     "data": function ( d ) {
-                        d.date_start = $('#date_start').val();
-                        d.date_end = $('#date_end').val();
+                        d.daterange = $('#daterange').val();
                     }
                 },
                 searchDelay: 500,
@@ -82,6 +84,16 @@
             });
 
             $('.check-btn').on('click', function(){
+
+            });
+
+            $('.daterange-picker').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('YYYY.MM.DD') + ' - ' + picker.endDate.format('YYYY.MM.DD'));
+                table.search($('#table_items_ajax_filter input').val()).draw();
+            });
+
+            $('.daterange-picker').on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
                 table.search($('#table_items_ajax_filter input').val()).draw();
             });
 

@@ -99,6 +99,28 @@ nav .navbar-brand img { display: inline-block; }
     width: auto !important;
 }
 
+@media print {
+    a[href]:after {
+        content: none !important;
+    }
+    .navbar {
+        display: block !important;
+    }
+}
+
+/* daterangepicker fixes */
+.daterange-picker-wrapper {
+    text-align: right;
+    margin: 0 0 5px 0;
+}
+.daterange-picker-wrapper label {
+    padding: 5px 5px 0 0;
+    font-weight: normal;
+}
+.daterange-picker-wrapper input {
+    width: 168px;
+}
+
 /* tablsesorter fixes */
 .tablesorter-material .select-wrapper {
     display: inline-block;

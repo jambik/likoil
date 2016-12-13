@@ -56,6 +56,44 @@ $(document).ready(function () {
         });
     }
 
+    // Применять плагин daterangepicker к полям типа дата
+    $('.daterange-picker').daterangepicker({
+        autoUpdateInput: false,
+        locale: {
+            format: 'YYYY.MM.DD',
+            "applyLabel": "Применить",
+            "cancelLabel": "Отмена",
+            "fromLabel": "От",
+            "toLabel": "До",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": [
+                "Вс",
+                "Пн",
+                "Вт",
+                "Ср",
+                "Чт",
+                "Пт",
+                "Су"
+            ],
+            "monthNames": [
+                "Январь",
+                "Февраль",
+                "Март",
+                "Апрель",
+                "Май",
+                "Июнь",
+                "Июль",
+                "Август",
+                "Сентябрь",
+                "Октябрь",
+                "Ноябрь",
+                "Декабрь"
+            ],
+            "firstDay": 1
+        }
+    });
+
     // Применять плагин datetime к полям типа дата
     if ($('.input-date').length) {
 

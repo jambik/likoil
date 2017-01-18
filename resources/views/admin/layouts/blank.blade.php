@@ -22,6 +22,14 @@
 
     @yield('head_scripts')
 
+    <style type="text/css">
+        @media print {
+            .navbar {
+                display: block !important;
+            }
+        }
+    </style>
+
     <title>@yield('title', 'Администрирование - Ликойл')</title>
 </head>
 <body>

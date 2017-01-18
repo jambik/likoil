@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Discount;
 use App\Http\Controllers\BackendController;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -59,6 +60,11 @@ class DiscountsController extends BackendController
             }
 
             $items = $query->get();
+
+            $items->transform(function ($item, $key) {
+                $item->date = Carbon::parse($item->date)->format('d.m.Y H:i');
+                return $item;
+            });
 
             return response()->json([
                 'draw' => $draw,

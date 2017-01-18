@@ -27,7 +27,7 @@
 <body>
 <div id="app">
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default hidden-print">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -68,7 +68,7 @@
 
     <main class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-4">
+            <div class="col-lg-3 col-md-4 col-sm-4 hidden-print">
                 <div class="list-group">
                     <a class="list-group-item" href="#"><i class="material-icons">credit_card</i> <strong>Настройки системы</strong></a>
                     <a class="list-group-item" href="{{ route('admin.cards.index') }}"><i class="material-icons">credit_card</i> Карты</a>

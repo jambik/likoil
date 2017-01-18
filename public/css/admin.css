@@ -100,11 +100,11 @@ nav .navbar-brand img { display: inline-block; }
 }
 
 @media print {
-    a[href]:after {
+    a[href]:after{
         content: none !important;
     }
-    .navbar {
-        display: block !important;
+    .dataTables_info, .dataTables_paginate, .dataTables_length, .dataTables_filter, .daterange-picker-wrapper {
+        display: none !important;
     }
 }
 

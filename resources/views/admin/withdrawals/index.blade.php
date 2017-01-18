@@ -4,47 +4,26 @@
 
 @section('content')
     <h2 class="text-center">Использованные баллы</h2>
-{{--    <p><a href="{{ route('admin.withdrawals.create') }}" class="btn btn-success"><i class="material-icons">add_circle</i> Добавить</a></p>--}}
 
-    {{--@if ($items->count())--}}
     <div class="daterange-picker-wrapper">
         <label for="daterange">Дата:</label>
         <input type="text" name="daterange" id="daterange" class="daterange-picker form-control input-sm pull-right">
     </div>
     <div class="clearfix"></div>
 
-    <div class="table-responsive">
-        <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Карта</th>
-                    <th>Баллы</th>
-                    <th>Тип</th>
-                    <th>АЗС</th>
-                    <th>Дата использования</th>
-                    <th>Печать</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{--@foreach($items as $item)
-                    <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->card->code }}</td>
-                        <td>{{ $item->amount }}</td>
-                        <td>{{ $item->type }}</td>
-                        <td>{{ $item->azs }}</td>
-                        <td>{{ $item->use_at }}</td>
-                        <td><a href="{{ route('admin.withdrawals.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>
-                        <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-danger btn-small"><i class="material-icons">delete</i></button></td>
-                    </tr>
-                @endforeach--}}
-            </tbody>
-        </table>
-    </div>
-    {{--@else
-        <div class="no-items"></div>
-    @endif--}}
+    <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Карта</th>
+                <th>Баллы</th>
+                <th>Тип</th>
+                <th>АЗС</th>
+                <th>Дата использования</th>
+                <th>Печать</th>
+            </tr>
+        </thead>
+    </table>
 @endsection
 
 @section('footer_scripts')

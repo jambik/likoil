@@ -4,44 +4,22 @@
 
 @section('content')
     <h2 class="text-center">Заливы</h2>
-    {{--<p><a href="{{ route('admin.discounts.create') }}" class="btn btn-default btn-success"><i class="material-icons">add_circle</i> Добавить</a></p>--}}
 
-    {{--@if ($items->count())--}}
-        <div class="table-responsive">
-            <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Карта</th>
-                        <th>Дата</th>
-                        <th>Объем</th>
-                        <th>Цена</th>
-                        <th>Сумма</th>
-                        <th>Топливо</th>
-                        <th>Код АЗС</th>
-                        <th>Бонус</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{--@foreach($items as $item)
-                        <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->card->code }}</td>
-                            <td>{{ $item->date }}</td>
-                            <td>{{ $item->volume }}</td>
-                            <td>{{ $item->price }}</td>
-                            <td>{{ $item->amount }}</td>
-                            <td>{{ $item->fuel_name }}</td>
-                            <td>{{ $item->azs }}</td>
-                            <td><strong class="red-text text-darken-2">{{ $item->point }}</strong></td>
-                        </tr>
-                    @endforeach--}}
-                </tbody>
-            </table>
-        </div>
-    {{--@else
-        <div class="no-items"></div>
-    @endif--}}
+    <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Карта</th>
+                <th>Дата</th>
+                <th>Объем</th>
+                <th>Цена</th>
+                <th>Сумма</th>
+                <th>Топливо</th>
+                <th>Код АЗС</th>
+                <th>Бонус</th>
+            </tr>
+        </thead>
+    </table>
 @endsection
 
 @section('footer_scripts')

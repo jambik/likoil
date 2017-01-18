@@ -4,44 +4,22 @@
 
 @section('content')
     <h2 class="text-center">Карты</h2>
-{{--    <p><a href="{{ route('admin.cards.create') }}" class="btn btn-default btn-success"><i class="material-icons">add_circle</i> Добавить</a></p>--}}
 
-    {{--@if ($items->count())--}}
-        <div class="table-responsive">
-            <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Номер карты</th>
-                        <th>Бонусы</th>
-                        <th>Имя</th>
-                        <th>Пол</th>
-                        <th>Телефон</th>
-                        <th>Дата рождения</th>
-                        <th>Инфо</th>
-                        <th>Логин</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{--@foreach($items as $item)
-                        <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->code }}</td>
-                            <td>{{ $item->bonus }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->gender }}</td>
-                            <td>{{ $item->phone }}</td>
-                            <td>{{ $item->birthday_at }}</td>
-                            <td><a href="{{ route('admin.cards.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>
-                            <td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-danger btn-small"><i class="material-icons">delete</i></button></td>
-                        </tr>
-                    @endforeach--}}
-                </tbody>
-            </table>
-        </div>
-    {{--@else--}}
-        {{--<div class="no-items"></div>--}}
-    {{--@endif--}}
+    <table id="table_items_ajax" class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Номер карты</th>
+                <th>Бонусы</th>
+                <th>Имя</th>
+                <th>Пол</th>
+                <th>Телефон</th>
+                <th>Дата рождения</th>
+                <th>Инфо</th>
+                <th>Логин</th>
+            </tr>
+        </thead>
+    </table>
 @endsection
 
 @section('footer_scripts')

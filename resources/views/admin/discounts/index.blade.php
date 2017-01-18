@@ -47,7 +47,8 @@
                     { "data": "fuel_name" },
                     { "data": "azs" },
                     { "data": "point" }
-                ]
+                ],
+                "order": [[ 2, "desc" ]]
             });
         }
     </script>

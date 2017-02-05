@@ -195,7 +195,7 @@ class UserController extends ApiController
         $response['withdrawals'] = $withdrawals;
 
         return response()->json(
-            $response,
+            $response
         );
     }
 

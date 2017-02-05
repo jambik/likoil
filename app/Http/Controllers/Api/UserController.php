@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\CardInfo;
 use App\Http\Controllers\ApiController;
+use App\Withdrawal;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -145,6 +146,54 @@ class UserController extends ApiController
 
         return response()->json(
             $response
+        );
+    }
+
+    /**
+     * Информация о карте
+     *
+     * @return Response
+     *
+     * @SWG\Get(
+     *     path="/user/withdrawals",
+     *     summary="Списанные баллы",
+     *     tags={"User"},
+     *     description="Список снятых баллов",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             @SWG\Property(
+     *                 property="card_info",
+     *                 ref="#/definitions/Withdrawal"
+     *             ),
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     ),
+     *     @SWG\Response(
+     *          response=404,
+     *          description="Информация о карта не найдена"
+     *     )
+     * )
+     */
+    public function withdrawals()
+    {
+        $card = CardInfo::where('user_id', Auth::id())->firstOrFail();
+        $withdrawals = Withdrawal::where('card_id', $card->id);
+
+        return response()->json(
+            $withdrawals
         );
     }
 

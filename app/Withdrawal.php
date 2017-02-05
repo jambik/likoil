@@ -5,6 +5,37 @@ namespace App;
 use App\Traits\ResourceableTrait;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @SWG\Definition(
+ *      definition="Withdrawal",
+ *      @SWG\Property(
+ *          property="id",
+ *          description="Id",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="card_id",
+ *          description="Id карты",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
+ *          property="amount",
+ *          description="Количество баллов",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property=azs",
+ *          description="АЗС",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="use_at",
+ *          description="Дата снятия",
+ *          type="string"
+ *      ),
+ * )
+ */
+
 class Withdrawal extends Model
 {
     use ResourceableTrait;

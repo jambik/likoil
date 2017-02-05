@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property=azs",
+ *          property="azs",
  *          description="АЗС",
  *          type="string"
  *      ),

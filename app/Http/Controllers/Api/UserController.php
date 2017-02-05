@@ -192,8 +192,10 @@ class UserController extends ApiController
         $card = CardInfo::where('user_id', Auth::id())->firstOrFail();
         $withdrawals = Withdrawal::where('card_id', $card->card_id)->get();
 
+        $response['withdrawals'] = $withdrawals;
+
         return response()->json(
-            $withdrawals
+            $response,
         );
     }
 

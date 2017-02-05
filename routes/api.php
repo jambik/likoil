@@ -24,6 +24,7 @@ Route::match(['get', 'post'], 'card/withdraw', 'Api\AzsController@cardWithdraw')
 ## User routes
 Route::get('user/auth', 'Api\UserController@authorizeAndGetToken');
 Route::get('user/info', 'Api\UserController@info')->middleware(['auth:api']);
+Route::get('user/withdrawals', 'Api\UserController@withdrawals')->middleware(['auth:api']);
 Route::get('user/discounts', 'Api\UserController@discounts')->middleware(['auth:api']);
 
 ## Documentation

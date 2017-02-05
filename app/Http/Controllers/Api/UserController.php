@@ -190,7 +190,7 @@ class UserController extends ApiController
     public function withdrawals()
     {
         $card = CardInfo::where('user_id', Auth::id())->firstOrFail();
-        $withdrawals = Withdrawal::where('card_id', $card->id);
+        $withdrawals = Withdrawal::where('card_id', $card->card_id)->get();
 
         return response()->json(
             $withdrawals

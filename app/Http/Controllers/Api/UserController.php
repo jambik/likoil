@@ -172,7 +172,7 @@ class UserController extends ApiController
      *         description="Успешный ответ",
      *         @SWG\Schema(
      *             @SWG\Property(
-     *                 property="card_info",
+     *                 property="withdrawals",
      *                 ref="#/definitions/Withdrawal"
      *             ),
      *         )

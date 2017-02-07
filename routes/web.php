@@ -37,6 +37,10 @@ Route::group(['prefix' => 'admin'], function()
         Route::get('initialization', ['as' => 'admin.initialization', 'uses' =>'Admin\InitializationController@index']);
         Route::post('initialization', ['as' => 'admin.initialization.save', 'uses' =>'Admin\InitializationController@save']);
 
+        ## Delete card
+        Route::get('delete', ['as' => 'admin.delete', 'uses' =>'Admin\DeleteController@index']);
+        Route::post('delete', ['as' => 'admin.delete.post', 'uses' =>'Admin\DeleteController@post']);
+
         Route::group(['as' => 'admin.'], function ()
         {
             ## Cards

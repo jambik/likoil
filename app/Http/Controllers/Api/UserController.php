@@ -173,7 +173,11 @@ class UserController extends ApiController
      *         @SWG\Schema(
      *             @SWG\Property(
      *                 property="withdrawals",
-     *                 ref="#/definitions/Withdrawal"
+     *                 type="array",
+     *                 description="Информация о списании",
+     *                 @SWG\Items(
+     *                     ref="#/definitions/Withdrawal"
+     *                 )
      *             ),
      *         )
      *     ),

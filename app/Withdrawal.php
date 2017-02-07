@@ -24,6 +24,11 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string"
  *      ),
  *      @SWG\Property(
+ *          property="type",
+ *          description="Тип операции",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="azs",
  *          description="АЗС",
  *          type="string"

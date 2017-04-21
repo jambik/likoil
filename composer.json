@@ -27,7 +27,8 @@
         "jhaoda/socialite-mailru": "^2.0",
         "roumen/sitemap": "^2.6",
         "maatwebsite/excel": "^2.1",
-        "garygreen/pretty-routes": "^0.0.2"
+        "garygreen/pretty-routes": "^0.0.2",
+        "rtconner/laravel-tagging": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

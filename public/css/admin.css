@@ -50,21 +50,6 @@ nav .navbar-brand img { display: inline-block; }
     margin-bottom: 20px;
 }
 
-.input-tags {
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
-.input-tags input {
-    height: 2rem;
-}
-
-.input-tags label, .input-tags label.active {
-    font-size: 1rem;
-    transform: none;
-    margin-top: -35px;
-}
-
 .collection a.depth-1 {
     padding: 10px 10px 10px 40px;
 }

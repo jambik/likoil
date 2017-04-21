@@ -43,6 +43,7 @@ elixir(mix => {
         '../../../bower_components/bootstrap-daterangepicker/daterangepicker.css',
         '../../../bower_components/datetimepicker/jquery.datetimepicker.css',
         '../../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css',
+        '../../../bower_components/selectize/dist/css/selectize.default.css'
     ], 'public/css/admin.bundle.css');
     mix.scripts([
         '../../../bower_components/jquery/dist/jquery.min.js',
@@ -59,7 +60,8 @@ elixir(mix => {
         '../../../bower_components/bootstrap-daterangepicker/daterangepicker.js',
         '../../../bower_components/datetimepicker/build/jquery.datetimepicker.full.min.js',
         '../../../bower_components/datatables.net/js/jquery.dataTables.min.js',
-        '../../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js'
+        '../../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js',
+        '../../../bower_components/selectize/dist/js/standalone/selectize.min.js'
     ], 'public/js/admin.bundle.js');
 
     /* CKEDITOR Files */

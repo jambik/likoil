@@ -71,6 +71,11 @@ Route::group(['prefix' => 'admin'], function()
             ## Users AZS
             Route::resource('users_azs', 'Admin\UsersAzsController');
 
+
+
+            ## Gas Stations
+            Route::resource('gas_stations', 'Admin\GasStationsController');
+
             ## Pages
             Route::resource('pages', 'Admin\PagesController');
 

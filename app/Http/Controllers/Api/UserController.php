@@ -2,14 +2,136 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Card;
 use App\CardInfo;
+use App\GasStation;
 use App\Http\Controllers\ApiController;
+use App\User;
 use App\Withdrawal;
 use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends ApiController
 {
+    /**
+     * Получение пароля по sms
+     *
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Get(
+     *     path="/user/getpassword",
+     *     summary="Получение пароля",
+     *     tags={"User"},
+     *     description="Получение пароля по sms",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="card",
+     *          description="Номер карты",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *      ),
+     *     @SWG\Parameter(
+     *          name="phone",
+     *          description="Номер телефона - 10 цифр",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="успешный запрос на получение пароля по sms",
+     *         @SWG\Schema(
+     *             type="object",
+     *             @SWG\Property(
+     *                 property="info",
+     *                 type="string",
+     *                 description="Ответ успешного запроса"
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=404,
+     *          description="Карта не найдена",
+     *          @SWG\Schema(
+     *             type="object",
+     *             @SWG\Property(
+     *                 property="error",
+     *                 type="string",
+     *                 description="Описание ошибки"
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="Входные параметры заполнены неверно"
+     *     ),
+     * )
+     */
+    public function getPassword(Request $request)
+    {
+        $this->validate($request, [
+            'card' => 'required',
+            'phone' => 'required|size:10',
+        ]);
+
+        $card = Card::whereCode($request->get('card'))->first();
+
+        if( ! $card) {
+            return response()->json([
+                'error' => 'Карта с номером - ' . $request->get('card') . ' не найдена.',
+            ], 404);
+        }
+
+        if( ! $card->info || ! $card->info->phone) {
+            return response()->json([
+                'error' => 'К карте с номером - ' . $request->get('card') . ' не приваязан телефон.',
+            ], 404);
+        }
+
+        if($card->info->phone != $request->get('phone')) {
+            return response()->json([
+                'error' => 'Номер телефона - ' . $request->get('phone') . ' не совпадает для карты - ' . $request->get('card') . '.',
+            ], 404);
+        }
+
+        $password = $card->info->password;
+
+        if ( ! $card->info->user) {
+            $password = random_int(100000, 999999);
+
+            $card->info()->update([
+                'password' => $password,
+            ]);
+
+            $user = User::create([
+                'name' => trim($card->info->last_name . ' ' . $card->info->name . ' ' . $card->info->patronymic),
+                'email' => $request->get('phone'),
+                'password' => bcrypt($password),
+                'api_token' => str_random(60),
+            ]);
+
+            $card->info->user()->associate($user);
+            $card->info->save();
+        }
+
+        include base_path('library/epochtasms/index.php');
+
+        // Отправляем СМС
+        $res = $Stat->sendSMS("Likoil", "Ликойл пароль - " . $password, '+7'.$request->get('phone'), "", 0);
+
+        if (isset($res["result"]["error"])) {
+            return response()->json([
+                'error' => 'Ошибка при отправке СМС: ' . $res["result"]["code"],
+            ], 400);
+        }
+
+        return response()->json([
+            'info' => 'Sms отправлена на телефон.',
+        ]);
+    }
+
     /**
      * Авторизация и получение api_token
      *
@@ -246,6 +368,55 @@ class UserController extends ApiController
         $cardInfo = CardInfo::with('card')->where('user_id', Auth::id())->firstOrFail();
 
         $response['discounts'] = $cardInfo->card->discounts;
+
+        return response()->json(
+            $response
+        );
+    }
+
+    /**
+     * Список АЗС
+     *
+     * @return Response
+     *
+     * @SWG\Get(
+     *     path="/user/gas_stations",
+     *     summary="Список всех АЗС",
+     *     tags={"User"},
+     *     description="Список всех АЗС",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             @SWG\Property(
+     *                 property="gas_stations",
+     *                 type="array",
+     *                 description="Список АЗС",
+     *                 @SWG\Items(
+     *                     ref="#/definitions/GasStation"
+     *                 )
+     *             ),
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     )
+     * )
+     */
+    public function gasStations()
+    {
+        $gasStations = GasStation::all();
+
+        $response['gas_stations'] = $gasStations;
 
         return response()->json(
             $response

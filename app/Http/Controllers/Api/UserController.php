@@ -32,13 +32,6 @@ class UserController extends ApiController
      *          required=true,
      *          in="query"
      *      ),
-     *     @SWG\Parameter(
-     *          name="phone",
-     *          description="Номер телефона - 10 цифр",
-     *          type="string",
-     *          required=true,
-     *          in="query"
-     *     ),
      *     @SWG\Response(
      *         response=200,
      *         description="успешный запрос на получение пароля по sms",
@@ -73,26 +66,19 @@ class UserController extends ApiController
     {
         $this->validate($request, [
             'card' => 'required',
-            'phone' => 'required|size:10',
         ]);
 
         $card = Card::whereCode($request->get('card'))->first();
 
         if( ! $card) {
             return response()->json([
-                'error' => 'Карта с номером - ' . $request->get('card') . ' не найдена.',
+                'error' => 'Карта не найдена',
             ], 404);
         }
 
         if( ! $card->info || ! $card->info->phone) {
             return response()->json([
-                'error' => 'К карте с номером - ' . $request->get('card') . ' не приваязан телефон.',
-            ], 404);
-        }
-
-        if($card->info->phone != $request->get('phone')) {
-            return response()->json([
-                'error' => 'Номер телефона - ' . $request->get('phone') . ' не совпадает для карты - ' . $request->get('card') . '.',
+                'error' => 'К данной карте не привязан телефон. Обратитесь по номеру: +7988-000-000-00',
             ], 404);
         }
 
@@ -107,7 +93,7 @@ class UserController extends ApiController
 
             $user = User::create([
                 'name' => trim($card->info->last_name . ' ' . $card->info->name . ' ' . $card->info->patronymic),
-                'email' => $request->get('phone'),
+                'email' => $request->get('card'),
                 'password' => bcrypt($password),
                 'api_token' => str_random(60),
             ]);
@@ -119,7 +105,7 @@ class UserController extends ApiController
         include base_path('library/epochtasms/index.php');
 
         // Отправляем СМС
-        $res = $Stat->sendSMS("Likoil", "Ликойл пароль - " . $password, '+7'.$request->get('phone'), "", 0);
+        $res = $Stat->sendSMS("Likoil", "логин: " . $card->code . "\nпароль: " . $password, '+7'.$card->info->phone, "", 0);
 
         if (isset($res["result"]["error"])) {
             return response()->json([
@@ -128,7 +114,7 @@ class UserController extends ApiController
         }
 
         return response()->json([
-            'info' => 'Sms отправлена на телефон.',
+            'info' => 'Sms отправлена на номер: '.$card->info->phone,
         ]);
     }
 

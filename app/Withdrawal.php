@@ -51,7 +51,7 @@ class Withdrawal extends Model
 
     public function getTypeAttribute($value)
     {
-        return in_array($value, ['Использование бонусов']) ? '+' : '-';
+        return in_array($value, ['Бонус']) ? '+' : '-';
     }
 
     /**

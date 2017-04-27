@@ -211,15 +211,25 @@ class UserController extends ApiController
      *                 description="Количество бонусов"
      *             ),
      *             @SWG\Property(
+     *                 property="points",
+     *                 type="integer",
+     *                 description="Общее количество заработанных бонусов"
+     *             ),
+     *             @SWG\Property(
+     *                 property="withdrawals",
+     *                 type="integer",
+     *                 description="Общее количество потраченных бонусов"
+     *             ),
+     *             @SWG\Property(
      *                 property="discounts_count",
      *                 type="integer",
-     *                 description="Количество заливов по карте"
+     *                 description="Общее количество заливов"
      *             ),
      *             @SWG\Property(
      *                 property="discounts_volume",
      *                 type="number",
      *                 format="float",
-     *                 description="Объем залитого топлива"
+     *                 description="Общий объем залитого топлива"
      *             ),
      *             @SWG\Property(
      *                 property="discounts_sum",
@@ -247,6 +257,8 @@ class UserController extends ApiController
         $cardInfo = CardInfo::with('card')->where('user_id', Auth::id())->firstOrFail();
 
         $response['bonus'] = $cardInfo->card->bonus;
+        $response['points'] = $cardInfo->card->total_points;
+        $response['withdrawals'] = $cardInfo->card->total_withdrawals;
         $response['discounts_count'] = $cardInfo->card->discounts->count();
         $response['discounts_volume'] = $cardInfo->card->discounts->sum('volume');
         $response['discounts_sum'] = $cardInfo->card->discounts->sum('amount');

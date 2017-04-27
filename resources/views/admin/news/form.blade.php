@@ -1,16 +1,16 @@
 <div class="form-group">
     {!! Form::label('title', 'Заголовок новости') !!}
-    {!! Form::text('title', null, ['class' => 'form-control'.($errors->has('title') ? ' invalid' : '')]) !!}
+    {!! Form::text('title', null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group input-html">
+<div class="form-group">
     {!! Form::label('text', 'Текст новости') !!}
-    {!! Form::textarea('text', null, ['class' => 'validate materialize-textarea'.($errors->has('text') ? ' invalid' : '')]) !!}
+    {!! Form::textarea('text', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group input-datetime">
     {!! Form::label('published_at', 'Дата публикации') !!}
-    {!! Form::text('published_at', null, ['class' => 'form-control'.($errors->has('published_at') ? ' invalid' : '')]) !!}
+    {!! Form::text('published_at', null, ['class' => 'form-control']) !!}
 </div>
 
 @include('admin.partials._imageable')

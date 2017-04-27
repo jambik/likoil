@@ -65,10 +65,10 @@ class UserController extends ApiController
     public function getPassword(Request $request)
     {
         $this->validate($request, [
-            'card' => 'required',
+            'card' => 'required|size:6',
         ]);
 
-        $card = Card::whereCode($request->get('card'))->first();
+        $card = Card::where('code', 'LIKE', '%'.$request->get('card').'%')->first();
 
         if( ! $card) {
             return response()->json([
@@ -314,6 +314,7 @@ class UserController extends ApiController
     /**
      * Заливы по карте
      *
+     * @param Request $request
      * @return Response
      *
      * @SWG\Get(
@@ -329,7 +330,21 @@ class UserController extends ApiController
      *          required=true,
      *          in="query"
      *      ),
-     *     @SWG\Response(
+     *      @SWG\Parameter(
+     *          name="start",
+     *          description="Дата от",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="end",
+     *          description="Дата до",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *      @SWG\Response(
      *         response=200,
      *         description="Успешный ответ",
      *         @SWG\Schema(
@@ -341,6 +356,21 @@ class UserController extends ApiController
      *                     ref="#/definitions/Discount"
      *                 )
      *             ),
+     *             @SWG\Property(
+     *                 property="count",
+     *                 type="integer",
+     *                 description="Количество заливов",
+     *             ),
+     *             @SWG\Property(
+     *                 property="amount",
+     *                 type="integer",
+     *                 description="Общая сумма",
+     *             ),
+     *             @SWG\Property(
+     *                 property="points",
+     *                 type="integer",
+     *                 description="Заработанные баллы",
+     *             ),
      *         )
      *     ),
      *     @SWG\Response(
@@ -349,15 +379,33 @@ class UserController extends ApiController
      *     )
      * )
      */
-    public function discounts()
+    public function discounts(Request $request)
     {
+        $this->validate($request, [
+            'start' => 'date|date_format:Y-m-d|before:end',
+            'end'   => 'date|date_format:Y-m-d|after:start',
+        ]);
+
         $cardInfo = CardInfo::with('card')->where('user_id', Auth::id())->firstOrFail();
 
-        $response['discounts'] = $cardInfo->card->discounts;
+        $discounts = $cardInfo->card->discounts;
 
-        return response()->json(
-            $response
-        );
+        if ($request->has('start')) {
+            $discounts = $discounts->where('date', '>=', $request->get('start'));
+            $discounts = $discounts->where('date', '<=', $request->get('end'));
+        }
+
+        $discounts = $discounts->values();
+
+        $amount = $discounts->sum('amount');
+        $points = $discounts->sum('point');
+
+        return response()->json([
+            'discounts' => $discounts,
+            'count'  => $discounts->count(),
+            'amount' => $amount,
+            'points' => $points,
+        ]);
     }
 
     /**

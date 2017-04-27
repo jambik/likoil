@@ -20,7 +20,11 @@ class Card extends Model
      */
     public function getTotalWithdrawalsAttribute()
     {
-        return $this->withdrawals->sum('amount');
+        $totalWithdrawals = $this->withdrawals->reduce(function ($carry, $item) {
+            return $item->type == '-' ? $carry + $item->amount : $carry - $item->amount;
+        });
+
+        return $totalWithdrawals;
     }
 
     /**

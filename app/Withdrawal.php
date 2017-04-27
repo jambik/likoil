@@ -49,6 +49,11 @@ class Withdrawal extends Model
 
     protected $fillable = ['card_id', 'amount', 'type', 'azs', 'use_at'];
 
+    public function getTypeAttribute($value)
+    {
+        return in_array($value, ['Rasxod', 'rasxod', 'Расход', 'расход']) ? '-' : '+';
+    }
+
     /**
      * Get discount card.
      */

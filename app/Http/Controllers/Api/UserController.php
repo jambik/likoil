@@ -6,6 +6,7 @@ use App\Card;
 use App\CardInfo;
 use App\GasStation;
 use App\Http\Controllers\ApiController;
+use App\News;
 use App\User;
 use App\Withdrawal;
 use Auth;
@@ -455,5 +456,52 @@ class UserController extends ApiController
         return response()->json(
             $response
         );
+    }
+
+    /**
+     * Список АЗС
+     *
+     * @return Response
+     *
+     * @SWG\Get(
+     *     path="/user/news",
+     *     summary="Новости",
+     *     tags={"User"},
+     *     description="Список всех новостей",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             @SWG\Property(
+     *                 property="news",
+     *                 type="array",
+     *                 description="Новости",
+     *                 @SWG\Items(
+     *                     ref="#/definitions/News"
+     *                 )
+     *             ),
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     )
+     * )
+     */
+    public function news()
+    {
+        $news = News::all();
+
+        return response()->json([
+            'news' => $news,
+        ]);
     }
 }

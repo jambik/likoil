@@ -28,6 +28,7 @@ Route::get('user/info', 'Api\UserController@info')->middleware(['auth:api']);
 Route::get('user/withdrawals', 'Api\UserController@withdrawals')->middleware(['auth:api']);
 Route::get('user/discounts', 'Api\UserController@discounts')->middleware(['auth:api']);
 Route::get('user/gas_stations', 'Api\UserController@gasStations')->middleware(['auth:api']);
+Route::get('user/news', 'Api\UserController@news')->middleware(['auth:api']);
 
 ## Documentation
 Route::get('docs', 'Api\DocumentationController@show');

@@ -333,14 +333,14 @@ class UserController extends ApiController
      *      ),
      *      @SWG\Parameter(
      *          name="start",
-     *          description="Дата от",
+     *          description="Дата от (YYYY-MM-DD)",
      *          type="string",
      *          required=false,
      *          in="query"
      *      ),
      *      @SWG\Parameter(
      *          name="end",
-     *          description="Дата до",
+     *          description="Дата до (YYYY-MM-DD)",
      *          type="string",
      *          required=false,
      *          in="query"

@@ -66,10 +66,10 @@ class UserController extends ApiController
     public function getPassword(Request $request)
     {
         $this->validate($request, [
-            'card' => 'required|size:6',
+            'card' => 'required|min:7|max:13',
         ]);
 
-        $card = Card::where('code', 'LIKE', '%'.$request->get('card').'%')->first();
+        $card = Card::where('code', $request->get('card'))->first();
 
         if( ! $card) {
             return response()->json([

@@ -69,7 +69,7 @@ class UserController extends ApiController
             'card' => 'required|min:7|max:13',
         ]);
 
-        $card = Card::where('code', 'LIKE', '%'.$request->get('card'))->first();
+        $card = Card::where('code', 'LIKE', '8'.$request->get('card'))->first();
 
         if( ! $card) {
             return response()->json([

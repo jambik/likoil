@@ -106,7 +106,7 @@ class UserController extends ApiController
         include base_path('library/epochtasms/index.php');
 
         // Отправляем СМС
-        $res = $Stat->sendSMS("Likoil", "логин: " . $card->code . "\nпароль: " . $password, '+7'.$card->info->phone, "", 0);
+        $res = $Stat->sendSMS("Likoil", "Login: " . $card->code . "\nPass: " . $password, '+7'.$card->info->phone, "", 0);
 
         if (isset($res["result"]["error"])) {
             return response()->json([
@@ -318,6 +318,8 @@ class UserController extends ApiController
         $withdrawals = Withdrawal::where('card_id', $card->card_id)->get();
 
         $response['withdrawals'] = $withdrawals;
+        $response['count'] = $withdrawals->count();
+        $response['total'] = $withdrawals->sum('amount');
 
         return response()->json(
             $response
@@ -353,6 +355,13 @@ class UserController extends ApiController
      *      @SWG\Parameter(
      *          name="end",
      *          description="Дата до (YYYY-MM-DD)",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="stat",
+     *          description="Только статистика",
      *          type="string",
      *          required=false,
      *          in="query"
@@ -401,7 +410,7 @@ class UserController extends ApiController
 
         $cardInfo = CardInfo::with('card')->where('user_id', Auth::id())->firstOrFail();
 
-        $discounts = $cardInfo->card->discounts;
+        $discounts = $cardInfo->card->discounts()->orderBy('date', 'desc')->get();
 
         if ($request->has('start')) {
             $discounts = $discounts->where('date', '>=', $request->get('start'));
@@ -413,12 +422,18 @@ class UserController extends ApiController
         $amount = $discounts->sum('amount');
         $points = $discounts->sum('point');
 
-        return response()->json([
+        $response = [
             'discounts' => $discounts,
             'count'  => $discounts->count(),
             'amount' => $amount,
             'points' => $points,
-        ]);
+        ];
+
+        if ($request->has('stat') && $request->get('stat')) {
+            unset($response['discounts']);
+        }
+
+        return response()->json($response);
     }
 
     /**

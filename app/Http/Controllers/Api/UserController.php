@@ -69,7 +69,7 @@ class UserController extends ApiController
             'card' => 'required|min:7|max:13',
         ]);
 
-        $card = Card::where('code', $request->get('card'))->first();
+        $card = Card::where('code', 'LIKE', '_'.$request->get('card'))->first();
 
         if( ! $card) {
             return response()->json([
@@ -133,7 +133,7 @@ class UserController extends ApiController
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *          name="email",
-     *          description="Логин (Телефон - 10 цифр)",
+     *          description="Логин - номер карты",
      *          type="string",
      *          required=true,
      *          in="query"

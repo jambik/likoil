@@ -300,6 +300,16 @@ class UserController extends ApiController
      *                     ref="#/definitions/Withdrawal"
      *                 )
      *             ),
+     *             @SWG\Property(
+     *                 property="count",
+     *                 type="integer",
+     *                 description="Количество использования балов",
+     *             ),
+     *             @SWG\Property(
+     *                 property="total",
+     *                 type="integer",
+     *                 description="Общая сумма использованных баллов",
+     *             ),
      *         )
      *     ),
      *     @SWG\Response(

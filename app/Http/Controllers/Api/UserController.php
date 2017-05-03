@@ -66,10 +66,10 @@ class UserController extends ApiController
     public function getPassword(Request $request)
     {
         $this->validate($request, [
-            'card' => 'required|min:6|max:12',
+            'card' => 'required|size:6',
         ]);
 
-        $card = Card::where('code', 'LIKE', '%'.$request->get('card'))->first();
+        $card = Card::where('code', 'LIKE', '%'.$request->get('card').'_')->first();
 
         if( ! $card) {
             return response()->json([
@@ -79,7 +79,7 @@ class UserController extends ApiController
 
         if( ! $card->info || ! $card->info->phone) {
             return response()->json([
-                'error' => 'К данной карте не привязан телефон. Обратитесь по номеру: +7988-000-000-00',
+                'error' => 'К данной карте не привязан телефон. Обратитесь по номеру: +7988-000-00-00',
             ], 404);
         }
 
@@ -94,7 +94,7 @@ class UserController extends ApiController
 
             $user = User::create([
                 'name' => trim($card->info->last_name . ' ' . $card->info->name . ' ' . $card->info->patronymic),
-                'email' => $request->get('card'),
+                'email' => $card->code,
                 'password' => bcrypt($password),
                 'api_token' => str_random(60),
             ]);

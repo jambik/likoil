@@ -28,7 +28,7 @@ class UserController extends ApiController
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *          name="card",
-     *          description="Номер карты",
+     *          description="Номер карты (6 символов)",
      *          type="string",
      *          required=true,
      *          in="query"
@@ -325,7 +325,7 @@ class UserController extends ApiController
     public function withdrawals()
     {
         $card = CardInfo::where('user_id', Auth::id())->firstOrFail();
-        $withdrawals = Withdrawal::where('card_id', $card->card_id)->get();
+        $withdrawals = Withdrawal::where('card_id', $card->card_id)->orderBy('use_at', 'desc')->get();
 
         $response['withdrawals'] = $withdrawals;
         $response['count'] = $withdrawals->count();

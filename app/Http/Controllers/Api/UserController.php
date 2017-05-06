@@ -702,7 +702,7 @@ class UserController extends ApiController
         ];
 
         Mail::send(['text' => 'emails.feedback'], $data, function ($message) {
-            $message->to('jambik@gmail.com');
+            $message->to('nmm888@gmail.com');
             $message->subject('Отзыв о приложении');
         });
 

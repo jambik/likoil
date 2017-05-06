@@ -36,7 +36,12 @@ use Illuminate\Database\Eloquent\Model;
  *      ),
  *      @SWG\Property(
  *          property="lng",
- *          description="Доолгота",
+ *          description="Долгота",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="code",
+ *          description="Код АЗС",
  *          type="string"
  *      ),
  *      @SWG\Property(
@@ -57,11 +62,11 @@ class GasStation extends Model
 
     protected $table = 'gas_station';
 
-    protected $fillable = ['name', 'city', 'address', 'phone', 'lat', 'lng', 'tags_service', 'tags_fuel'];
+    protected $fillable = ['name', 'city', 'address', 'phone', 'lat', 'lng', 'code', 'tags_service', 'tags_fuel'];
 
     protected $hidden = ['id', 'created_at', 'updated_at'];
 
-    public function getTagsServiceStringAttribute()
+    /*public function getTagsServiceStringAttribute()
     {
         return implode(',', $this->tags->pluck('name')->all());
     }
@@ -69,5 +74,5 @@ class GasStation extends Model
     public function getTagsFuelStringAttribute()
     {
         return implode(',', $this->tags->pluck('name')->all());
-    }
+    }*/
 }

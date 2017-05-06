@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Card;
 use App\CardInfo;
+use App\Feedback;
 use App\GasStation;
 use App\Http\Controllers\ApiController;
 use App\News;
@@ -11,6 +12,7 @@ use App\User;
 use App\Withdrawal;
 use Auth;
 use Illuminate\Http\Request;
+use Mail;
 
 class UserController extends ApiController
 {
@@ -181,6 +183,84 @@ class UserController extends ApiController
         }
 
         return response('Unauthorized.', 401);
+    }
+
+    /**
+     * Отправка данных для Push уведомлений
+     *
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Get(
+     *     path="/user/push",
+     *     summary="Отправка данных для Push уведомлений",
+     *     tags={"User"},
+     *     description="Отправка данных для Push уведомлений",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *     ),
+     *     @SWG\Parameter(
+     *          name="device",
+     *          description="Устройство",
+     *          type="string",
+     *          enum={"ios", "android"},
+     *          required=true,
+     *          in="query"
+     *     ),
+     *     @SWG\Parameter(
+     *          name="device_token",
+     *          description="Token устройства",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный запрос",
+     *         @SWG\Schema(
+     *             type="object",
+     *             @SWG\Property(
+     *                 property="info",
+     *                 type="string",
+     *                 description="Ответ успешного запроса"
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthorized"
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="Входные параметры заполнены неверно"
+     *     ),
+     * )
+     */
+    public function push(Request $request)
+    {
+        $this->validate($request, [
+            'device' => 'required|in:ios,android',
+            'device_token' => 'required',
+        ]);
+
+        // save device and device_token
+        Auth::user()->update([
+            'device' => $request->get('device'),
+            'device_token' => $request->get('device_token'),
+        ]);
+
+        Auth::user()->device = $request->get('device');
+        Auth::user()->device_token = $request->get('device_token');
+        Auth::user()->saveOrFail();
+
+        return response()->json([
+            'info' => 'Данные сохранены',
+        ]);
     }
 
     /**
@@ -429,14 +509,29 @@ class UserController extends ApiController
 
         $discounts = $discounts->values();
 
-        $amount = $discounts->sum('amount');
-        $points = $discounts->sum('point');
+        if ($discounts->count()) {
+            $gasStations = GasStation::all();
+            $gasStationsAddress = null;
+
+            foreach ($gasStations as $item) {
+                if ($item->code) {
+                    $codes = explode(',', $item->code);
+                    foreach ($codes as $value) {
+                        $gasStationsAddress[(int)trim($value)] = $item->city . ', ' . $item->address;
+                    }
+                }
+            }
+
+            foreach ($discounts as $value) {
+                $value->azs_address = isset($gasStationsAddress[$value->azs]) ? $gasStationsAddress[$value->azs] : '';
+            }
+        }
 
         $response = [
             'discounts' => $discounts,
             'count'  => $discounts->count(),
-            'amount' => $amount,
-            'points' => $points,
+            'amount' => $discounts->sum('amount'),
+            'points' => $discounts->sum('point'),
         ];
 
         if ($request->has('stat') && $request->get('stat')) {
@@ -539,6 +634,80 @@ class UserController extends ApiController
 
         return response()->json([
             'news' => $news,
+        ]);
+    }
+
+    /**
+     * Отзыв
+     *
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *     path="/user/feedback",
+     *     summary="Отзыв",
+     *     tags={"User"},
+     *     description="Отзыв",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *     ),
+     *     @SWG\Parameter(
+     *          name="message",
+     *          description="Сообщение",
+     *          type="string",
+     *          required=true,
+     *          in="formData"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             type="object",
+     *             @SWG\Property(
+     *                 property="info",
+     *                 type="string",
+     *                 description="Ответ"
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="Входные параметры заполнены неверно"
+     *     )
+     * )
+     */
+    public function feedback(Request $request)
+    {
+        $this->validate($request, [
+            'message' => 'required',
+        ]);
+
+        Feedback::create([
+            'message' => $request->get('message'),
+            'user_id' => Auth::id(),
+        ]);
+
+        $data = [
+            'text' => $request->get('message'),
+            'user' => Auth::user(),
+        ];
+
+        Mail::send(['text' => 'emails.feedback'], $data, function ($message) {
+            $message->to('jambik@gmail.com');
+            $message->subject('Отзыв о приложении');
+        });
+
+        return response()->json([
+            'info' => 'Отзыв сохранен',
         ]);
     }
 }

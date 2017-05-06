@@ -53,6 +53,11 @@ use Illuminate\Database\Eloquent\Model;
  *          type="integer"
  *      ),
  *      @SWG\Property(
+ *          property="azs_address",
+ *          description="Адрес АЗС",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="point",
  *          description="Начисленный бонус",
  *          type="number",

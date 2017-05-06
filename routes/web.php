@@ -76,6 +76,9 @@ Route::group(['prefix' => 'admin'], function()
             ## Gas Stations
             Route::resource('gas_stations', 'Admin\GasStationsController');
 
+            ## Feedbacks
+            Route::resource('feedbacks', 'Admin\FeedbacksController');
+
             ## Pages
             Route::resource('pages', 'Admin\PagesController');
 

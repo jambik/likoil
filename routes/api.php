@@ -24,11 +24,13 @@ Route::match(['get', 'post'], 'card/withdraw', 'Api\AzsController@cardWithdraw')
 ## User routes
 Route::get('user/getpassword', 'Api\UserController@getPassword');
 Route::get('user/auth', 'Api\UserController@authorizeAndGetToken');
+Route::get('user/push', 'Api\UserController@push')->middleware(['auth:api']);
 Route::get('user/info', 'Api\UserController@info')->middleware(['auth:api']);
 Route::get('user/withdrawals', 'Api\UserController@withdrawals')->middleware(['auth:api']);
 Route::get('user/discounts', 'Api\UserController@discounts')->middleware(['auth:api']);
 Route::get('user/gas_stations', 'Api\UserController@gasStations')->middleware(['auth:api']);
 Route::get('user/news', 'Api\UserController@news')->middleware(['auth:api']);
+Route::post('user/feedback', 'Api\UserController@feedback')->middleware(['auth:api']);
 
 ## Documentation
 Route::get('docs', 'Api\DocumentationController@show');

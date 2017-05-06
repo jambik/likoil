@@ -29,6 +29,12 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('code', 'Код АЗС') !!}
+    {!! Form::text('code', null, ['class' => 'form-control']) !!}
+    <small>Можно указать несколько кодов через запятую</small>
+</div>
+
+<div class="form-group">
     {!! Form::label('tags_service', 'Услуги') !!}
     {!! Form::text('tags_service', null, ['class' => 'form-control']) !!}
 </div>

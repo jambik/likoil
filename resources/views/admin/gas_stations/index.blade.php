@@ -16,6 +16,7 @@
                     <th>Адрес</th>
                     <th>Телефон</th>
                     <th>Координаты</th>
+                    <th>Коды</th>
                     <th>Услуги</th>
                     <th>Виды топлива</th>
                     <th data-orderable="false" class="btn-collumn"></th>
@@ -31,6 +32,7 @@
                         <td>{{ $item->address }}</td>
                         <td>{{ $item->phone }}</td>
                         <td>{{ $item->lat }}, {{ $item->lng }}</td>
+                        <td>{{ $item->code }}</td>
                         <td>{{ $item->tags_service }}</td>
                         <td>{{ $item->tags_fuel }}</td>
                         <td><a href="{{ route('admin.gas_stations.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>

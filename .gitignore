@@ -4,6 +4,8 @@
 /vendor
 /.idea
 .env
+.env.jambik.ru
+.env.likoil.ru
 .phpstorm.meta.php
 _ide_helper.php
 Homestead.json

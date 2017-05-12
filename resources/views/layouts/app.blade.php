@@ -17,7 +17,7 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Philosopher:400,400i,700,700i|Roboto+Slab:300,400,700|Scada:400,700&amp;subset=cyrillic" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Philosopher:400,400i,700,700i|Roboto+Slab:300,400,700|Scada:400,700&amp;subset=cyrillic" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="{{ asset('/js/app.bundle.js') }}" type="text/javascript"></script>

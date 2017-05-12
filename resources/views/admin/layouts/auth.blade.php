@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Import Google Icon Font -->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('/css/admin.bundle.css') }}" type="text/css" rel="stylesheet">

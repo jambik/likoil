@@ -113,7 +113,7 @@ class UserController extends ApiController
         include base_path('library/epochtasms/index.php');
 
         // Отправляем СМС
-        $res = $Stat->sendSMS("Likoil", "login: " . $card->code . "\npass: " . $password, '+7'.$card->info->phone, "", 0);
+        $res = $Stat->sendSMS("Likoil", "Likoil: " . $password, '+7'.$card->info->phone, "", 0);
 
         if (isset($res["result"]["error"])) {
             return response()->json([

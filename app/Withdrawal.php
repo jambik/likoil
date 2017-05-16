@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\ResourceableTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -60,5 +61,10 @@ class Withdrawal extends Model
     public function card()
     {
         return $this->belongsTo('App\Card');
+    }
+
+    public function getUseAtAttribute($value)
+    {
+        return Carbon::parse($value)->setTimezone('Europe/Moscow')->toDateTimeString();
     }
 }

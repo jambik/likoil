@@ -41,6 +41,11 @@ class UserController extends ApiController
      *         @SWG\Schema(
      *             type="object",
      *             @SWG\Property(
+     *                 property="card",
+     *                 type="string",
+     *                 description="Номер карты"
+     *             ),
+     *             @SWG\Property(
      *                 property="info",
      *                 type="string",
      *                 description="Ответ успешного запроса"
@@ -117,6 +122,7 @@ class UserController extends ApiController
         }
 
         return response()->json([
+            'card' => $card->code,
             'info' => 'Sms отправлена на номер: '.$card->info->phone,
         ]);
     }

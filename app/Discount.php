@@ -133,4 +133,9 @@ class Discount extends Model
 
         Discount::updateOrCreate($attributes, $values);
     }
+
+    public function getDateAttribute($value)
+    {
+        return Carbon::parse($value)->setTimezone('Europe/Moscow')->toDateTimeString();
+    }
 }

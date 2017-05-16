@@ -195,7 +195,8 @@ class CardsController extends BackendController
 
         $this->validate($request, [
             'info.name' => 'required',
-            'info.phone' => 'required|size:10|unique:cards_info,phone' . ($item->info ? ',' . $item->info->card_id . ',card_id' : ''),
+//            'info.phone' => 'required|size:10|unique:cards_info,phone' . ($item->info ? ',' . $item->info->card_id . ',card_id' : ''),
+            'info.phone' => 'required|size:10',
         ]);
 
         $data = $request->get('info');

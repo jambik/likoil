@@ -47,6 +47,6 @@ class News extends Model
 
     public function getIconAttribute()
     {
-        return (request()->server('HTTPS') ? 'https://' : 'http://').request()->server('HTTP_HOST').'/images/small/'.$this->img_url.$this->image;
+        return $this->image ? (request()->server('HTTPS') ? 'https://' : 'http://').request()->server('HTTP_HOST').'/images/original/'.$this->img_url.$this->image : '';
     }
 }

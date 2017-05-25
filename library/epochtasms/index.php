@@ -1,4 +1,5 @@
 <?php
+
 include __DIR__.DIRECTORY_SEPARATOR.'config.php';
 include __DIR__.DIRECTORY_SEPARATOR.'Addressbook.php';
 include __DIR__.DIRECTORY_SEPARATOR.'Exceptions.php';

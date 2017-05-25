@@ -65,13 +65,17 @@ Route::group(['prefix' => 'admin'], function()
             ## Rates
             Route::resource('rates', 'Admin\RatesController');
 
+            ## Users
+            Route::resource('users', 'Admin\UsersController');
+
+            Route::get('notification/{user?}', ['as' => 'notification', 'uses' => 'Admin\NotificationsController@notification']);
+            Route::post('notification', ['as' => 'notification.send', 'uses' => 'Admin\NotificationsController@sendNotification']);
+
             ## Users import
             Route::resource('users_export', 'Admin\UsersExportController');
 
             ## Users AZS
             Route::resource('users_azs', 'Admin\UsersAzsController');
-
-
 
             ## Gas Stations
             Route::resource('gas_stations', 'Admin\GasStationsController');

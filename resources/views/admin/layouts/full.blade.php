@@ -83,6 +83,7 @@
 
                 <div class="list-group">
                     <a class="list-group-item list-group-item-warning" href="#"><i class="material-icons">web</i> <strong>Настройки сайта</strong></a>
+                    <a class="list-group-item list-group-item-warning" href="{{ route('admin.users.index') }}"><i class="material-icons">account_box</i> Пользователи</a>
                     <a class="list-group-item list-group-item-warning" href="{{ route('admin.gas_stations.index') }}"><i class="material-icons">local_gas_station</i> Список АЗС</a>
                     <a class="list-group-item list-group-item-warning" href="{{ route('admin.feedbacks.index') }}"><i class="material-icons">feedback</i> Отзывы</a>
                     <a class="list-group-item list-group-item-warning" href="{{ route('admin.pages.index') }}"><i class="material-icons">content_copy</i> Страницы</a>

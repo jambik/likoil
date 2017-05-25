@@ -1,4 +1,5 @@
 <?php
+
 class Exceptions{
 	private $gateway=NULL;
 

@@ -3,7 +3,7 @@
 @section('title', 'Администрирование - Пользователи АЗС')
 
 @section('content')
-    <h2 class="text-center">Пользователи АЗС</h2>
+    <h4 class="text-center">Пользователи АЗС</h4>
     <p><a href="{{ route('admin.users_azs.create') }}" class="btn btn-success"><i class="material-icons">add_circle</i> Добавить</a></p>
 
     @if ($items->count())

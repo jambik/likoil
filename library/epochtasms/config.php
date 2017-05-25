@@ -1,4 +1,5 @@
 <?php
+
 include __DIR__.DIRECTORY_SEPARATOR.'APISMS.php';
 //public & private ключи, можно установить на странице https://atompark.com/members/settings#sms
 $sms_key_private='3e5bd25ae22ca641b89f9f61443d0d58';

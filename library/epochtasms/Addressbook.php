@@ -1,4 +1,5 @@
 <?php
+
 class Addressbook{
 	private $gateway=NULL;
 

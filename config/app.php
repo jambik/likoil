@@ -180,6 +180,7 @@ return [
         SocialiteProviders\Manager\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class,
 
         //
 
@@ -248,6 +249,7 @@ return [
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'PushNotification' => Davibennun\LaravelPushNotification\Facades\PushNotification::class,
 
     ],
 

@@ -2,13 +2,13 @@
 
 return array(
 
-    'likoilIOS'     => array(
-        'environment' => 'development',
+    'ios' => array(
+        'environment' => 'production',
         'certificate' => storage_path('certificates/apns/production_Olegek.LB.pem'),
         'passPhrase'  => '123456',
         'service'     => 'apns'
     ),
-    'likoilAndroid' => array(
+    'android' => array(
         'environment' => 'production',
         'apiKey'      => env('GOOGLE_GCM_KEY'),
         'service'     => 'gcm'

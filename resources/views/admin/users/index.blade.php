@@ -25,7 +25,11 @@
                         <td>@if ($item->avatar)<img src='{{ $item->avatar }}' alt='' />@endif</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->email }}</td>
-                        <td><a href="{{ route('admin.notification', ['user' => $item->id]) }}" class="btn btn-primary btn-small"><i class="material-icons">phonelink_ring</i></a></td>
+                        <td>
+                            @if ($item->device_token)
+                                <a href="{{ route('admin.notification', ['user' => $item->id]) }}" class="btn btn-primary btn-small"><i class="material-icons">phonelink_ring</i></a>
+                            @endif
+                        </td>
                         {{--<td><button onclick="confirmDelete(this, '{{ $item->id }}')" class="btn btn-danger btn-small"><i class="material-icons">delete</i></button></td>--}}
                     </tr>
                 @endforeach

@@ -6,7 +6,6 @@ use App\Http\Controllers\BackendController;
 use App\Notification;
 use App\User;
 use Davibennun\LaravelPushNotification\Facades\PushNotification;
-use DB;
 use Flash;
 use Illuminate\Http\Request;
 

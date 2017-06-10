@@ -90,6 +90,16 @@ class Discount extends Model
         'start_at',
     ];
 
+    protected $hidden = [
+        'id',
+        'card_id',
+        'azs',
+        'rate',
+        'start_at',
+        'created_at',
+        'updated_at',
+    ];
+
     /**
      * Get discount card.
      */

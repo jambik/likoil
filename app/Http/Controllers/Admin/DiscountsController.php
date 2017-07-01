@@ -62,7 +62,7 @@ class DiscountsController extends BackendController
             $items = $query->get();
 
             $items->transform(function ($item, $key) {
-                $item->date = Carbon::parse($item->date)->setTimezone('Europe/Moscow')->format('d.m.Y H:i');
+                $item->date = Carbon::parse($item->date)->format('d.m.Y H:i');
                 return $item;
             });
 

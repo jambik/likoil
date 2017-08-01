@@ -35,6 +35,13 @@ class UserController extends ApiController
      *          required=true,
      *          in="query"
      *      ),
+     *     @SWG\Parameter(
+     *          name="phone",
+     *          description="Телефон (10 символов)",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
      *     @SWG\Response(
      *         response=200,
      *         description="успешный запрос на получение пароля по sms",
@@ -51,6 +58,10 @@ class UserController extends ApiController
      *                 description="Ответ успешного запроса"
      *             )
      *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=400,
+     *          description="Ошибка в запросе"
      *     ),
      *     @SWG\Response(
      *          response=404,
@@ -74,6 +85,7 @@ class UserController extends ApiController
     {
         $this->validate($request, [
             'card' => 'required|size:6',
+            'phone' => 'sometimes|required|size:10',
         ]);
 
         $card = Card::where('code', 'LIKE', '%'.$request->get('card').'_')->first();
@@ -84,10 +96,29 @@ class UserController extends ApiController
             ], 404);
         }
 
-        if( ! $card->info || ! $card->info->phone) {
+        // Если в запросе присутствует телефон
+        if ($request->exists('phone')) {
+            // Если анкета заполнена и телефоны не совпадают
+            if ($card->info && $card->info->phone && $card->info->phone != $request->get('phone')) {
+                return response()->json([
+                    'error' => 'К данной карте уже привязан телефон: ' . $card->info->phone,
+                ], 400);
+            }
+
+            // Если есть анкета, то обновляем телефон
+            if ($card->info()->count()) {
+                $card->info()->update(['phone' => $request->get('phone')]);
+            // Если нет анкеты то создаем ее с телефоном и пустым паролем
+            } else {
+                $card->info()->create(['phone' => $request->get('phone'), 'password' => '']);
+            }
+            $card->load('info');
+//            dd($card->info);
+        // Если в запросе отсутсвует телефон и анкета не заполнена
+        } elseif ( ! $card->info || ! $card->info->phone) {
             return response()->json([
-                'error' => 'К данной карте не привязан телефон. Обратитесь по номеру: +7988-000-00-00',
-            ], 404);
+                'error' => 'К данной карте не привязан номер телефона',
+            ], 400);
         }
 
         $password = $card->info->password;

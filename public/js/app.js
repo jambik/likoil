@@ -20,6 +20,27 @@ $(document).ready(function() {
         $('.navbar-toggle:visible').click();
     });
 
+    // Выбор сообщений
+    $('.message .checkbox-indicator').on('click', function(){
+        $(this).data('status', $(this).data('status') == 'on' ? 'off' : 'on');
+    });
+
+    // Выбор сообщений
+    $('#dropButton').on('click', function(){
+        var fruits = new Array();
+
+        $('#messageList .checkbox-indicator').each(function(){
+            if ($(this).data('status') == 'on') {
+                fruits.push($(this).prev().val());
+            }
+            console.log($(this).data('status'));
+        });
+
+        alert(fruits);
+    });
+
+
+
     // Offset for Main Navigation
     $('#mainNav').affix({
         offset: {

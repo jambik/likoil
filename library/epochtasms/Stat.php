@@ -22,7 +22,7 @@ class Stat{
 	**	quick send sms. No list using, just 1 phone
 	*/
 	function sendSMS($sender, $text, $phone, $datetime, $sms_lifetime){
-		return $this->gateway->execCommad('sendSMS',array('sender' => $sender, 'text' => $text, 'phone' => $phone, 'datetime' => $datetime, 'sms_lifetime' => $sms_lifetime, 'type' => 4));
+		return $this->gateway->execCommad('sendSMS',array('sender' => $sender, 'text' => $text, 'phone' => $phone, 'datetime' => $datetime, 'sms_lifetime' => $sms_lifetime, 'type' => 2));
 	}
 	
 	/*

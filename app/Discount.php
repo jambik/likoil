@@ -108,6 +108,11 @@ class Discount extends Model
         return $this->belongsTo('App\Card');
     }
 
+    /*public function getDateAttribute($value)
+    {
+        return Carbon::parse($value)->timezone('Europe/Moscow');
+    }*/
+
     public static function import($discountObject)
     {
         $point = 0;
@@ -142,10 +147,5 @@ class Discount extends Model
         ];
 
         Discount::updateOrCreate($attributes, $values);
-    }
-
-    public function getDateAttribute($value)
-    {
-        return Carbon::parse($value)->setTimezone('Europe/Moscow')->toDateTimeString();
     }
 }

@@ -60,6 +60,14 @@ class Card extends Model
     }
 
     /**
+     * Замена масла
+     */
+    public function oilChanges()
+    {
+        return $this->hasMany('App\OilChange');
+    }
+
+    /**
      * Информация о карте
      */
     public function info()

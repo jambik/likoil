@@ -8,6 +8,7 @@ use App\Feedback;
 use App\GasStation;
 use App\Http\Controllers\ApiController;
 use App\News;
+use App\OilChange;
 use App\User;
 use App\Withdrawal;
 use Auth;
@@ -376,6 +377,7 @@ class UserController extends ApiController
         $response['bonus'] = $cardInfo->card->bonus;
         $response['points'] = $cardInfo->card->total_points;
         $response['withdrawals'] = $cardInfo->card->total_withdrawals;
+//        $response['oil_changes'] = $cardInfo->card->oilChanges;
         $response['discounts_count'] = $cardInfo->card->discounts->count();
         $response['discounts_volume'] = $cardInfo->card->discounts->sum('volume');
         $response['discounts_sum'] = $cardInfo->card->discounts->sum('amount');
@@ -745,6 +747,189 @@ class UserController extends ApiController
 
         return response()->json([
             'info' => 'Отзыв сохранен',
+        ]);
+    }
+
+    /**
+     * Замена масла
+     *
+     * @return Response
+     *
+     * @SWG\Get(
+     *     path="/user/oil_changes",
+     *     summary="Замена масла",
+     *     tags={"User"},
+     *     description="Список Замен масла",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             @SWG\Property(
+     *                 property="oil_changes",
+     *                 type="array",
+     *                 description="Замена масла",
+     *                 @SWG\Items(
+     *                     ref="#/definitions/OilChange"
+     *                 )
+     *             ),
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     )
+     * )
+     */
+    public function oilChanges()
+    {
+        $oil_changes = OilChange::where('card_id', Auth::user()->cardInfo->card->id)->get();
+
+        return response()->json([
+            'oil_changes' => $oil_changes,
+        ]);
+    }
+
+    /**
+     * Добавление Замены масла
+     *
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *     path="/user/oil_changes/add",
+     *     summary="Добавление замены масла",
+     *     tags={"User"},
+     *     description="Добавление замены масла",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *     ),
+     *     @SWG\Parameter(
+     *          name="mileage",
+     *          description="Пробег",
+     *          type="integer",
+     *          required=true,
+     *          in="formData"
+     *      ),
+     *     @SWG\Parameter(
+     *          name="change_at",
+     *          description="Дата замены масла (YYYY-MM-DD)",
+     *          type="string",
+     *          required=false,
+     *          in="formData"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             type="object",
+     *             @SWG\Property(
+     *                 property="info",
+     *                 type="string",
+     *                 description="Ответ"
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="Входные параметры заполнены неверно"
+     *     )
+     * )
+     */
+    public function addOilChange(Request $request)
+    {
+        $this->validate($request, [
+            'mileage' => 'required|numeric',
+            'change_at' => 'date',
+        ]);
+
+        $data = [
+            'card_id' => Auth::user()->cardInfo->card->id,
+            'mileage' => $request->get('mileage'),
+            'change_at' => $request->exists('change_at') && $request->get('change_at') ? $request->get('change_at') : date('Y-m-d'),
+        ];
+
+        OilChange::create($data);
+
+        return response()->json([
+            'info' => 'Данные сохранены',
+        ]);
+    }
+
+    /**
+     * Удаление Замены масла
+     *
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *     path="/user/oil_changes/delete",
+     *     summary="Удаление замены масла",
+     *     tags={"User"},
+     *     description="Удаление замены масла",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *     ),
+     *     @SWG\Parameter(
+     *          name="id",
+     *          description="ID записи",
+     *          type="integer",
+     *          required=true,
+     *          in="formData"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             type="object",
+     *             @SWG\Property(
+     *                 property="info",
+     *                 type="string",
+     *                 description="Ответ"
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="Входные параметры заполнены неверно"
+     *     )
+     * )
+     */
+    public function deleteOilChange(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
+
+        OilChange::destroy($request->get('id'));
+
+        return response()->json([
+            'info' => 'Запись удалена',
         ]);
     }
 }

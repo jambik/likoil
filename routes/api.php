@@ -31,6 +31,9 @@ Route::get('user/discounts', 'Api\UserController@discounts')->middleware(['auth:
 Route::get('user/gas_stations', 'Api\UserController@gasStations')->middleware(['auth:api']);
 Route::get('user/news', 'Api\UserController@news')->middleware(['auth:api']);
 Route::post('user/feedback', 'Api\UserController@feedback')->middleware(['auth:api']);
+Route::get('user/oil_changes', 'Api\UserController@oilChanges')->middleware(['auth:api']);
+Route::post('user/oil_changes/add', 'Api\UserController@addOilChange')->middleware(['auth:api']);
+Route::post('user/oil_changes/delete', 'Api\UserController@deleteOilChange')->middleware(['auth:api']);
 
 ## Documentation
 Route::get('docs', 'Api\DocumentationController@show');

@@ -62,4 +62,10 @@ class Withdrawal extends Model
     {
         return $this->belongsTo('App\Card');
     }
+
+
+    public function getUseAtAttribute($value)
+    {
+        return Carbon::parse($value)->setTimezone('Europe/Moscow')->toDateTimeString();
+    }
 }

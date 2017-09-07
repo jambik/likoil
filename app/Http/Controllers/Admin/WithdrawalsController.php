@@ -77,7 +77,7 @@ class WithdrawalsController extends BackendController
             $items = $query->get();
 
             $items->transform(function ($item, $key) {
-                $item->use_at = Carbon::parse($item->use_at)->format('d.m.Y H:i');
+                $item->use_at = Carbon::parse($item->use_at)->setTimezone('Europe/Moscow')->format('d.m.Y H:i');
                 return $item;
             });
 

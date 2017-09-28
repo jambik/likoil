@@ -108,13 +108,19 @@ class UserController extends ApiController
 
             // Если есть анкета, то обновляем телефон
             if ($card->info()->count()) {
-                $card->info()->update(['phone' => $request->get('phone')]);
+                $card->info()->update([
+                    'phone' => $request->get('phone'),
+                    'name' => $request->exists('name') && $request->get('name') ? $request->get('name') : $card->info->name,
+                ]);
             // Если нет анкеты то создаем ее с телефоном и пустым паролем
             } else {
-                $card->info()->create(['phone' => $request->get('phone'), 'password' => '']);
+                $card->info()->create([
+                    'phone' => $request->get('phone'),
+                    'password' => '',
+                    'name' => $request->exists('name') && $request->get('name') ? $request->get('name') : '',
+                ]);
             }
             $card->load('info');
-//            dd($card->info);
         // Если в запросе отсутсвует телефон и анкета не заполнена
         } elseif ( ! $card->info || ! $card->info->phone) {
             return response()->json([
@@ -869,6 +875,90 @@ class UserController extends ApiController
 
         return response()->json([
             'info' => 'Данные сохранены',
+        ]);
+    }
+
+    /**
+     * Добавление Замены масла
+     *
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *     path="/user/oil_changes/update",
+     *     summary="Изменение замены масла",
+     *     tags={"User"},
+     *     description="Изменение записи о замене масла",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *     ),
+     *     @SWG\Parameter(
+     *          name="id",
+     *          description="ID записи",
+     *          type="integer",
+     *          required=true,
+     *          in="formData"
+     *      ),
+     *     @SWG\Parameter(
+     *          name="mileage",
+     *          description="Пробег",
+     *          type="integer",
+     *          required=true,
+     *          in="formData"
+     *      ),
+     *     @SWG\Parameter(
+     *          name="change_at",
+     *          description="Дата замены масла (YYYY-MM-DD)",
+     *          type="string",
+     *          required=false,
+     *          in="formData"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             type="object",
+     *             @SWG\Property(
+     *                 property="info",
+     *                 type="string",
+     *                 description="Ответ"
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="Входные параметры заполнены неверно"
+     *     )
+     * )
+     */
+    public function updateOilChange(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required',
+            'mileage' => 'numeric',
+            'change_at' => 'date',
+        ]);
+
+        $data = [
+            'mileage' => $request->get('mileage'),
+            'change_at' => $request->exists('change_at') && $request->get('change_at') ? $request->get('change_at') : date('Y-m-d'),
+        ];
+
+        $oilChange = OilChange::findOrFail($request->get('id'));
+
+        $oilChange->update($data);
+
+        return response()->json([
+            'info' => 'Данные обновлены',
         ]);
     }
 

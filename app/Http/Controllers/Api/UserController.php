@@ -43,6 +43,13 @@ class UserController extends ApiController
      *          required=false,
      *          in="query"
      *      ),
+     *     @SWG\Parameter(
+     *          name="name",
+     *          description="Имя",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
      *     @SWG\Response(
      *         response=200,
      *         description="успешный запрос на получение пароля по sms",

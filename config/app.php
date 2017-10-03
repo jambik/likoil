@@ -178,6 +178,7 @@ return [
         Roumen\Sitemap\SitemapServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class,
@@ -248,6 +249,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'PushNotification' => Davibennun\LaravelPushNotification\Facades\PushNotification::class,
 

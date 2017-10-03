@@ -14,6 +14,7 @@ use App\Withdrawal;
 use Auth;
 use Illuminate\Http\Request;
 use Mail;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class UserController extends ApiController
 {
@@ -757,6 +758,19 @@ class UserController extends ApiController
             $message->to('nmm888@gmail.com');
             $message->subject('Отзыв о приложении');
         });
+
+        $telegramMessage = "Отправлено сообщение с мобильного приложения
+Пользователь: " . Auth::user()->name . "
+Номер карты: " . Auth::user()->cardInfo->card->code . "
+Телефон: +7" . Auth::user()->cardInfo->phone ."
+
+Сообщение:
+" . $request->get('message');
+
+        Telegram::sendMessage([
+            'chat_id' => env('TELEGRAM_CHANNEL_ID'),
+            'text' => $telegramMessage,
+        ]);
 
         return response()->json([
             'info' => 'Отзыв сохранен',

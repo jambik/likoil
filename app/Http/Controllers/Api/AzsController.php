@@ -225,6 +225,11 @@ class AzsController extends ApiController
      *                     description="Номер карты"
      *                 ),
      *                 @SWG\Property(
+     *                     property="azs_name",
+     *                     type="string",
+     *                     description="Место выдачи"
+     *                 ),
+     *                 @SWG\Property(
      *                     property="card_info",
      *                     ref="#/definitions/CardInfo"
      *                 )
@@ -277,6 +282,7 @@ class AzsController extends ApiController
                 'receipt_id' => $instance->id,
                 'card_id' => $card->id,
                 'code' => $card->code,
+                'azs_name' => Auth::user()->name,
                 'card_info' => $card->info,
             ],
         ]);

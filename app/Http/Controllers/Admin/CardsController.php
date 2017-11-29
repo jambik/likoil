@@ -283,6 +283,7 @@ class CardsController extends BackendController
 
         if ( ! $card_exchange) {
             Flash::error("Новая карта #{$request->get('card_exchange')} не найдена");
+            return view('admin.'.$this->resourceName.'.exchange', compact('card'));
         }
 
         $card->discounts->each(function ($item, $key) use ($card_exchange){

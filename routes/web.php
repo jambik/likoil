@@ -49,12 +49,17 @@ Route::group(['prefix' => 'admin'], function()
             Route::post('cards/{id}/info', ['as' => 'cards.info.save', 'uses' =>'Admin\CardsController@saveInfo'])->where('id', '[0-9]+');
             Route::get('cards/{id}/login', ['as' => 'cards.login', 'uses' =>'Admin\CardsController@showLogin'])->where('id', '[0-9]+');
             Route::post('cards/{id}/login', ['as' => 'cards.login.save', 'uses' =>'Admin\CardsController@saveLogin'])->where('id', '[0-9]+');
+            Route::get('cards/{id}/card_exchange', ['as' => 'cards.exchange', 'uses' =>'Admin\CardsController@showCardExchange'])->where('id', '[0-9]+');
+            Route::post('cards/{id}/card_exchange', ['as' => 'cards.exchange.save', 'uses' =>'Admin\CardsController@saveCardExchange'])->where('id', '[0-9]+');
 
             ## Discounts
             Route::resource('discounts', 'Admin\DiscountsController');
 
             ## Oil changes
             Route::resource('oil_changes', 'Admin\OilChangesController');
+
+            ## Card exchanges
+            Route::resource('card_exchanges', 'Admin\CardExchangesController');
 
             ## Withdrawals
             Route::resource('withdrawals', 'Admin\WithdrawalsController');

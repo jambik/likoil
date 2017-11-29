@@ -18,6 +18,7 @@
                 <th>Инфо</th>
                 <th>Логин</th>
                 <th>Масло</th>
+                <th>Замена<br>карты</th>
             </tr>
         </thead>
     </table>
@@ -64,6 +65,12 @@
                         "data":           null,
                         "defaultContent" : '<button style="padding: 0 5px;" class="btn btn-default"><i class="material-icons">opacity</i></button>'
                     },
+                    {
+                        "className":      'btn-collumn card-exchange',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent" : '<button style="padding: 0 5px;" class="btn btn-default"><i class="material-icons">find_replace</i></button>'
+                    },
                 ],
                 "createdRow": function ( row, data, index ) {
                     if ( ! data.info) {
@@ -101,6 +108,16 @@
                 var row = table.row( tr );
 
                 var location = '/admin/oil_changes?card=' +  row.data().id;
+
+                document.location = location;
+            });
+
+            // Добавление события на нажатие кнопки Замена карты
+            $('#table_items_ajax tbody').on('click', 'td.card-exchange', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                var location = '/admin/cards/' +  row.data().id + '/card_exchange';
 
                 document.location = location;
             });

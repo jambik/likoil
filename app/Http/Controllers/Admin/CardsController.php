@@ -7,6 +7,7 @@ use App\Http\Controllers\BackendController;
 use App\User;
 use Flash;
 use Illuminate\Http\Request;
+use Log;
 
 class CardsController extends BackendController
 {
@@ -261,5 +262,39 @@ class CardsController extends BackendController
         Flash::success("Запись #{$item->id} обновлена");
 
         return redirect(route('admin.'.$this->resourceName.'.index'));
+    }
+
+    public function showCardExchange($id)
+    {
+        $card = $this->model->findOrFail($id);
+
+        return view('admin.'.$this->resourceName.'.exchange', compact('card'));
+    }
+
+    public function saveCardExchange(Request $request, $id)
+    {
+        $card = $this->model->findOrFail($id);
+
+        $this->validate($request, [
+            'card_exchange' => 'required',
+        ]);
+
+        $card_exchange = $this->model->where('code', $request->get('card_exchange'))->first();
+
+        if ( ! $card_exchange) {
+            Flash::error("Новая карта #{$request->get('card_exchange')} не найдена");
+        }
+
+        $card->discounts->each(function ($item, $key) use ($card_exchange){
+            $item->update(['card_id' => $card_exchange->id]);
+        });
+
+        Log::info("Смена карты #{$card->code} на карту #{$request->get('card_exchange')} произведена");
+
+        $card = $this->model->findOrFail($id);
+
+        Flash::success("Смена карты #{$card->code} на карту #{$request->get('card_exchange')} произведена");
+
+        return view('admin.'.$this->resourceName.'.exchange', compact('card'));
     }
 }

@@ -19,6 +19,7 @@
                 <th>Логин</th>
                 <th>Масло</th>
                 <th>Замена<br>карты</th>
+                <th>Блокировка<br>карты</th>
             </tr>
         </thead>
     </table>
@@ -71,6 +72,12 @@
                         "data":           null,
                         "defaultContent" : '<button style="padding: 0 5px;" class="btn btn-default"><i class="material-icons">find_replace</i></button>'
                     },
+                    {
+                        "className":      'btn-collumn card-block',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent" : '<button style="padding: 0 5px;" class="btn btn-default"><i class="material-icons">block</i></button>'
+                    },
                 ],
                 "createdRow": function ( row, data, index ) {
                     if ( ! data.info) {
@@ -78,6 +85,9 @@
                         $(row).find('.card-login button').hide();
                     } else if ( ! data.info.user_id) {
                         $(row).find('.card-login button').removeClass('btn-success').addClass('btn-primary');
+                    }
+                    if (data.is_blocked) {
+                        $(row).find('.card-block button').removeClass('btn-default').addClass('btn-danger');
                     }
                 }
             });
@@ -118,6 +128,16 @@
                 var row = table.row( tr );
 
                 var location = '/admin/cards/' +  row.data().id + '/card_exchange';
+
+                document.location = location;
+            });
+
+            // Добавление события на нажатие кнопки Блокировка карты
+            $('#table_items_ajax tbody').on('click', 'td.card-block', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                var location = '/admin/cards/' +  row.data().id + '/card_block';
 
                 document.location = location;
             });

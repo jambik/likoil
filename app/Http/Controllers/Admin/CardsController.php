@@ -298,4 +298,23 @@ class CardsController extends BackendController
 
         return view('admin.'.$this->resourceName.'.exchange', compact('card'));
     }
+
+    public function showCardBlock($id)
+    {
+        $card = $this->model->findOrFail($id);
+
+        return view('admin.'.$this->resourceName.'.card_block', compact('card'));
+    }
+
+    public function saveCardBlock(Request $request, $id)
+    {
+        $card = $this->model->findOrFail($id);
+
+        $card->is_blocked = ! $card->is_blocked;
+        $card->save();
+
+        Flash::success("Карта заблокирована");
+
+        return redirect(route('admin.'.$this->resourceName.'.index'));
+    }
 }

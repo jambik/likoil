@@ -155,7 +155,7 @@ class AzsController extends ApiController
 
         return response()->json([
             'response' => [
-                'points' => $card->bonus,
+                'points' => $card->is_blocked ? 0 : $card->bonus,
                 'card_id' => $card->id,
                 'code' => $card->code,
                 'card_info' => $card->info,

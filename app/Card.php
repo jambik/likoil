@@ -11,7 +11,7 @@ class Card extends Model
 
     protected $table = 'cards';
 
-    protected $fillable = ['id', 'code', 'transaction_id', 'verified'];
+    protected $fillable = ['id', 'code', 'transaction_id', 'verified', 'is_blocked'];
 
     protected $appends = ['bonus'];
 

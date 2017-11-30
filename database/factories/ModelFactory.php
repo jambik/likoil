@@ -56,22 +56,22 @@ $factory->define(App\Card::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Discount::class, function (Faker\Generator $faker) {
 
-    $categories = App\Card::all();
+    $cards = App\Card::all();
 
-    $DiscountCardIDs = $categories->pluck('DiscountCardID')->all();
+    $DiscountCardIDs = $cards->pluck('id')->all();
 
     $volume = $faker->randomFloat(2, 10, 100);
     $price = $faker->randomFloat(2, 18, 35);
 
     return [
-        'DiscountID' => $faker->randomNumber(),
-        'DiscountCardID' => $faker->randomElement($DiscountCardIDs),
-        'Date' => $faker->dateTimeThisMonth(),
-        'Volume' => $volume,
-        'Price' => $price,
-        'Amount' => number_format($volume * $price, 2, '.', ''),
-        'FuelName' => $faker->randomElement(['Аи92', 'Аи95', 'Аи98', 'ДТ', 'ДТев', 'СУГ']),
-        'AZSCode' => $faker->numberBetween(1, 30),
+        'id' => $faker->randomNumber(),
+        'card_id' => $faker->randomElement($DiscountCardIDs),
+        'date' => $faker->dateTimeThisMonth(),
+        'volume' => $volume,
+        'price' => $price,
+        'amount' => number_format($volume * $price, 2, '.', ''),
+        'fuel_name' => $faker->randomElement(['Аи92', 'Аи95', 'Аи98', 'ДТ', 'ДТев', 'СУГ']),
+        'azs' => $faker->numberBetween(1, 30),
     ];
 });
 

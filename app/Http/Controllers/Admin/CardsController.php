@@ -290,6 +290,10 @@ class CardsController extends BackendController
             $item->update(['card_id' => $card_exchange->id]);
         });
 
+        $card->withdrawals->each(function ($item, $key) use ($card_exchange){
+            $item->update(['card_id' => $card_exchange->id]);
+        });
+
         Log::info("Смена карты #{$card->code} на карту #{$request->get('card_exchange')} произведена");
 
         $card = $this->model->findOrFail($id);

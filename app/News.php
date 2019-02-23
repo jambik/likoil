@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Model;
  * @SWG\Definition(
  *      definition="News",
  *      @SWG\Property(
+ *          property="id",
+ *          description="ID новости",
+ *          type="integer"
+ *      ),
+ *      @SWG\Property(
  *          property="title",
  *          description="Заголовок новости",
  *          type="string"
@@ -18,6 +23,11 @@ use Illuminate\Database\Eloquent\Model;
  *          property="text",
  *          description="Текст новости",
  *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="is_read",
+ *          description="Статус новости",
+ *          type="integer"
  *      ),
  *      @SWG\Property(
  *          property="icon",
@@ -37,13 +47,18 @@ class News extends Model
 
     protected $table = 'news';
 
-    protected $fillable = ['title', 'text', 'image', 'published_at'];
+    protected $fillable = ['title', 'text', 'image', 'is_read', 'published_at'];
 
-    protected $hidden = ['id', 'created_at', 'updated_at', 'img_url', 'image'];
+    protected $hidden = ['created_at', 'updated_at', 'img_url', 'image'];
 
     protected $dates = ['created_at', 'updated_at', 'published_at'];
 
     protected $appends = ['img_url', 'icon'];
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'user_news', 'news_id', 'user_id');
+    }
 
     public function getIconAttribute()
     {

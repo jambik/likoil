@@ -40,6 +40,16 @@ class User extends Authenticatable
         return $this->hasOne('App\CardInfo');
     }
 
+    /**
+     * Прочитанные новости
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function news()
+    {
+        return $this->belongsToMany('App\News', 'user_news', 'user_id', 'news_id');
+    }
+
     public function getRolesNamesAttribute()
     {
         return implode(', ', $this->roles->pluck('display_name')->all());

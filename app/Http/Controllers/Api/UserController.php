@@ -644,7 +644,7 @@ class UserController extends ApiController
     }
 
     /**
-     * Список АЗС
+     * Список новостей
      *
      * @return Response
      *
@@ -685,8 +685,77 @@ class UserController extends ApiController
     {
         $news = News::all();
 
+        $news->transform(function ($item, $key) {
+            $item['is_read'] = $item->users()->get()->find(auth()->id()) ? 1 : 0;
+            return $item;
+        });
+
         return response()->json([
             'news' => $news,
+        ]);
+    }
+
+    /**
+     * Изменение статуса новости
+     *
+     * @param Request $request
+     * @return Response
+     *
+     * @SWG\Post(
+     *     path="/user/news_read",
+     *     summary="Изменение статуса новости",
+     *     tags={"User"},
+     *     description="Изменение статуса новости на - прочитано",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *     ),
+     *     @SWG\Parameter(
+     *          name="id",
+     *          description="ID новости",
+     *          type="integer",
+     *          required=true,
+     *          in="formData"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             type="object",
+     *             @SWG\Property(
+     *                 property="info",
+     *                 type="string",
+     *                 description="Ответ"
+     *             )
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     ),
+     *     @SWG\Response(
+     *          response=422,
+     *          description="Входные параметры заполнены неверно"
+     *     )
+     * )
+     */
+    public function newsRead(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
+
+
+        $news = News::findOrFail($request->get('id'));
+
+        auth()->user()->news()->syncWithoutDetaching([$news->id]);
+
+        return response()->json([
+            'info' => 'Статус новости обновлен',
         ]);
     }
 

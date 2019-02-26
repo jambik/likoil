@@ -701,7 +701,7 @@ class UserController extends ApiController
      * @param Request $request
      * @return Response
      *
-     * @SWG\Post(
+     * @SWG\Get(
      *     path="/user/news_read",
      *     summary="Изменение статуса новости",
      *     tags={"User"},
@@ -719,7 +719,7 @@ class UserController extends ApiController
      *          description="ID новости",
      *          type="integer",
      *          required=true,
-     *          in="formData"
+     *          in="query"
      *      ),
      *     @SWG\Response(
      *         response=200,

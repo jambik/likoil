@@ -61,7 +61,7 @@ Route::group(['prefix' => 'admin'], function()
             Route::resource('oil_changes', 'Admin\OilChangesController');
 
             ## Card exchanges
-            Route::resource('card_exchanges', 'Admin\CardExchangesController');
+//            Route::resource('card_exchanges', 'Admin\CardExchangesController');
 
             ## Withdrawals
             Route::resource('withdrawals', 'Admin\WithdrawalsController');

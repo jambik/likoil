@@ -30,7 +30,8 @@ Route::get('user/withdrawals', 'Api\UserController@withdrawals')->middleware(['a
 Route::get('user/discounts', 'Api\UserController@discounts')->middleware(['auth:api']);
 Route::get('user/gas_stations', 'Api\UserController@gasStations')->middleware(['auth:api']);
 Route::get('user/news', 'Api\UserController@news')->middleware(['auth:api']);
-Route::post('user/news_read', 'Api\UserController@newsRead')->middleware(['auth:api']);
+Route::get('user/news_read', 'Api\UserController@newsRead')->middleware(['auth:api']);
+//Route::post('user/news_read', 'Api\UserController@newsRead')->middleware(['auth:api']);
 Route::post('user/feedback', 'Api\UserController@feedback')->middleware(['auth:api']);
 Route::get('user/oil_changes', 'Api\UserController@oilChanges')->middleware(['auth:api']);
 Route::post('user/oil_changes/add', 'Api\UserController@addOilChange')->middleware(['auth:api']);

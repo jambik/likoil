@@ -8,6 +8,11 @@
     {!! Form::textarea('text', null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group">
+    {!! Form::label('link', 'Ссылка') !!}
+    {!! Form::text('link', null, ['class' => 'form-control']) !!}
+</div>
+
 <div class="form-group input-datetime">
     {!! Form::label('published_at', 'Дата публикации') !!}
     {!! Form::text('published_at', null, ['class' => 'form-control']) !!}

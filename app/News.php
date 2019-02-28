@@ -20,6 +20,11 @@ use Illuminate\Database\Eloquent\Model;
  *          type="string"
  *      ),
  *      @SWG\Property(
+ *          property="link",
+ *          description="Ссылка",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
  *          property="text",
  *          description="Текст новости",
  *          type="string"
@@ -47,17 +52,22 @@ class News extends Model
 
     protected $table = 'news';
 
-    protected $fillable = ['title', 'text', 'image', 'is_read', 'published_at'];
+    protected $fillable = ['title', 'link', 'text', 'image', 'is_read', 'published_at'];
 
     protected $hidden = ['created_at', 'updated_at', 'img_url', 'image'];
 
     protected $dates = ['created_at', 'updated_at', 'published_at'];
 
-    protected $appends = ['img_url', 'icon'];
+    protected $appends = ['img_url', 'thumb', 'icon'];
 
     public function users()
     {
         return $this->belongsToMany('App\User', 'user_news', 'news_id', 'user_id');
+    }
+
+    public function getThumbAttribute()
+    {
+        return $this->image ? (request()->server('HTTPS') ? 'https://' : 'http://').request()->server('HTTP_HOST').'/images/small/'.$this->img_url.$this->image : '';
     }
 
     public function getIconAttribute()

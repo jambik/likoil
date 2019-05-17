@@ -395,6 +395,7 @@ class UserController extends ApiController
         $response['discounts_count'] = $cardInfo->card->discounts->count();
         $response['discounts_volume'] = $cardInfo->card->discounts->sum('volume');
         $response['discounts_sum'] = $cardInfo->card->discounts->sum('amount');
+        $cardInfo->card_number = $cardInfo->card->code;
         unset($cardInfo->card);
         $response['info'] = $cardInfo;
 

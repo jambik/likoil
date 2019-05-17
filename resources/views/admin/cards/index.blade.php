@@ -20,6 +20,7 @@
                 <th>Масло</th>
                 <th>Замена<br>карты</th>
                 <th>Блокировка<br>карты</th>
+                <th>Добавить<br>баллы</th>
             </tr>
         </thead>
     </table>
@@ -77,6 +78,12 @@
                         "orderable":      false,
                         "data":           null,
                         "defaultContent" : '<button style="padding: 0 5px;" class="btn btn-default"><i class="material-icons">block</i></button>'
+                    },
+                    {
+                        "className":      'btn-collumn card-bonus',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent" : '<button style="padding: 0 5px;" class="btn btn-info"><i class="material-icons">add_circle</i></button>'
                     },
                 ],
                 "createdRow": function ( row, data, index ) {
@@ -138,6 +145,16 @@
                 var row = table.row( tr );
 
                 var location = '/admin/cards/' +  row.data().id + '/card_block';
+
+                document.location = location;
+            });
+
+            // Добавление события на нажатие кнопки Добавить баллы
+            $('#table_items_ajax tbody').on('click', 'td.card-bonus', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                var location = '/admin/bonus/create/?card=' +  row.data().code;
 
                 document.location = location;
             });

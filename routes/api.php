@@ -26,6 +26,7 @@ Route::get('user/getpassword', 'Api\UserController@getPassword');
 Route::get('user/auth', 'Api\UserController@authorizeAndGetToken');
 Route::get('user/push', 'Api\UserController@push')->middleware(['auth:api']);
 Route::get('user/info', 'Api\UserController@info')->middleware(['auth:api']);
+Route::get('user/bonuses', 'Api\UserController@bonuses')->middleware(['auth:api']);
 Route::get('user/withdrawals', 'Api\UserController@withdrawals')->middleware(['auth:api']);
 Route::get('user/discounts', 'Api\UserController@discounts')->middleware(['auth:api']);
 Route::get('user/gas_stations', 'Api\UserController@gasStations')->middleware(['auth:api']);

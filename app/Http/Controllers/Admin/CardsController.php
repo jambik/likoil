@@ -42,7 +42,7 @@ class CardsController extends BackendController
             $order = $request->get('order');
             $search = $request->get('search');
 
-            $query = $this->model->with('info')->select('*');
+            $query = $this->model->with(['info', 'bonuses', 'withdrawals', 'discounts'])->select('*');
 
             // Поиск
             if ($search['value']) {

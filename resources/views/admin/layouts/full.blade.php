@@ -73,6 +73,7 @@
                     <a class="list-group-item" href="#"><i class="material-icons">credit_card</i> <strong>Настройки системы</strong></a>
                     <a class="list-group-item" href="{{ route('admin.cards.index') }}"><i class="material-icons">credit_card</i> Карты</a>
                     <a class="list-group-item" href="{{ route('admin.discounts.index') }}"><i class="material-icons">local_gas_station</i> Заливы</a>
+                    <a class="list-group-item list-group-item-info" href="{{ route('admin.bonus.index') }}"><i class="material-icons">monetization_on</i> Добавленные бонусы</a>
                     {{--<a class="list-group-item" href="{{ route('admin.oil_changes.index') }}"><i class="material-icons">opacity</i> Замена масла</a>--}}
                     <a class="list-group-item" href="{{ route('admin.withdrawals.index') }}"><i class="material-icons">card_giftcard</i> Использованные баллы</a>
                     <a class="list-group-item" href="{{ route('admin.campaigns.index') }}"><i class="material-icons">event_note</i> Акции</a>

@@ -57,6 +57,9 @@ Route::group(['prefix' => 'admin'], function()
             ## Discounts
             Route::resource('discounts', 'Admin\DiscountsController');
 
+            ## Bonus
+            Route::resource('bonus', 'Admin\BonusController');
+
             ## Oil changes
             Route::resource('oil_changes', 'Admin\OilChangesController');
 

@@ -36,11 +36,27 @@ class Card extends Model
     }
 
     /**
+     * Сумма всех добавленных Администратором баллов
+     */
+    public function getTotalBonusesAttribute()
+    {
+        return $this->bonuses->sum('amount');
+    }
+
+    /**
      * Сумма всех начисленных баллов
      */
     public function getBonusAttribute()
     {
-        return number_format($this->total_points - $this->total_withdrawals, 2, '.', '');
+        return number_format($this->total_points + $this->total_bonuses - $this->total_withdrawals, 2, '.', '');
+    }
+
+    /**
+     * Снятые баллы
+     */
+    public function bonuses()
+    {
+        return $this->hasMany('App\Bonus');
     }
 
     /**

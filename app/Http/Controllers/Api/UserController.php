@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Bonus;
 use App\Card;
 use App\CardInfo;
 use App\Feedback;
@@ -369,7 +370,7 @@ class UserController extends ApiController
      *                 description="Сумма всех заливов"
      *             ),
      *             @SWG\Property(
-     *                 property="card_info",
+     *                 property="info",
      *                 ref="#/definitions/CardInfo"
      *             ),
      *         )
@@ -390,6 +391,7 @@ class UserController extends ApiController
 
         $response['bonus'] = $cardInfo->card->bonus;
         $response['points'] = $cardInfo->card->total_points;
+        $response['bonuses'] = $cardInfo->card->total_bonuses;
         $response['withdrawals'] = $cardInfo->card->total_withdrawals;
 //        $response['oil_changes'] = $cardInfo->card->oilChanges;
         $response['discounts_count'] = $cardInfo->card->discounts->count();
@@ -398,6 +400,66 @@ class UserController extends ApiController
         $cardInfo->card_number = $cardInfo->card->code;
         unset($cardInfo->card);
         $response['info'] = $cardInfo;
+
+        return response()->json(
+            $response
+        );
+    }
+
+    /**
+     * Информация о карте
+     *
+     * @return Response
+     *
+     * @SWG\Get(
+     *     path="/user/bonuses",
+     *     summary="Добавленные Администратором баллы",
+     *     tags={"User"},
+     *     description="Добавленные Администратором баллы",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *          name="api_token",
+     *          description="API Token",
+     *          type="string",
+     *          required=true,
+     *          in="query"
+     *      ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Успешный ответ",
+     *         @SWG\Schema(
+     *             @SWG\Property(
+     *                 property="bonuses",
+     *                 type="array",
+     *                 description="Добавленные Администратором баллы",
+     *                 @SWG\Items(
+     *                     ref="#/definitions/Bonus"
+     *                 )
+     *             ),
+     *             @SWG\Property(
+     *                 property="total",
+     *                 type="integer",
+     *                 description="Общая сумма добавленных баллов",
+     *             ),
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *     ),
+     *     @SWG\Response(
+     *          response=404,
+     *          description="Информация о карта не найдена"
+     *     )
+     * )
+     */
+    public function bonuses()
+    {
+        $card = CardInfo::where('user_id', Auth::id())->firstOrFail();
+        $bonuses = Bonus::where('card_id', $card->card_id)->latest()->get();
+
+        $response['bonuses'] = $bonuses;
+        $response['total'] = $bonuses->sum('amount');
 
         return response()->json(
             $response

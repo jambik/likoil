@@ -56,8 +56,8 @@ class Withdrawal extends Model
     }
 
     /**
-     * Get discount card.
-     */
+ * Get discount card.
+ */
     public function card()
     {
         return $this->belongsTo('App\Card');

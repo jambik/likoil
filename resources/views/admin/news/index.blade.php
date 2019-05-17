@@ -13,6 +13,7 @@
                     <th>Id</th>
                     <th>Фото</th>
                     <th>Заголовок</th>
+                    <th>Ссылка</th>
                     <th>Текст новости</th>
                     <th>Дата публикации</th>
                     <th data-orderable="false" class="btn-collumn"></th>
@@ -25,6 +26,7 @@
                         <td>{{ $item->id }}</td>
                         <td>@if ($item->image)<img src='/images/small/{{ $item->img_url.$item->image }}' alt='' />@endif</td>
                         <td>{{ $item->title }}</td>
+                        <td>{{ $item->link }}</td>
                         <td>{{ str_limit(strip_tags($item->text), 300) }}</td>
                         <td>{{ $item->published_at }}</td>
                         <td><a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="material-icons">edit</i></a></td>

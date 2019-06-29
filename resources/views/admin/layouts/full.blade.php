@@ -39,7 +39,7 @@
                 </button>
                 <a class="navbar-brand" href="{{ route('admin') }}">
                     <img src="/img/logo.png" class="img-responsive" style="height: 35px;">
-                    <img class="img-responsive" src="{{ asset('img/brand-name.png') }}" style="height: 30px;" />
+                    {{--<img class="img-responsive" src="{{ asset('img/brand-name.png') }}" style="height: 30px;" />--}}
                 </a>
             </div>
 

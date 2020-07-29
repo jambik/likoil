@@ -39,7 +39,7 @@
             </button>
             <a class="navbar-brand  page-scroll" href="#page-top">
                 <img src="{{ asset('img/logo-inverse.png') }}" class="img-responsive" style="height: 35px;">
-                <img class="img-responsive" src="{{ asset('img/brand-name-inverse.png') }}" style="height: 30px;" />
+{{--                <img class="img-responsive" src="{{ asset('img/brand-name-inverse.png') }}" style="height: 30px;" />--}}
             </a>
         </div>
 
@@ -76,7 +76,7 @@
     <div class="container">
         <div class="intro-text">
             <div class="intro-lead-in">Выбирайте самое лучшее!</div>
-            <div class="intro-heading">ДИСКОНТНЫЕ КАРТЫ ЛИКОЙЛ</div>
+            <div class="intro-heading">ДИСКОНТНЫЕ КАРТЫ Asko</div>
             <a href="#about" class="page-scroll btn btn-xl">подробнее</a>
         </div>
     </div>
@@ -87,7 +87,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Дисконтная карта ЛИКОЙЛ</h2>
+                <h2 class="section-heading">Дисконтная карта Asko</h2>
                 <h3 class="section-subheading text-muted">За обслуживание и техническое сопровождение плата не взимается</h3>
             </div>
         </div>
@@ -126,7 +126,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">Как получить карту</h2>
-                <h3 class="section-subheading text-muted">Мы высоко ценим Вашу лояльность и стремимся быть полезными каждому владельцу Дисконтной Карты ЛИКОЙЛ!</h3>
+                <h3 class="section-subheading text-muted">Мы высоко ценим Вашу лояльность и стремимся быть полезными каждому владельцу Дисконтной Карты Asko!</h3>
             </div>
         </div>
         <div class="row text-center">
@@ -136,7 +136,7 @@
                         <i class="fa fa-credit-card fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="service-heading">ПОЛУЧИТЕ КАРТУ</h4>
-                <p class="text-muted">Получить карту Вы можете на любой АЗС «ЛИКОЙЛ»</p>
+                <p class="text-muted">Получить карту Вы можете на любой АЗС «Asko»</p>
             </div>
             <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -164,7 +164,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">Как накопить баллы</h2>
-                <h3 class="section-subheading text-muted">Накапливайте больше баллов, используя дисконтную карту ЛИКОЙЛ</h3>
+                <h3 class="section-subheading text-muted">Накапливайте больше баллов, используя дисконтную карту Asko</h3>
             </div>
         </div>
         <div class="row text-center">
@@ -174,7 +174,7 @@
                         <i class="fa fa-car fa-stack-1x fa-inverse"></i>
                     </span>
                 <h4 class="service-heading">ВЫ ЗАПРАВЛЯЕТЕСЬ</h4>
-                <p class="text-muted">При покупке топлива на АЗС «ЛИКОЙЛ» Вы предъявляете карту дисконтную карту</p>
+                <p class="text-muted">При покупке топлива на АЗС «Asko» Вы предъявляете карту дисконтную карту</p>
             </div>
             <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -285,7 +285,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <span class="copyright">Copyright &copy; Ликойл 2016</span>
+                <span class="copyright">Copyright &copy; Asko 2016</span>
             </div>
             <div class="col-md-4">
 

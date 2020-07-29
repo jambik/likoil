@@ -181,3 +181,6 @@ Route::group([], function ()
     ## Sitemap
     Route::get('sitemap.xml', 'SitemapController@index');
 });
+
+## Documentation
+Route::get('docs', 'Api\DocumentationController@show')->middleware(['auth']);

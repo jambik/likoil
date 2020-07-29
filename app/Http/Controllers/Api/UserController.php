@@ -95,7 +95,7 @@ class UserController extends ApiController
     {
         $this->validate($request, [
             'card' => 'required|size:6',
-            'phone' => 'sometimes|required|size:10',
+            'phone' => 'required|size:10',
         ]);
 
         $card = Card::where('code', 'LIKE', '%'.$request->get('card').'_')->first();
@@ -106,12 +106,20 @@ class UserController extends ApiController
             ], 404);
         }
 
+        // Если к данной карте не привязан телефон выдаем ошибку
+        if ( ! $card->info || ! $card->info->phone) {
+            return response()->json([
+                'error' => 'К данной карте не привязан номер телефона',
+            ], 400);
+        }
+
         // Если в запросе присутствует телефон
-        if ($request->exists('phone')) {
+//        if ($request->exists('phone')) {
             // Если анкета заполнена и телефоны не совпадают
-            if ($card->info && $card->info->phone && $card->info->phone != $request->get('phone')) {
+            if ($card->info->phone != $request->get('phone')) {
                 return response()->json([
-                    'error' => 'К данной карте уже привязан телефон: ' . $card->info->phone,
+                    'error' => 'К данной карте уже привязан другой телефон',
+                    //'error' => 'К данной карте уже привязан другой телефон: ' . $card->info->phone,
                 ], 400);
             }
 
@@ -131,11 +139,11 @@ class UserController extends ApiController
             }
             $card->load('info');
         // Если в запросе отсутсвует телефон и анкета не заполнена
-        } elseif ( ! $card->info || ! $card->info->phone) {
-            return response()->json([
-                'error' => 'К данной карте не привязан номер телефона',
-            ], 400);
-        }
+//        } elseif ( ! $card->info || ! $card->info->phone) {
+//            return response()->json([
+//                'error' => 'К данной карте не привязан номер телефона',
+//            ], 400);
+//        }
 
         $password = $card->info->password;
 

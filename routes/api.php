@@ -40,4 +40,4 @@ Route::post('user/oil_changes/update', 'Api\UserController@updateOilChange')->mi
 Route::post('user/oil_changes/delete', 'Api\UserController@deleteOilChange')->middleware(['auth:api']);
 
 ## Documentation
-Route::get('docs', 'Api\DocumentationController@show');
+//Route::get('docs', 'Api\DocumentationController@show')->middleware(['auth']);

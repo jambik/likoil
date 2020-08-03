@@ -183,4 +183,4 @@ Route::group([], function ()
 });
 
 ## Documentation
-Route::get('docs', 'Api\DocumentationController@show')->middleware(['auth']);
+//Route::get('docs', 'Api\DocumentationController@show')->middleware(['auth']);

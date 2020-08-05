@@ -12,9 +12,9 @@
 
 				<div class="row">
 					<div class="form-group">
-						{!! Form::label('login', 'Логин (Номер телефона - 10 цифр)') !!}
-						{!! Form::text('login', $card->info ? $card->info->phone : '', ['class' => 'form-control']) !!}
-						<small>Номер вводится без +7 или 8</small>
+						{!! Form::label('login', 'Логин (Номер карты - 13 цифр)') !!}
+						{!! Form::text('login', $card->info->user->email ? $card->info->user->email : '', ['class' => 'form-control']) !!}
+{{--						<small>Номер вводится без +7 или 8</small>--}}
 					</div>
 
 					<div class="form-group">

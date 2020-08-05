@@ -227,12 +227,12 @@ class CardsController extends BackendController
         $item = $this->model->findOrFail($id);
 
         $this->validate($request, [
-            'login' => 'required|size:10|unique:users,email' . ($item->info->user ? ',' . $item->info->user->id : ''),
+            'login' => 'required|size:13|unique:users,email' . ($item->info->user ? ',' . $item->info->user->id : ''),
             'password' => 'required|min:4',
         ]);
 
         $item->info()->update([
-            'phone' => $request->get('login'),
+//            'phone' => $request->get('login'),
             'password' => $request->get('password'),
         ]);
 

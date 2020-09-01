@@ -13,7 +13,7 @@
 				<div class="row">
 					<div class="form-group">
 						{!! Form::label('login', 'Логин (Номер карты - 13 цифр)') !!}
-						{!! Form::text('login', $card->info->user ? $card->info->user->email : '', ['class' => 'form-control']) !!}
+						{!! Form::text('login', $card->info->user && $card->info->user->email ? $card->info->user->email : $card->code, ['class' => 'form-control']) !!}
 {{--						<small>Номер вводится без +7 или 8</small>--}}
 					</div>
 
